@@ -8,7 +8,6 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance => instance;
 
     // Managers=========================
-
     private static ResourceManager resourceManager;
     public static ResourceManager Resource => resourceManager;
 
@@ -20,7 +19,6 @@ public class GameManager : MonoBehaviour
 
     private static UIManager uiManager;
     public static UIManager UI => uiManager;
-
 
     private void Awake()
     {
