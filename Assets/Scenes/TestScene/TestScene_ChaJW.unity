@@ -273,6 +273,7 @@ GameObject:
   - component: {fileID: 783846220}
   - component: {fileID: 783846219}
   - component: {fileID: 783846221}
+  - component: {fileID: 783846222}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -360,7 +361,19 @@ MonoBehaviour:
   laneChangeSpeed: 3
   jumpHeight: 2.5
   jumpDuration: 0.5
-  slideDuration: 2
+  slideDuration: 1
+--- !u!114 &783846222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 783846217}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6315a44ffd031e04aa40de764607619c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0

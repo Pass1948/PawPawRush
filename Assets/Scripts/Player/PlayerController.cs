@@ -3,24 +3,31 @@ using UnityEngine.TextCore.Text;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private float laneChangeSpeed = 1.0f;
+    // Animator parameter
 
-    [Header("Controls")]
+
+    // Components
+    private PlayerColliderHandler colliderHandler;
+
+    [Header("Movement")]
+    [SerializeField] private float laneChangeSpeed = 1.0f;
     [SerializeField] private float jumpHeight = 2.0f;
-    [SerializeField] private float jumpDuration = 1.0f;
-    [SerializeField] private float slideDuration = 2.0f;
+    [SerializeField] private float jumpDuration = 0.5f;
+    [SerializeField] private float slideDuration = 0.5f;
 
     // Player State
     private bool isRunning = true;
     private bool isJumping;
     private bool isSliding;
 
+    // Jumping & Sliding time
     private float jumpStartTime;
     private float slideStartTime;
 
     private Vector3 targetPosition = Vector3.zero;
     private int currentLane = STARTING_LANE;
 
+    // Constants
     private const int STARTING_LANE = 1;
 
     private void Awake()
@@ -30,7 +37,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-
+        colliderHandler = GetComponent<PlayerColliderHandler>();
     }
 
     private void Update()
@@ -45,18 +52,19 @@ public class PlayerController : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.W))
         {
-            HandleJumpAnimation();
+            HandleJump();
         }
         else if (Input.GetKeyDown(KeyCode.S))
         {
             if (!isSliding)
             {
-                Slide();
+                HandleSlide();
             }
         }
 
         Vector3 finalTargetPosition = targetPosition;
 
+        CalculateSlide();
         finalTargetPosition.y = CalculateJumpY();
 
         transform.position = Vector3.MoveTowards(transform.localPosition, finalTargetPosition, laneChangeSpeed * Time.deltaTime);
@@ -87,10 +95,19 @@ public class PlayerController : MonoBehaviour
 
     public void StartRunning()
     {
+        isRunning = true;
 
+        // TODO: 애니메이션
     }
 
-    public void HandleJumpAnimation()
+    public void StopRunning()
+    {
+        isRunning = false;
+
+        // TODO: 애니메이션
+    }
+
+    public void HandleJump()
     {
         if (!isRunning || isJumping)
         {
@@ -113,6 +130,11 @@ public class PlayerController : MonoBehaviour
         //m_Audio.PlayOneShot(character.jumpSound);
     }
 
+    public void StopJumping()
+    {
+
+    }
+
     public float CalculateJumpY()
     {
         if (isJumping)
@@ -125,13 +147,13 @@ public class PlayerController : MonoBehaviour
 
             if (ratio >= 1.0f)
             {
-                // 점프가 끝 -> 상태 변경
+                // 점프 끝 -> 상태 변경
                 isJumping = false;
 
                 // TODO: 애니메이션 상태 변경 로직
                 // character.animator.SetBool("isJumping", false);
 
-                return 0f; // 점프가 끝 -> 지면(y=0)으로 돌아감
+                return 0f; // 점프 끝 -> 지면(y=0)으로 돌아감
             }
             else
             {
@@ -144,18 +166,50 @@ public class PlayerController : MonoBehaviour
         return 0f;
     }
 
-    public void HandleSlideAnimation()
+    public void HandleSlide()
     {
+        if (!isRunning || isSliding)
+        {
+            return;
+        }
 
+        if (isJumping)
+        {
+            StopJumping();
+        }
+
+        isSliding = true;
+        slideStartTime = Time.time;
+
+        // TODO: 애니메이션 및 사운드 재생
+
+
+        colliderHandler.Slide(isSliding);
     }
 
     public void StopSliding()
     {
-
+        if(isSliding)
+        {
+            isSliding = false;
+            colliderHandler.Slide(isSliding);
+        }
     }
 
-    public void Slide()
+    public void CalculateSlide()
     {
+        if (isSliding)
+        {
+            // 슬라이딩 시작 후 경과된 시간 계산
+            float elapsedTime = Time.time - slideStartTime;
 
+            // 경과 시간을 기준으로 슬라이딩 진행률(ratio)을 0과 1 사이의 값으로 계산
+            float ratio = elapsedTime / slideDuration;
+
+            if (ratio >= 1.0f)
+            {
+                StopSliding();
+            }
+        }
     }
 }
