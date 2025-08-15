@@ -274,6 +274,7 @@ GameObject:
   - component: {fileID: 783846219}
   - component: {fileID: 783846221}
   - component: {fileID: 783846222}
+  - component: {fileID: 783846223}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -358,6 +359,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00a54319f7f502d41bf1170a03011930, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  modelTransform: {fileID: 6436743543640209763}
   laneChangeSpeed: 3
   jumpHeight: 2.5
   jumpDuration: 0.5
@@ -374,6 +376,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6315a44ffd031e04aa40de764607619c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &783846223
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 783846217}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 36a2903e866c7184a8349d9d266daa3d, type: 3}
+  m_Controller: {fileID: 9100000, guid: 2f263363c252414469e2deeec717fa52, type: 2}
+  m_CullingMode: 1
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 1
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -758,7 +781,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5915540279502758873}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 9000000, guid: 36a2903e866c7184a8349d9d266daa3d, type: 3}
   m_Controller: {fileID: 9100000, guid: 2f263363c252414469e2deeec717fa52, type: 2}
   m_CullingMode: 1
@@ -1365,7 +1388,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5915540279502758873}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

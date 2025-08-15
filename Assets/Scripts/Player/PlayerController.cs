@@ -1,13 +1,23 @@
+using DG.Tweening;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.TextCore.Text;
 
 public class PlayerController : MonoBehaviour
 {
     // Animator parameter
-
+    private static int startHash = Animator.StringToHash("Greeting");
+    private static int deadHash = Animator.StringToHash("Dead");
+    private static int runStartHash = Animator.StringToHash("RunStart");
+    private static int movingHash = Animator.StringToHash("Moving");
+    private static int jumpingHash = Animator.StringToHash("Jumping");
+    private static int jumpingSpeedHash = Animator.StringToHash("JumpSpeed");
+    private static int slidingHash = Animator.StringToHash("Sliding");
 
     // Components
+    [SerializeField] private Transform modelTransform;
     private PlayerColliderHandler colliderHandler;
+    private Animator animator;
 
     [Header("Movement")]
     [SerializeField] private float laneChangeSpeed = 1.0f;
@@ -32,12 +42,15 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-
+        animator = GetComponent<Animator>();
     }
 
     private void Start()
     {
         colliderHandler = GetComponent<PlayerColliderHandler>();
+
+        // temp
+        StartCoroutine(WaitToStart());
     }
 
     private void Update()
@@ -81,30 +94,61 @@ public class PlayerController : MonoBehaviour
 
         if (targetLane < 0 || targetLane > 2)
         {
-            // ·¹ÀÎ ¹ÛÀ¸·Î ¸ø ³ª°¡°Ô ¹«½Ã
+            // ë ˆì¸ ë°–ìœ¼ë¡œ ëª» ë‚˜ê°€ê²Œ ë¬´ì‹œ
             return;
         }
 
-        // TODO: ¸Ê¿¡¼­ laneOffset Á¶Àý
-        // ÀÓ½Ã·Î ¼³Á¤
+        // TODO: ë§µì—ì„œ laneOffset ì¡°ì ˆ
+        // ìž„ì‹œë¡œ ì„¤ì •
         float laneOffset = 2.0f;
 
         currentLane = targetLane;
         targetPosition = new Vector3((currentLane - 1) * laneOffset, 0, 0);
     }
 
+    // ì¹´ìš´íŠ¸ ë‹¤ìš´ í•˜ëŠ” ë™ì•ˆ Greeting ì• ë‹ˆë©”ì´ì…˜ ì‹¤í–‰
+    // ë§µ ë§¤ë‹ˆì €ì—ì„œ í•˜ëŠ”ê²Œ ì ì ˆ? -> ì¼ë‹¨ ì—¬ê¸°ì— ì •ì˜
+    private IEnumerator WaitToStart()
+    {
+        // ì¹´ë©”ë¼ ë°©í–¥ ìª½ìœ¼ë¡œ í”Œë ˆì´ì–´ íšŒì „
+        Tween lookAtCamera = modelTransform.DORotate(new Vector3(0, 180, 0), 0.5f);
+        yield return lookAtCamera.WaitForCompletion(); // íšŒì „ì´ ëë‚  ë•Œê¹Œì§€ ì½”ë£¨í‹´ì„ ìž ì‹œ ëŒ€ê¸°
+
+        animator.Play(startHash);
+
+        float timeToStart;
+        float length = 5f; // temp 5ì´ˆ ì¹´ìš´íŠ¸ ë‹¤ìš´ -> ë‚˜ì¤‘ì— ë§µ ë§¤ë‹ˆì €ì—ì„œ ì„¤ì • ë°›ì•„ì˜´
+        timeToStart = length;
+
+        while (timeToStart >= 0)
+        {
+            yield return null;
+            timeToStart -= Time.deltaTime * 1.5f;
+        }
+
+        timeToStart = -1;
+
+        // ë‹¤ì‹œ ì •ë©´ìœ¼ë¡œ í”Œë ˆì´ì–´ íšŒì „
+        // ì›ëž˜ ë°©í–¥(Yì¶• 0ë„)ìœ¼ë¡œ ëŒì•„ì˜´ (0.3ì´ˆ ë™ì•ˆ)
+        Tween lookForward = modelTransform.DORotate(Vector3.zero, 0.3f);
+        yield return lookForward.WaitForCompletion(); // íšŒì „ì´ ëë‚  ë•Œê¹Œì§€ ë‹¤ì‹œ ëŒ€ê¸°
+
+        StartRunning();
+    }
+
     public void StartRunning()
     {
         isRunning = true;
 
-        // TODO: ¾Ö´Ï¸ÞÀÌ¼Ç
+        animator.Play(runStartHash);
+        animator.SetBool(movingHash, true);
     }
 
     public void StopRunning()
     {
         isRunning = false;
 
-        // TODO: ¾Ö´Ï¸ÞÀÌ¼Ç
+        animator.SetBool(movingHash, false);
     }
 
     public void HandleJump()
@@ -124,41 +168,39 @@ public class PlayerController : MonoBehaviour
         isJumping = true;
         jumpStartTime = Time.time;
 
-        // ¾Ö´Ï¸ÞÀÌ¼Ç ¹× »ç¿îµå Àç»ý
+        // ì• ë‹ˆë©”ì´ì…˜ ë° ì‚¬ìš´ë“œ ìž¬ìƒ
         //character.animator.SetFloat(s_JumpingSpeedHash, animSpeed);
-        //character.animator.SetBool(s_JumpingHash, true);
+        animator.SetBool(jumpingHash, true);
         //m_Audio.PlayOneShot(character.jumpSound);
     }
 
     public void StopJumping()
     {
+        isJumping = false;
 
+        animator.SetBool(jumpingHash, false);
     }
 
     public float CalculateJumpY()
     {
         if (isJumping)
         {
-            // Á¡ÇÁ ½ÃÀÛ ÈÄ °æ°úµÈ ½Ã°£ °è»ê
+            // ì í”„ ì‹œìž‘ í›„ ê²½ê³¼ëœ ì‹œê°„ ê³„ì‚°
             float elapsedTime = Time.time - jumpStartTime;
 
-            // °æ°ú ½Ã°£À» ±âÁØÀ¸·Î Á¡ÇÁ ÁøÇà·ü(ratio)À» 0°ú 1 »çÀÌÀÇ °ªÀ¸·Î °è»ê
+            // ê²½ê³¼ ì‹œê°„ì„ ê¸°ì¤€ìœ¼ë¡œ ì í”„ ì§„í–‰ë¥ (ratio)ì„ 0ê³¼ 1 ì‚¬ì´ì˜ ê°’ìœ¼ë¡œ ê³„ì‚°
             float ratio = elapsedTime / jumpDuration;
 
             if (ratio >= 1.0f)
             {
-                // Á¡ÇÁ ³¡ -> »óÅÂ º¯°æ
-                isJumping = false;
+                StopJumping();
 
-                // TODO: ¾Ö´Ï¸ÞÀÌ¼Ç »óÅÂ º¯°æ ·ÎÁ÷
-                // character.animator.SetBool("isJumping", false);
-
-                return 0f; // Á¡ÇÁ ³¡ -> Áö¸é(y=0)À¸·Î µ¹¾Æ°¨
+                return 0f; // ì í”„ ë -> ì§€ë©´(y=0)ìœ¼ë¡œ ëŒì•„ê°
             }
             else
             {
-                // Sin ÇÔ¼ö¸¦ ÀÌ¿ëÇØ ºÎµå·¯¿î Æ÷¹°¼± ÇüÅÂÀÇ y°ª °è»ê
-                // ratio°¡ 0¿¡¼­ 1·Î º¯ÇÔ¿¡ µû¶ó y°ªÀº 0 -> jumpHeight -> 0 À¸·Î º¯ÇÔ
+                // Sin í•¨ìˆ˜ë¥¼ ì´ìš©í•´ ë¶€ë“œëŸ¬ìš´ í¬ë¬¼ì„  í˜•íƒœì˜ yê°’ ê³„ì‚°
+                // ratioê°€ 0ì—ì„œ 1ë¡œ ë³€í•¨ì— ë”°ë¼ yê°’ì€ 0 -> jumpHeight -> 0 ìœ¼ë¡œ ë³€í•¨
                 return Mathf.Sin(ratio * Mathf.PI) * jumpHeight;
             }
         }
@@ -181,8 +223,8 @@ public class PlayerController : MonoBehaviour
         isSliding = true;
         slideStartTime = Time.time;
 
-        // TODO: ¾Ö´Ï¸ÞÀÌ¼Ç ¹× »ç¿îµå Àç»ý
-
+        // TODO: ì• ë‹ˆë©”ì´ì…˜ ë° ì‚¬ìš´ë“œ ìž¬ìƒ
+        animator.SetBool(slidingHash, true);
 
         colliderHandler.Slide(isSliding);
     }
@@ -191,7 +233,9 @@ public class PlayerController : MonoBehaviour
     {
         if(isSliding)
         {
+            animator.SetBool(slidingHash, false);
             isSliding = false;
+
             colliderHandler.Slide(isSliding);
         }
     }
@@ -200,10 +244,10 @@ public class PlayerController : MonoBehaviour
     {
         if (isSliding)
         {
-            // ½½¶óÀÌµù ½ÃÀÛ ÈÄ °æ°úµÈ ½Ã°£ °è»ê
+            // ìŠ¬ë¼ì´ë”© ì‹œìž‘ í›„ ê²½ê³¼ëœ ì‹œê°„ ê³„ì‚°
             float elapsedTime = Time.time - slideStartTime;
 
-            // °æ°ú ½Ã°£À» ±âÁØÀ¸·Î ½½¶óÀÌµù ÁøÇà·ü(ratio)À» 0°ú 1 »çÀÌÀÇ °ªÀ¸·Î °è»ê
+            // ê²½ê³¼ ì‹œê°„ì„ ê¸°ì¤€ìœ¼ë¡œ ìŠ¬ë¼ì´ë”© ì§„í–‰ë¥ (ratio)ì„ 0ê³¼ 1 ì‚¬ì´ì˜ ê°’ìœ¼ë¡œ ê³„ì‚°
             float ratio = elapsedTime / slideDuration;
 
             if (ratio >= 1.0f)
