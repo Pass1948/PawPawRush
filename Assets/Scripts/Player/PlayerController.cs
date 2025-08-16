@@ -11,12 +11,12 @@ public class PlayerController : MonoBehaviour
     private static int runStartHash = Animator.StringToHash("RunStart");
     private static int movingHash = Animator.StringToHash("Moving");
     private static int jumpingHash = Animator.StringToHash("Jumping");
-    private static int jumpingSpeedHash = Animator.StringToHash("JumpSpeed");
     private static int slidingHash = Animator.StringToHash("Sliding");
 
     // Components
     [SerializeField] private Transform modelTransform;
     private PlayerColliderHandler colliderHandler;
+    public Animator Animator { get; private set; }
     private Animator animator;
 
     [Header("Movement")]
@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float slideDuration = 0.5f;
 
     // Player State
-    private bool isRunning = true;
+    private bool isRunning;
     private bool isJumping;
     private bool isSliding;
 
@@ -55,6 +55,11 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        if(!isRunning)
+        {
+            return;
+        }
+
         if (Input.GetKeyDown(KeyCode.A))
         {
             ChangeLane(-1);
@@ -110,6 +115,8 @@ public class PlayerController : MonoBehaviour
     // 맵 매니저에서 하는게 적절? -> 일단 여기에 정의
     private IEnumerator WaitToStart()
     {
+        StopRunning();
+
         // 카메라 방향 쪽으로 플레이어 회전
         Tween lookAtCamera = modelTransform.DORotate(new Vector3(0, 180, 0), 0.5f);
         yield return lookAtCamera.WaitForCompletion(); // 회전이 끝날 때까지 코루틴을 잠시 대기
