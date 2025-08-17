@@ -13,8 +13,8 @@ public class PlayerColliderHandler : MonoBehaviour
     private BoxCollider boxCollider;
     private Animator animator;
     private AudioSource audioSource;
-    [SerializeField] private Renderer playerRenderer; // 플레이어 렌더러 컴포넌트
-    [SerializeField] private Color originalColor;     // 플레이어 원래 색상
+    [SerializeField] private List<Renderer> playerRenderers; // 플레이어 렌더러 컴포넌트
+    private Color[] originalColors; // 원래 색상 저장용
 
     [Header("Sound")]
     public AudioClip coinSound;
@@ -33,10 +33,15 @@ public class PlayerColliderHandler : MonoBehaviour
     private readonly Vector3 notSlidingColliderScale = new Vector3(1.0f, 2.0f, 1.0f);
 
     // Constants
-    private const int COINS_LAYER_INDEX = 8;
-    private const int OBSTACLE_LAYER_INDEX = 9;
+    private const string COINS_TAG = "Coin";
+    private const string OBSTACLE_TAG = "Obstacle";
 
     private void Awake()
+    {
+        
+    }
+
+    private void Start()
     {
         // 컴포넌트 캐싱
         playerController = GameManager.Player.PlayerCharacter.PlayerController;
@@ -45,6 +50,16 @@ public class PlayerColliderHandler : MonoBehaviour
         boxCollider = GetComponent<BoxCollider>();
         animator = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
+
+        // 렌더러 원래 색상 저장
+        originalColors = new Color[playerRenderers.Count];
+        for (int i = 0; i < playerRenderers.Count; i++)
+        {
+            if (playerRenderers[i] != null)
+            {
+                originalColors[i] = playerRenderers[i].material.color;
+            }
+        }
     }
 
     public void Slide(bool isSliding)
@@ -68,15 +83,14 @@ public class PlayerColliderHandler : MonoBehaviour
 
     private IEnumerator InvincibleTimer()
     {
+        Debug.Log("Invincible Timer Started");
         isInvincible = true;
 
         float time = 0;
         float lastBlink = 0.0f;
 
-        Color origColor = playerRenderer.material.color;
-
         // 무적 시간
-        while (time < invincibleDuration && isInvincible)
+        while (time < invincibleDuration)
         {
             yield return null;
             time += Time.deltaTime;
@@ -86,33 +100,59 @@ public class PlayerColliderHandler : MonoBehaviour
             {
                 lastBlink = 0;
 
-                // 현재 색상이 원래 색상이면 무적 색상으로 아니면 원래 색상으로 변경
-                if (playerRenderer.material.color == origColor)
+                for(int i = 0; i < playerRenderers.Count; i++)
                 {
-                    playerRenderer.material.color = invincibleColor;
+                    if (playerRenderers[i] == null)
+                    {
+                        continue; // 렌더러가 없으면 다음으로
+                    }
+
+                    // 현재 색상이 원래 색상이면 무적 색상으로 아니면 원래 색상으로 변경
+                    if (playerRenderers[i].material.color == originalColors[i])
+                    {
+                        playerRenderers[i].material.color = invincibleColor;
+                    }
+                    else
+                    {
+                        playerRenderers[i].material.color = originalColors[i];
+                    }
                 }
-                else
-                {
-                    playerRenderer.material.color = origColor;
-                }
+
+                //// 현재 색상이 원래 색상이면 무적 색상으로 아니면 원래 색상으로 변경
+                //if (playerRenderers.material.color == origColor)
+                //{
+                //    playerRenderers.material.color = invincibleColor;
+                //}
+                //else
+                //{
+                //    playerRenderers.material.color = origColor;
+                //}
             }
         }
 
-        if (playerRenderer != null)
+        for(int i = 0; i < playerRenderers.Count; i++)
         {
-            playerRenderer.material.color = originalColor;
+            if (playerRenderers[i] != null)
+            {
+                playerRenderers[i].material.color = originalColors[i]; // 원래 색상으로 복원
+            }
         }
+        //if (playerRenderers != null)
+        //{
+        //    playerRenderers.material.color = origColor;
+        //}
 
+        Debug.Log("Invincible Timer Ended");
         isInvincible = false;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.layer == COINS_LAYER_INDEX) // 코인 충돌 처리(아이템 구현 후 적용)
+        if(other.CompareTag(COINS_TAG)) // 코인 충돌 처리(아이템 구현 후 적용)
         {
 
         }
-        else if(other.gameObject.layer == OBSTACLE_LAYER_INDEX) // 장애물 충돌 처리(맵 구현하면서 적용)
+        else if(other.CompareTag(OBSTACLE_TAG)) // 장애물 충돌 처리(맵 구현하면서 적용)
         {
             if(isInvincible)
             {
