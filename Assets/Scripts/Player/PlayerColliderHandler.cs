@@ -35,6 +35,7 @@ public class PlayerColliderHandler : MonoBehaviour
     // Constants
     private const string COINS_TAG = "Coin";
     private const string OBSTACLE_TAG = "Obstacle";
+    private const string ITEM_TAG = "Item";
 
     private void Awake()
     {
@@ -117,16 +118,6 @@ public class PlayerColliderHandler : MonoBehaviour
                         playerRenderers[i].material.color = originalColors[i];
                     }
                 }
-
-                //// 현재 색상이 원래 색상이면 무적 색상으로 아니면 원래 색상으로 변경
-                //if (playerRenderers.material.color == origColor)
-                //{
-                //    playerRenderers.material.color = invincibleColor;
-                //}
-                //else
-                //{
-                //    playerRenderers.material.color = origColor;
-                //}
             }
         }
 
@@ -137,10 +128,6 @@ public class PlayerColliderHandler : MonoBehaviour
                 playerRenderers[i].material.color = originalColors[i]; // 원래 색상으로 복원
             }
         }
-        //if (playerRenderers != null)
-        //{
-        //    playerRenderers.material.color = origColor;
-        //}
 
         Debug.Log("Invincible Timer Ended");
         isInvincible = false;
@@ -150,7 +137,7 @@ public class PlayerColliderHandler : MonoBehaviour
     {
         if(other.CompareTag(COINS_TAG)) // 코인 충돌 처리(아이템 구현 후 적용)
         {
-
+            Debug.Log("Coin Collected");
         }
         else if(other.CompareTag(OBSTACLE_TAG)) // 장애물 충돌 처리(맵 구현하면서 적용)
         {
@@ -183,6 +170,10 @@ public class PlayerColliderHandler : MonoBehaviour
 
                 // 플레이어가 죽으면 스테이지 종료라서 맵 매니저에서 플레이어 죽음 처리?
             }
+        }
+        else if(other.CompareTag(ITEM_TAG))
+        {
+            playerController.UseItem();
         }
     }
 }

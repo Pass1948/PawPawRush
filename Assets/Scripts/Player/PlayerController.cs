@@ -263,4 +263,9 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+
+    public void UseItem()
+    {
+        Debug.Log("Use Item");
+    }
 }
