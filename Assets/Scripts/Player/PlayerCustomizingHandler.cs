@@ -26,10 +26,9 @@ public class PlayerCustomizingHandler : MonoBehaviour
             return;
         }
 
+        // TODO: 추후에 리소스 매니저로 인스턴스화
         // 프리팹을 소켓의 자식으로 인스턴스화
         GameObject accessoryInstance = Instantiate(item.Prefab, targetSocket);
-        //accessoryInstance.transform.localPosition = Vector3.zero;
-        //accessoryInstance.transform.localRotation = Quaternion.identity;
 
         // 착용 중인 아이템 목록에 추가
         equippedAccessories[item.Type] = accessoryInstance;
