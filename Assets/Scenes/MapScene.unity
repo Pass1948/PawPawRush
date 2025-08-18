@@ -156,9 +156,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   obstaclePrefabs:
   - {fileID: 4620996009535610244, guid: 48bc8d481b83e134c9f7ee28aea7c619, type: 3}
-  obstacleParent: {fileID: 1430289540}
-  numberOfInitialObstacles: 3
-  obstacleLength: 22.9
+  spawnPoints:
+  - {fileID: 1430289540}
 --- !u!114 &205236398
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -172,7 +171,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 10
-  obstacleParent: {fileID: 1430289540}
 --- !u!114 &205236399
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -185,8 +183,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cc7f14a6b1133443b8183a3f3bdfd1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapMovement: {fileID: 205236398}
-  obstacleSpawner: {fileID: 205236397}
+  platformPrefabs:
+  - {fileID: 4620996009535610244, guid: 48bc8d481b83e134c9f7ee28aea7c619, type: 3}
+  spawnPoint: {fileID: 1430289540}
+  destroyPoint: {fileID: 1910687141}
 --- !u!4 &205236400
 Transform:
   m_ObjectHideFlags: 0
@@ -519,7 +519,7 @@ Transform:
   m_GameObject: {fileID: 1910687137}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.5, z: 11.1}
+  m_LocalPosition: {x: 0, y: 1.5, z: -15.3}
   m_LocalScale: {x: 20, y: 5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -537,7 +537,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acf58db891700e44b999dd90d367cd0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  obstacleSpawner: {fileID: 205236397}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

@@ -4,17 +4,11 @@ using UnityEngine;
 
 public class MapMovement : MonoBehaviour
 {
-    public float movementSpeed = 10f; //  속도
-    public Transform obstacleParent;
+    public float movementSpeed = 10f; // 게임 속도
 
-    public void MoveMap()
+    void Update()
     {
-        if (obstacleParent != null)
-        {
-            foreach (Transform obstacle in obstacleParent)
-            {
-                obstacle.Translate(Vector3.back * (movementSpeed * Time.deltaTime));
-            }
-        }
+        // 매 프레임마다 오브젝트를 뒤로 이동
+        transform.Translate(Vector3.back * movementSpeed * Time.deltaTime);
     }
 }

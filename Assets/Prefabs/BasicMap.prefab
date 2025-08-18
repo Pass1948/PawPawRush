@@ -4919,6 +4919,7 @@ GameObject:
   - component: {fileID: 5651516427888508491}
   - component: {fileID: 3632082139372441623}
   - component: {fileID: 1611583434736663229}
+  - component: {fileID: 7083934993288527936}
   m_Layer: 0
   m_Name: BasicMap
   m_TagString: Obstacle
@@ -5070,6 +5071,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &7083934993288527936
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4620996009535610244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d9b0e7f6b59fbf4b9ddb1a2d56322f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementSpeed: 10
 --- !u!1 &4667952573490890319
 GameObject:
   m_ObjectHideFlags: 0

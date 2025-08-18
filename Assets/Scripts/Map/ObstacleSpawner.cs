@@ -4,50 +4,28 @@ using UnityEngine;
 
 public class ObstacleSpawner : MonoBehaviour
 {
-    public GameObject[] obstaclePrefabs; 
-    public Transform obstacleParent; 
-    public int numberOfInitialObstacles = 4; // 시작할 때 미리 생성할 개수
-    [HideInInspector] public float obstacleLength;
+    // 스폰할 장애물 프리팹 목록
+    public List<GameObject> obstaclePrefabs;
 
-    private float _zSpawnPosition = 0f;
+    // 장애물을 생성할 빈 게임 오브젝트(스폰 포인트)
+    public List<Transform> spawnPoints;
 
-    private void Awake()
+    public void SpawnObstacleOnPlatform()
     {
-        // 발판 전체 길이 자동 계산 (자식 포함)
-        Renderer[] renderers = obstaclePrefabs[0].GetComponentsInChildren<Renderer>();
-        Bounds bounds = renderers[0].bounds;
-        foreach (Renderer rend in renderers)
-            bounds.Encapsulate(rend.bounds);
-
-        obstacleLength = bounds.size.z;
-        Debug.Log("자동 계산된 발판 길이: " + obstacleLength);
-    }
-
-    private void Start()
-    {
-        SpawnInitialObstacles();
-    }
-
-    public void SpawnInitialObstacles()
-    {
-        for (int i = 0; i < numberOfInitialObstacles; i++)
+        // 각 스폰 포인트에 무작위로 장애물 생성
+        for (int i = 0; i < spawnPoints.Count; i++)
         {
-            SpawnObstacle();
+            // 20% 확률로 장애물 생성
+            if (Random.Range(0f, 1f) < 0.2f)
+            {
+                // 무작위 장애물 선택
+                int randomIndex = Random.Range(0, obstaclePrefabs.Count);
+                GameObject selectedObstacle = obstaclePrefabs[randomIndex];
+
+                // 장애물 생성 및 부모 설정
+                GameObject newObstacle = Instantiate(selectedObstacle, spawnPoints[i].position, Quaternion.identity);
+                newObstacle.transform.SetParent(spawnPoints[i]);
+            }
         }
-    }
-
-    public void SpawnObstacle()
-    {
-        // Pivot 중앙일 경우 보정
-        Vector3 spawnPos = new Vector3(0, 0, _zSpawnPosition + obstacleLength / 2f);
-
-        GameObject newObstacle = Instantiate(
-            obstaclePrefabs[0],
-            spawnPos,
-            Quaternion.identity,
-            obstacleParent
-        );
-
-        _zSpawnPosition += obstacleLength; // 다음 발판 위치 갱신
     }
 }
