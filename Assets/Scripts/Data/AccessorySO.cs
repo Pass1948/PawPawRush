@@ -10,7 +10,7 @@ public enum AccessoryType
 [CreateAssetMenu(fileName = "New Accessory", menuName = "Customizing/Accessory Item")]
 public class AccessorySO : ScriptableObject
 {
-    public string itemName;
-    public AccessoryType type;
-    public GameObject prefab; // 액세서리 프리팹
+    public string ItemName;
+    public AccessoryType Type;
+    public GameObject Prefab; // 액세서리 프리팹
 }

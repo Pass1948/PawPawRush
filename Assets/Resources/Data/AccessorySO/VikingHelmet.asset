@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ba904f9a7406bf4ab9b4b25a6c38fc4, type: 3}
   m_Name: VikingHelmet
   m_EditorClassIdentifier: 
-  itemName: CowboyHat
-  type: 1
-  prefab: {fileID: 1125304032782783391, guid: 23a8099ae632cc84c889fa94db50fb4b, type: 3}
+  ItemName: VikingHelmet
+  Type: 1
+  Prefab: {fileID: 3935786350346061255, guid: 4a310628b44f29445a41c51ec4a80e13, type: 3}

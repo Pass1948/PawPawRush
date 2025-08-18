@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ba904f9a7406bf4ab9b4b25a6c38fc4, type: 3}
   m_Name: MinerHat
   m_EditorClassIdentifier: 
-  itemName: CowboyHat
-  type: 1
-  prefab: {fileID: 1125304032782783391, guid: 23a8099ae632cc84c889fa94db50fb4b, type: 3}
+  ItemName: MinerHat
+  Type: 1
+  Prefab: {fileID: 3284181984970117100, guid: aadb4886651e4d940a0aae1de8e6b007, type: 3}

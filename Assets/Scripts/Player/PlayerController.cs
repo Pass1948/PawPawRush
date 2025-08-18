@@ -14,7 +14,6 @@ public class PlayerController : MonoBehaviour
     private static int slidingHash = Animator.StringToHash("Sliding");
 
     // Components
-    [SerializeField] private Transform modelTransform;
     private PlayerColliderHandler colliderHandler;
     public Animator Animator { get; private set; }
     private Animator animator;
@@ -118,7 +117,7 @@ public class PlayerController : MonoBehaviour
         StopRunning();
 
         // 카메라 방향 쪽으로 플레이어 회전
-        Tween lookAtCamera = modelTransform.DORotate(new Vector3(0, 180, 0), 0.5f);
+        Tween lookAtCamera = transform.DORotate(new Vector3(0, 180, 0), 0.5f);
         yield return lookAtCamera.WaitForCompletion(); // 회전이 끝날 때까지 코루틴을 잠시 대기
 
         animator.Play(startHash);
@@ -137,7 +136,7 @@ public class PlayerController : MonoBehaviour
 
         // 다시 정면으로 플레이어 회전
         // 원래 방향(Y축 0도)으로 돌아옴 (0.3초 동안)
-        Tween lookForward = modelTransform.DORotate(Vector3.zero, 0.3f);
+        Tween lookForward = transform.DORotate(Vector3.zero, 0.3f);
         yield return lookForward.WaitForCompletion(); // 회전이 끝날 때까지 다시 대기
 
         StartRunning();

@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ba904f9a7406bf4ab9b4b25a6c38fc4, type: 3}
   m_Name: Sombrero
   m_EditorClassIdentifier: 
-  itemName: CowboyHat
-  type: 1
-  prefab: {fileID: 1125304032782783391, guid: 23a8099ae632cc84c889fa94db50fb4b, type: 3}
+  ItemName: Sombrero
+  Type: 1
+  Prefab: {fileID: 3275408679684006544, guid: 13b328dd5fe7b8d4c93b9a94da45de9b, type: 3}
