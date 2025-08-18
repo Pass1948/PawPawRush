@@ -16,6 +16,11 @@ public class PlayerCharacter : MonoBehaviour
     public AudioClip HitSound;
     public AudioClip DeathSound;
 
+    [Header("Accessory Test")]
+    [SerializeField] private PlayerCustomizingHandler customizingHandler;
+    [SerializeField] private List<AccessorySO> accessories;
+    [SerializeField] private int accessoryIndex;
+
     private void Awake()
     {
         GameManager.Player.PlayerCharacter = this;
@@ -25,5 +30,11 @@ public class PlayerCharacter : MonoBehaviour
 
         playerCondition = GetComponent<PlayerCondition>();
         PlayerCondition = playerCondition;
+    }
+
+    // 커스터마이징 테스트
+    private void Start()
+    {
+        customizingHandler.EquipAccessory(accessories[accessoryIndex]);
     }
 }
