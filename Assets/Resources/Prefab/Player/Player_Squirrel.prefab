@@ -1154,7 +1154,7 @@ GameObject:
   - component: {fileID: 1776628067324996706}
   - component: {fileID: 5869542677550817192}
   m_Layer: 0
-  m_Name: Player
+  m_Name: Player_Squirrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
