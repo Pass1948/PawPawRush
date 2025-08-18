@@ -8,7 +8,6 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance => instance;
 
     // Managers=========================
-
     private static ResourceManager resourceManager;
     public static ResourceManager Resource => resourceManager;
 
