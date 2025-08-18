@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEditor.PackageManager.UI;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.WSA;
 
 public class UIManager : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class UIManager : MonoBehaviour
     private Stack<PopUpUI> popUpStack;
 
 
+    private readonly List<ToastUI> active = new();
 
     private void Awake()
     {
