@@ -10,6 +10,18 @@ public class ScoreManager : MonoBehaviour
     public int score = 0;
     public TextMeshProUGUI scoreText;
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            // Á¡¼ö Áõ°¡
+            ScoreManager.Instance.AddScore(1);
+
+            // ÄÚÀÎ ÆÄ±«
+            Destroy(gameObject);
+        }
+    }
+
     void Awake()
     {
         // ½Ì±ÛÅæ ÆÐÅÏ
@@ -33,7 +45,7 @@ public class ScoreManager : MonoBehaviour
     void UpdateScoreUI()
     {
         if (scoreText != null)
-            scoreText.text = score.ToString("D5");
+        scoreText.text = score.ToString("D5");
     }
 
     public int GetScore()
@@ -41,3 +53,4 @@ public class ScoreManager : MonoBehaviour
         return score;
     }
 }
+
