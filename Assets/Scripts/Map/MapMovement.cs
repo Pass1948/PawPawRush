@@ -8,7 +8,7 @@ public class MapMovement : MonoBehaviour
 
     void Update()
     {
-        // 매 프레임마다 오브젝트를 뒤로 이동
+        // 오브젝트 이동
         transform.Translate(Vector3.back * movementSpeed * Time.deltaTime);
     }
 }

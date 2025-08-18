@@ -21,19 +21,19 @@ public class MapManager : MonoBehaviour
         // 첫 2개의 발판은 장애물 없이 생성
         for (int i = 0; i < 2; i++)
         {
-            SpawnNewPlatform(false); // false를 전달하여 장애물 생성하지 않음
+            SpawnNewPlatform(false);
         }
 
-        // 나머지 8개의 발판은 장애물을 포함하여 생성
+        // 나머지 발판은 장애물을 포함하여 생성
         for (int i = 0; i < 8; i++)
         {
-            SpawnNewPlatform(true); // true를 전달하여 장애물 생성
+            SpawnNewPlatform(true);
         }
     }
 
     private void Update()
     {
-        // 플레이어가 발판 끝에 도달하면 새로운 발판 생성
+        // 새로운 발판 생성
         if (activePlatforms.Count > 0 && activePlatforms[activePlatforms.Count - 1].transform.position.z < spawnPoint.position.z)
         {
             SpawnNewPlatform(true); // 업데이트 중에는 항상 장애물 포함 생성
@@ -57,7 +57,7 @@ public class MapManager : MonoBehaviour
         if (activePlatforms.Count > 0)
         {
             GameObject lastPlatform = activePlatforms[activePlatforms.Count - 1];
-            // 마지막 발판의 길이를 고려하여 정확하게 이어붙임
+            // 정확하게 이어붙임
             spawnPosition = lastPlatform.transform.position + new Vector3(0, 0, GetPlatformLength(lastPlatform));
         } else
         {
@@ -69,7 +69,7 @@ public class MapManager : MonoBehaviour
         GameObject newPlatform = Instantiate(selectedPlatform, spawnPosition, Quaternion.identity);
         activePlatforms.Add(newPlatform);
         
-        // 매개변수에 따라 장애물 스포너를 호출
+        // 장애물 스포너를 호출
         if (spawnObstacles)
         {
             ObstacleSpawner spawner = newPlatform.GetComponent<ObstacleSpawner>();
