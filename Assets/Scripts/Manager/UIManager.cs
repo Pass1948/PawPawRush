@@ -9,7 +9,6 @@ public class UIManager : MonoBehaviour
     private Canvas windowCanvas;
     private Canvas popUpCanvas;
     private Stack<PopUpUI> popUpStack;
-
     private void Awake()
     {
         InstantsWindowUI();
@@ -57,7 +56,6 @@ public class UIManager : MonoBehaviour
         GameManager.Resource.Instantiate(eventSystem);
         DontDestroyOnLoad(eventSystem.gameObject);
     }
-
 
     // --------------[WindowUI]--------------
 
