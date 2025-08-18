@@ -1,14 +1,13 @@
 using System.Resources;
 using UnityEngine;
 
-[DefaultExecutionOrder(-100)]       // GameManager°¡ ´Ù¸¥ Scriptº¸´Ù ¸ÕÀú È£ÃâµÇ°Ô ¼³Á¤
+[DefaultExecutionOrder(-100)]       // GameManagerê°€ ë‹¤ë¥¸ Scriptë³´ë‹¤ ë¨¼ì € í˜¸ì¶œë˜ê²Œ ì„¤ì •
 public class GameManager : MonoBehaviour
 {
     private static GameManager instance;
     public static GameManager Instance => instance;
 
     // Managers=========================
-
     private static ResourceManager resourceManager;
     public static ResourceManager Resource => resourceManager;
 
@@ -21,6 +20,8 @@ public class GameManager : MonoBehaviour
     private static UIManager uiManager;
     public static UIManager UI => uiManager;
 
+    private static PlayerManager playerManager;
+    public static PlayerManager Player => playerManager;
 
     private void Awake()
     {
@@ -53,6 +54,10 @@ public class GameManager : MonoBehaviour
         GameObject uiObj = new GameObject("UIManager");
         uiObj.transform.SetParent(transform, false);
         uiManager = uiObj.AddComponent<UIManager>();
+
+        GameObject playerObj = new GameObject("PlayerManager");
+        playerObj.transform.SetParent(transform, false);
+        playerManager = playerObj.AddComponent<PlayerManager>();
     }
 
 }
