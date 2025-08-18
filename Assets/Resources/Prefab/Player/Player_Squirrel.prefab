@@ -1088,6 +1088,7 @@ GameObject:
   - component: {fileID: 1722921761514397304}
   - component: {fileID: 8131949605378127268}
   - component: {fileID: 1776628067324996706}
+  - component: {fileID: 6690706557344028952}
   - component: {fileID: 5869542677550817192}
   m_Layer: 0
   m_Name: Player_Squirrel
@@ -1248,6 +1249,19 @@ MonoBehaviour:
   invincibleDuration: 2
   invincibleColor: {r: 1, g: 0, b: 0, a: 1}
   blinkPeriod: 0.1
+--- !u!114 &6690706557344028952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8868124184818071609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6722ac9984ddd8140982629eba18bc01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hatSocket: {fileID: 2177102082894136479}
 --- !u!82 &5869542677550817192
 AudioSource:
   m_ObjectHideFlags: 0

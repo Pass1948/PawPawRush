@@ -26,4 +26,10 @@ public class PlayerCharacter : MonoBehaviour
         playerCondition = GetComponent<PlayerCondition>();
         PlayerCondition = playerCondition;
     }
+
+    // 커스터마이징 테스트
+    private void Start()
+    {
+        
+    }
 }
