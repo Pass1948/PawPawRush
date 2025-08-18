@@ -4,25 +4,20 @@ using UnityEngine;
 
 public class MapManager : MonoBehaviour
 {
-    public GameObject[] obstaclePrefabs; // ��ֹ� ������ �迭
-    public float obstacleLength = 30f; // �� �������� ����
-    public int numberOfObstacles = 3; // ó�� ������ �� �������� ����
-
-    private float zSpawn = 0f; // �
+    // 맵 이동 스크립트와 맵 생성 스크립트를 연결합니다.
+    public MapMovement mapMovement;
+    public ObstacleSpawner obstacleSpawner;
 
     void Start()
     {
-        // ���� ���� �� �ʱ� �� ����
-        for (int i = 0; i < numberOfObstacles; i++)
-        {
-            SpawnObstacle(Random.Range(0, obstaclePrefabs.Length));
-        }
+        // 초기 맵 만들기
+        obstacleSpawner.SpawnInitialObstacles();
+        
     }
-
-    // �� ���� �Լ�
-    public void SpawnObstacle(int obstacleIndex)
+    
+    void Update()
     {
-        GameObject newObstacle = Instantiate(obstaclePrefabs[obstacleIndex], transform.forward * zSpawn, transform.rotation);
-        zSpawn += obstacleLength;
+        // 맵 움직임
+        mapMovement.MoveMap();
     }
 }

@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class BGLooper : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    // ObstacleSpawner 스크립트를 참조하여 맵 생성을 요청합니다.
+    public ObstacleSpawner obstacleSpawner;
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter(Collider other)
     {
-        
+        if (other.CompareTag("Obstacle"))
+        {
+            obstacleSpawner.SpawnObstacle();
+            Destroy(other.gameObject);
+        }
     }
 }
