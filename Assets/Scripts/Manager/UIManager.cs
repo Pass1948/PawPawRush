@@ -9,6 +9,9 @@ public class UIManager : MonoBehaviour
     private Canvas windowCanvas;
     private Canvas popUpCanvas;
     private Stack<PopUpUI> popUpStack;
+
+
+
     private void Awake()
     {
         InstantsWindowUI();
