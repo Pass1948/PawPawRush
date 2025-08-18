@@ -18,10 +18,16 @@ public class MapManager : MonoBehaviour
 
     private void Start()
     {
-        // 게임 시작 시, 초기 발판 생성
-        for (int i = 0; i < 10; i++) // 초기 발판 10개 생성
+        // 첫 2개의 발판은 장애물 없이 생성
+        for (int i = 0; i < 2; i++)
         {
-            SpawnNewPlatform();
+            SpawnNewPlatform(false); // false를 전달하여 장애물 생성하지 않음
+        }
+
+        // 나머지 8개의 발판은 장애물을 포함하여 생성
+        for (int i = 0; i < 8; i++)
+        {
+            SpawnNewPlatform(true); // true를 전달하여 장애물 생성
         }
     }
 
@@ -30,7 +36,7 @@ public class MapManager : MonoBehaviour
         // 플레이어가 발판 끝에 도달하면 새로운 발판 생성
         if (activePlatforms.Count > 0 && activePlatforms[activePlatforms.Count - 1].transform.position.z < spawnPoint.position.z)
         {
-            SpawnNewPlatform();
+            SpawnNewPlatform(true); // 업데이트 중에는 항상 장애물 포함 생성
         }
 
         // 플레이어 뒤로 멀어진 발판 제거
@@ -40,7 +46,7 @@ public class MapManager : MonoBehaviour
         }
     }
 
-    private void SpawnNewPlatform()
+    private void SpawnNewPlatform(bool spawnObstacles)
     {
         // 발판 프리팹 목록에서 무작위로 선택
         int randomIndex = Random.Range(0, platformPrefabs.Count);
@@ -63,11 +69,14 @@ public class MapManager : MonoBehaviour
         GameObject newPlatform = Instantiate(selectedPlatform, spawnPosition, Quaternion.identity);
         activePlatforms.Add(newPlatform);
         
-        // 생성된 발판에 장애물 스포너 로직을 호출 (아래 ObstacleSpawner.cs와 연결)
-        ObstacleSpawner spawner = newPlatform.GetComponent<ObstacleSpawner>();
-        if (spawner != null)
+        // 매개변수에 따라 장애물 스포너를 호출
+        if (spawnObstacles)
         {
-            spawner.SpawnObstacleOnPlatform();
+            ObstacleSpawner spawner = newPlatform.GetComponent<ObstacleSpawner>();
+            if (spawner != null)
+            {
+                spawner.SpawnObstacleOnPlatform();
+            }
         }
     }
 
@@ -78,16 +87,13 @@ public class MapManager : MonoBehaviour
         Destroy(oldestPlatform);
     }
 
-    // 발판의 길이를 계산하는 헬퍼 함수
     private float GetPlatformLength(GameObject platform)
     {
-        // 발판의 BoxCollider를 사용하여 길이(z축)를 얻음
-        // 발판에 BoxCollider가 반드시 있어야 함
         BoxCollider collider = platform.GetComponent<BoxCollider>();
         if (collider != null)
         {
             return collider.size.z;
         }
-        return 0f; // 콜라이더가 없으면 길이 0 반환
+        return 0f;
     }
 }

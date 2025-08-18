@@ -12,6 +12,8 @@ public class ObstacleSpawner : MonoBehaviour
 
     public void SpawnObstacleOnPlatform()
     {
+        bool isObstacleSpawned = false; // 장애물이 생성되었는지 확인하는 변수
+
         // 각 스폰 포인트에 무작위로 장애물 생성
         for (int i = 0; i < spawnPoints.Count; i++)
         {
@@ -25,7 +27,23 @@ public class ObstacleSpawner : MonoBehaviour
                 // 장애물 생성 및 부모 설정
                 GameObject newObstacle = Instantiate(selectedObstacle, spawnPoints[i].position, Quaternion.identity);
                 newObstacle.transform.SetParent(spawnPoints[i]);
+
+                isObstacleSpawned = true; // 장애물이 생성되었음을 기록
             }
+        }
+
+        // 만약 장애물이 하나도 생성되지 않았다면,
+        // 무작위 스폰 포인트에 하나를 강제로 생성
+        if (!isObstacleSpawned && spawnPoints.Count > 0)
+        {
+            int randomIndex = Random.Range(0, obstaclePrefabs.Count);
+            GameObject selectedObstacle = obstaclePrefabs[randomIndex];
+            
+            int randomSpawnPointIndex = Random.Range(0, spawnPoints.Count);
+            Transform selectedSpawnPoint = spawnPoints[randomSpawnPointIndex];
+
+            GameObject newObstacle = Instantiate(selectedObstacle, selectedSpawnPoint.position, Quaternion.identity);
+            newObstacle.transform.SetParent(selectedSpawnPoint);
         }
     }
 }

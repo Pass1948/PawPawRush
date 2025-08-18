@@ -134,7 +134,6 @@ GameObject:
   - component: {fileID: 205236400}
   - component: {fileID: 205236399}
   - component: {fileID: 205236398}
-  - component: {fileID: 205236397}
   m_Layer: 0
   m_Name: MapManager
   m_TagString: Untagged
@@ -142,22 +141,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &205236397
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 205236396}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a2ea9df925575642bef56aecffb66cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  obstaclePrefabs:
-  - {fileID: 4620996009535610244, guid: 48bc8d481b83e134c9f7ee28aea7c619, type: 3}
-  spawnPoints:
-  - {fileID: 1430289540}
 --- !u!114 &205236398
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -413,7 +396,7 @@ Transform:
   m_GameObject: {fileID: 1430289539}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 118.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -519,7 +502,7 @@ Transform:
   m_GameObject: {fileID: 1910687137}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.5, z: -15.3}
+  m_LocalPosition: {x: 0, y: 1.5, z: -30.3}
   m_LocalScale: {x: 20, y: 5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
