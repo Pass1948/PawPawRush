@@ -160,6 +160,8 @@ public class PlayerColliderHandler : MonoBehaviour
                 //audioSource.PlayOneShot(GameManager.Player.PlayerCharacter.HitSound);
 
                 SetInvincible();
+
+                playerController.StartRunning();
             }
             else // 플레이어 죽음
             {
