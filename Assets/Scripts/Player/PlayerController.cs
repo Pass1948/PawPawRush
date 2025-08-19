@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour
     private float jumpStartTime;
     private float slideStartTime;
 
-    private Vector3 targetPosition = Vector3.zero;
+    private Vector3 targetPosition;
     private int currentLane = STARTING_LANE;
 
     // Constants
@@ -42,12 +42,13 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         animator = GetComponent<Animator>();
+        colliderHandler = GetComponent<PlayerColliderHandler>();
+
+        targetPosition = transform.position;
     }
 
     private void Start()
     {
-        colliderHandler = GetComponent<PlayerColliderHandler>();
-
         // temp
         StartCoroutine(WaitToStart());
     }
@@ -107,7 +108,7 @@ public class PlayerController : MonoBehaviour
         float laneOffset = 2.0f;
 
         currentLane = targetLane;
-        targetPosition = new Vector3((currentLane - 1) * laneOffset, 0, 0);
+        targetPosition = new Vector3((currentLane - 1) * laneOffset, targetPosition.y, targetPosition.z);
     }
 
     // 카운트 다운 하는 동안 Greeting 애니메이션 실행
@@ -170,14 +171,11 @@ public class PlayerController : MonoBehaviour
             StopSliding();
         }
 
-
         isJumping = true;
         jumpStartTime = Time.time;
 
         // 애니메이션 및 사운드 재생
-        //character.animator.SetFloat(s_JumpingSpeedHash, animSpeed);
         animator.SetBool(jumpingHash, true);
-        //m_Audio.PlayOneShot(character.jumpSound);
     }
 
     public void StopJumping()
@@ -201,17 +199,17 @@ public class PlayerController : MonoBehaviour
             {
                 StopJumping();
 
-                return 0f; // 점프 끝 -> 지면(y=0)으로 돌아감
+                return targetPosition.y; // 점프 끝 -> 지면으로 돌아감
             }
             else
             {
                 // Sin 함수를 이용해 부드러운 포물선 형태의 y값 계산
                 // ratio가 0에서 1로 변함에 따라 y값은 0 -> jumpHeight -> 0 으로 변함
-                return Mathf.Sin(ratio * Mathf.PI) * jumpHeight;
+                return targetPosition.y + Mathf.Sin(ratio * Mathf.PI) * jumpHeight;
             }
         }
 
-        return 0f;
+        return targetPosition.y;
     }
 
     public void HandleSlide()
