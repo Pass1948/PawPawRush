@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DoubleScoreEffect : MonoBehaviour
 {
-    public float effectDuration = 5f;  // 2배 점수 지속 시간
+    [SerializeField] private float effectDuration = 5f;  // 2배 점수 지속 시간
 
     private void OnTriggerEnter(Collider other)
     {
