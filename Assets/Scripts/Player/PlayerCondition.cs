@@ -25,9 +25,8 @@ public class PlayerCondition : MonoBehaviour
         if (CurrentLife > 0)
         {
             CurrentLife--;
+            Debug.Log($"Player Life Decreased: {CurrentLife}");
         }
-
-        Debug.Log($"Player Life Decreased: {CurrentLife}");
     }
 
     // 플레이어 목숨 증가
@@ -37,5 +36,7 @@ public class PlayerCondition : MonoBehaviour
         {
             CurrentLife++;
         }
+        
+        Debug.Log($"{CurrentLife}");
     }
 }
