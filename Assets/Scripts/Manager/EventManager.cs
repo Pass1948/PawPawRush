@@ -5,8 +5,8 @@ using UnityEngine.SceneManagement;
 public enum EventType
 {
     // 업적 이벤트 정리
-    첫번째,
-    두번째,
+    First,
+    Second,
 
 
 

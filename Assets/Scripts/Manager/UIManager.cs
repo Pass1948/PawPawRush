@@ -135,6 +135,5 @@ public class UIManager : MonoBehaviour
         while (popUpStack.Count > 0)
             GameManager.Pool.ReleaseUI(popUpStack.Pop().gameObject);
     }
-
 }
 
