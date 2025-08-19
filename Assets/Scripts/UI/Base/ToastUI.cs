@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class ToastUI : BaseUI
 {
-    private readonly Queue<ToastUIData> pending = new();
     protected override void Awake()
     {
         base.Awake();
