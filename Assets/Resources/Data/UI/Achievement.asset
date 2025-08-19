@@ -12,4 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 525380af8b4124b4bbe4819ee61ef3b1, type: 3}
   m_Name: Achievement
   m_EditorClassIdentifier: 
-  toastUIInfo: []
+  toastUIInfo:
+  - title: 
+    desc: 
+    icon: {fileID: 0}
+  - title: 
+    desc: 
+    icon: {fileID: 0}
