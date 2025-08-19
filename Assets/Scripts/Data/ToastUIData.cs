@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.WSA;
 
 [System.Serializable]
-public class ToastUIData : MonoBehaviour
+public class ToastUIData
 {
     public string title;
     public string desc;
