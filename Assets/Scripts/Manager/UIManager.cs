@@ -11,7 +11,6 @@ public class UIManager : MonoBehaviour
     private Canvas popUpCanvas;
     private Stack<PopUpUI> popUpStack;
 
-
     private readonly List<ToastUI> active = new();
 
     private void Awake()
