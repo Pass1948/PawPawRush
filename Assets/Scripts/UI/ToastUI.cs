@@ -9,7 +9,4 @@ public class ToastUI : BaseUI
     {
         base.Awake();
     }
-
-
-
 }
