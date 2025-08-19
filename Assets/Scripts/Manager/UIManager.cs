@@ -105,16 +105,11 @@ public class UIManager : MonoBehaviour
     public T ShowPopUpUI<T>(T popUpUI) where T : PopUpUI
     {
         if (popUpStack.Count > 0)
-        {
-            PopUpUI prevUI = popUpStack.Peek();
-            prevUI.gameObject.SetActive(false);
-        }
+            popUpStack.Peek().gameObject.SetActive(false);
 
         T ui = GameManager.Pool.GetUI(popUpUI);
         ui.transform.SetParent(popUpCanvas.transform, false);
-
         popUpStack.Push(ui);
-
         return ui;
     }
 
@@ -131,15 +126,15 @@ public class UIManager : MonoBehaviour
 
         if (popUpStack.Count > 0)
         {
-            PopUpUI curUI = popUpStack.Peek();
-            curUI.gameObject.SetActive(true);
+            popUpStack.Peek().gameObject.SetActive(true);
         }
     }
     public void PopUpUIClear()
     {
-        popUpStack.Clear();
+        // PopUpUI 스택을 비우고 모든 PopUpUI를 반환
+        while (popUpStack.Count > 0)
+            GameManager.Pool.ReleaseUI(popUpStack.Pop().gameObject);
     }
-
 
 }
 
