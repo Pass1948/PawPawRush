@@ -167,7 +167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   platformPrefabs:
-  - {fileID: 4620996009535610244, guid: 48bc8d481b83e134c9f7ee28aea7c619, type: 3}
+  - {fileID: 7289757297068183664, guid: 48bc8d481b83e134c9f7ee28aea7c619, type: 3}
   spawnPoint: {fileID: 1430289540}
   destroyPoint: {fileID: 1910687141}
 --- !u!4 &205236400
