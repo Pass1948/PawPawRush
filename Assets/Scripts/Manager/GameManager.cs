@@ -70,10 +70,6 @@ public class GameManager : MonoBehaviour
         playerObj.transform.SetParent(transform, false);
         playerManager = playerObj.AddComponent<PlayerManager>();
 
-        GameObject mapObj = new GameObject("MapManager");
-        mapObj.transform.SetParent(transform, false);
-        mapManager = mapObj.AddComponent<MapManager>();
-
         GameObject eventObj = new GameObject("EventManager");
         eventObj.transform.SetParent(transform, false);
         eventManager = eventObj.AddComponent<EventManager>();

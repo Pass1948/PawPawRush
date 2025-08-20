@@ -167,10 +167,7 @@ public class PlayerColliderHandler : MonoBehaviour
                 // 죽음 사운드 재생
                 audioSource.PlayOneShot(GameManager.Player.PlayerCharacter.DeathSound);
 
-                // 플레이어 죽고 데이터를 맵 매니저나 게임 매니저에 전달?
-
-                // 플레이어가 죽으면 스테이지 종료라서 맵 매니저에서 플레이어 죽음 처리?
-                GameManager.Map.MapMovement.movementSpeed = 0; // 맵 이동 멈춤
+                MapManager.Instance.EndGame(); // 맵 이동 멈춤
 
                 animator.SetBool(PlayerController.DeadHash, true);
             }

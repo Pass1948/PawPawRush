@@ -54,7 +54,7 @@ public class PlayerController : MonoBehaviour
         audioSource = GameManager.Player.PlayerCharacter.AudioSource;
 
         // temp
-        StartCoroutine(WaitToStart());
+        //StartCoroutine(WaitToStart());
     }
 
     private void Update()
@@ -115,9 +115,7 @@ public class PlayerController : MonoBehaviour
         targetPosition = new Vector3((currentLane - 1) * laneOffset, targetPosition.y, targetPosition.z);
     }
 
-    // 카운트 다운 하는 동안 Greeting 애니메이션 실행
-    // 맵 매니저에서 하는게 적절? -> 일단 여기에 정의
-    private IEnumerator WaitToStart()
+    public IEnumerator PrepareForGameStart(float countdownDuration)
     {
         StopRunning();
 
@@ -127,17 +125,20 @@ public class PlayerController : MonoBehaviour
 
         animator.Play(startHash);
 
-        float timeToStart;
-        float length = 5f; // temp 5초 카운트 다운 -> 나중에 맵 매니저에서 설정 받아옴
-        timeToStart = length;
+        //float timeToStart;
+        //float length = 5f; // temp 5초 카운트 다운 -> 나중에 맵 매니저에서 설정 받아옴
+        //timeToStart = length;
 
-        while (timeToStart >= 0)
-        {
-            yield return null;
-            timeToStart -= Time.deltaTime * 1.5f;
-        }
+        //while (timeToStart >= 0)
+        //{
+        //    yield return null;
+        //    timeToStart -= Time.deltaTime * 1.5f;
+        //}
 
-        timeToStart = -1;
+        //timeToStart = -1;
+
+        // 카운트다운 시간만큼 대기
+        yield return new WaitForSeconds(countdownDuration);
 
         // 다시 정면으로 플레이어 회전
         // 원래 방향(Y축 0도)으로 돌아옴 (0.3초 동안)
