@@ -13,7 +13,7 @@ public class ToastUIBase : ToastUI
     ToastUIData toastUIData;
     AudioSource audioSource;
 
-    private void Awake()
+    protected override void Awake()
     {
         base.Awake();
         audioSource = GetComponent<AudioSource>();
