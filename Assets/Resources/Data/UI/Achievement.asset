@@ -30,3 +30,7 @@ MonoBehaviour:
       100\uBC88"
     icon: {fileID: 0}
     achievementId: 3
+  - title: "\uC810\uC21810\uC810\uB2EC\uC131"
+    desc: "\uB2EC\uC131\uC870\uAC74 : \uC2A4\uCF54\uC5B410\uB2EC\uC131"
+    icon: {fileID: 0}
+    achievementId: 4

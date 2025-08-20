@@ -26,6 +26,12 @@ public class PlayerCondition : MonoBehaviour
         {
             CurrentLife--;
             Debug.Log($"Player Life Decreased: {CurrentLife}");
+            if (CurrentLife <= 0)
+            {
+                // 플레이어가 죽었을 때 처리
+                Debug.Log("Player is dead.");
+                GameManager.Event.PostNotification(EventType.AchievementUnlocked, this, AchievementId.Coin50);
+            }
         }
     }
 

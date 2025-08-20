@@ -17,9 +17,9 @@ public class DoubleScoreEffect : MonoBehaviour
 
     private IEnumerator ActivateDoubleScore()
     {
-        ScoreManager.Instance.SetScoreMultiplier(2f);  // 2배 설정
+        GameManager.Score.SetScoreMultiplier(2f);  // 2배 설정
         yield return new WaitForSeconds(effectDuration);
-        ScoreManager.Instance.SetScoreMultiplier(1f);  // 효과 종료 시 원래대로
+        GameManager.Score.SetScoreMultiplier(1f);  // 효과 종료 시 원래대로
     }
 }
 
