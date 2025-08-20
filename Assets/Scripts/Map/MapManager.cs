@@ -10,6 +10,9 @@ public class MapManager : MonoBehaviour
     // 현재 활성화된 발판들을 관리하는 리스트
     private List<GameObject> activePlatforms = new List<GameObject>();
 
+    public MapMovement MapMovement { get; set; }
+    public float OrigMapMovementSpeed { get; set; }
+
     // 스폰 지점
     public Transform spawnPoint;
 
@@ -18,6 +21,8 @@ public class MapManager : MonoBehaviour
 
     private void Start()
     {
+        OrigMapMovementSpeed = GameManager.Map.MapMovement.movementSpeed;
+
         // 첫 2개의 발판은 장애물 없이 생성
         for (int i = 0; i < 2; i++)
         {
@@ -33,6 +38,11 @@ public class MapManager : MonoBehaviour
 
     private void Update()
     {
+        if (MapMovement != null)
+        {
+            MapMovement.Move();
+        }
+        
         // 새로운 발판 생성
         if (activePlatforms.Count > 0 && activePlatforms[activePlatforms.Count - 1].transform.position.z < spawnPoint.position.z)
         {
@@ -66,7 +76,7 @@ public class MapManager : MonoBehaviour
         }
 
         // 새로운 발판 생성
-        GameObject newPlatform = Instantiate(selectedPlatform, spawnPosition, Quaternion.identity);
+        GameObject newPlatform = Instantiate(selectedPlatform, spawnPosition, Quaternion.identity, this.transform);
         activePlatforms.Add(newPlatform);
         
         // 장애물 스포너를 호출

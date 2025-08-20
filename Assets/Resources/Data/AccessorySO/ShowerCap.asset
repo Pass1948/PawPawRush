@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ba904f9a7406bf4ab9b4b25a6c38fc4, type: 3}
   m_Name: ShowerCap
   m_EditorClassIdentifier: 
+  ItemID: 7
   ItemName: ShowerCap
   Type: 1
   Prefab: {fileID: 2055379893458849372, guid: 9db3221fb4f41a441b184cd81ba35a2f, type: 3}

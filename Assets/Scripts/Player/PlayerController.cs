@@ -7,17 +7,18 @@ public class PlayerController : MonoBehaviour
 {
     // Animator parameter
     private static int startHash = Animator.StringToHash("Greeting");
-    private static int deadHash = Animator.StringToHash("Dead");
     private static int runStartHash = Animator.StringToHash("RunStart");
     private static int movingHash = Animator.StringToHash("Moving");
     private static int jumpingHash = Animator.StringToHash("Jumping");
     private static int slidingHash = Animator.StringToHash("Sliding");
+    public static int DeadHash = Animator.StringToHash("Dead");
 
     // Components
     public PlayerColliderHandler ColliderHandler { get; private set; }
     private PlayerColliderHandler colliderHandler;
     public Animator Animator { get; private set; }
     private Animator animator;
+    private AudioSource audioSource;
 
     [Header("Movement")]
     [SerializeField] private float laneChangeSpeed = 1.0f;
@@ -50,6 +51,8 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        audioSource = GameManager.Player.PlayerCharacter.AudioSource;
+
         // temp
         StartCoroutine(WaitToStart());
     }
@@ -176,6 +179,7 @@ public class PlayerController : MonoBehaviour
         jumpStartTime = Time.time;
 
         // 애니메이션 및 사운드 재생
+        audioSource.PlayOneShot(GameManager.Player.PlayerCharacter.JumpSound); // 슬라이드 사운드 재생
         animator.SetBool(jumpingHash, true);
     }
 
@@ -260,10 +264,5 @@ public class PlayerController : MonoBehaviour
                 StopSliding();
             }
         }
-    }
-
-    public void UseItem()
-    {
-        Debug.Log("Use Item");
     }
 }
