@@ -7,11 +7,15 @@ using UnityEngine.UI;
 public class ToastUIBase : ToastUI
 {
     [SerializeField] Image iconImage;
-    [SerializeField] TextMeshProUGUI titleText;
-    [SerializeField] TextMeshProUGUI decText;
+    [SerializeField] TextMeshPro titleText;
+    [SerializeField] TextMeshPro decText;
+    ToastUIData toastUIData;
 
     private void Awake()
     {
         base.Awake();
+        Set(toastUIData, titleText, decText, iconImage)
     }
+    
+
 }
