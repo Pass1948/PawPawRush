@@ -7311,19 +7311,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a2ea9df925575642bef56aecffb66cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  obstaclePrefabs:
-  - {fileID: 8482347960162844852, guid: c8fbbf5bc4729eb44a644fee519f05d7, type: 3}
-  - {fileID: 739019982574592530, guid: 78d282fd21fd37e44be30cec024c9c35, type: 3}
-  - {fileID: 6499927526838642793, guid: 30c3b891127084e43957eed3982793ff, type: 3}
-  - {fileID: 1213044990150454799, guid: 0c23ff9dd9bdb4740895f65154d07ed7, type: 3}
-  - {fileID: 6683396898397088703, guid: 585902fc0ddc1b947aec087f976efbbd, type: 3}
-  - {fileID: 8861170140527211832, guid: 764d507e9ee273041aa8204ed51f9fd2, type: 3}
-  - {fileID: 1032516925712261209, guid: 537323e462256ea4aaf0dda0dc517885, type: 3}
-  - {fileID: 9195856486016985073, guid: a198351a5b027024698f7ab5e56fdeef, type: 3}
-  - {fileID: 727597705423213612, guid: a00c4981dabaa914fa2c253fecae6108, type: 3}
-  - {fileID: 5325127590720003623, guid: 9267546bf82cb5241bd091fd40b6dd60, type: 3}
-  - {fileID: 3495944031090317331, guid: b895c3d583824fb46ac9b587cf36d86e, type: 3}
-  - {fileID: 5192869112967406624, guid: 99e6988240b401e4baff06c3485590ce, type: 3}
+  obstaclePrefabs: []
   spawnPoints:
   - {fileID: 3206171835406439028}
 --- !u!65 &7606272701233916135
