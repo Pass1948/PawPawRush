@@ -12,11 +12,17 @@ public class SpeedBoostItem : MonoBehaviour
     private float timer = 0f;                       // 타이머: 효과가 얼마나 남았는지
     private PlayerColliderHandler colliderHandler;      // 플레이어 캐릭터 참조
     private float originalSpeed;          // 원래 속도 (효과 종료 시 복구용)
+    bool isFirst = true; // 첫 활성화 여부
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
+            if (isFirst)
+            {
+                isFirst= false;
+                GameManager.Event.PostNotification(EventType.AchievementUnlocked, this, AchievementId.FistHeal);
+            }
             colliderHandler = other.GetComponent<PlayerColliderHandler>();
             if (colliderHandler != null)
             {

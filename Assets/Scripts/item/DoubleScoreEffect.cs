@@ -5,11 +5,17 @@ using UnityEngine;
 public class DoubleScoreEffect : MonoBehaviour
 {
     [SerializeField] private float effectDuration = 5f;  // 2배 점수 지속 시간
+    bool isFirst = true;  // 첫 활성화 여부
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
+            if (isFirst)
+            {
+                isFirst = false;
+                GameManager.Event.PostNotification(EventType.AchievementUnlocked, this, AchievementId.FistDouble);
+            }
             StartCoroutine(ActivateDoubleScore());
             Destroy(gameObject);  // 아이템 먹으면 사라짐
         }

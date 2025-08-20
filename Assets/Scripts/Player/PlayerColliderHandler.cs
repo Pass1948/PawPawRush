@@ -37,11 +37,6 @@ public class PlayerColliderHandler : MonoBehaviour
     // Constants
     private const string OBSTACLE_TAG = "Obstacle";
 
-    private void Awake()
-    {
-        
-    }
-
     private void Start()
     {
         // 컴포넌트 캐싱
@@ -140,6 +135,7 @@ public class PlayerColliderHandler : MonoBehaviour
     {
         if(other.CompareTag(OBSTACLE_TAG)) // 장애물 충돌 처리(맵 구현하면서 적용)
         {
+            GameManager.Event.PostNotification(EventType.AchievementUnlocked, this, AchievementId.FistHit);
             if(isInvincible)
             {
                 return;
