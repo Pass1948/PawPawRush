@@ -77,12 +77,12 @@ public class PlayerColliderHandler : MonoBehaviour
         }
     }
 
-    public void SetInvincible()
+    public void SetInvincible(float duration, Color color)
     {
-        StartCoroutine(InvincibleTimer());
+        StartCoroutine(InvincibleTimer(duration, color));
     }
 
-    private IEnumerator InvincibleTimer()
+    private IEnumerator InvincibleTimer(float duration, Color color)
     {
         Debug.Log("Invincible Timer Started");
         isInvincible = true;
@@ -91,7 +91,7 @@ public class PlayerColliderHandler : MonoBehaviour
         float lastBlink = 0.0f;
 
         // 무적 시간
-        while (time < invincibleDuration)
+        while (time < duration)
         {
             yield return null;
             time += Time.deltaTime;
@@ -111,7 +111,7 @@ public class PlayerColliderHandler : MonoBehaviour
                     // 현재 색상이 원래 색상이면 무적 색상으로 아니면 원래 색상으로 변경
                     if (playerRenderers[i].material.color == originalColors[i])
                     {
-                        playerRenderers[i].material.color = invincibleColor;
+                        playerRenderers[i].material.color = color;
                     }
                     else
                     {
@@ -135,11 +135,7 @@ public class PlayerColliderHandler : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag(COINS_TAG)) // 코인 충돌 처리(아이템 구현 후 적용)
-        {
-            Debug.Log("Coin Collected");
-        }
-        else if(other.CompareTag(OBSTACLE_TAG)) // 장애물 충돌 처리(맵 구현하면서 적용)
+        if(other.CompareTag(OBSTACLE_TAG)) // 장애물 충돌 처리(맵 구현하면서 적용)
         {
             if(isInvincible)
             {
@@ -159,7 +155,7 @@ public class PlayerColliderHandler : MonoBehaviour
                 // TODO: 피격 사운드 재생
                 //audioSource.PlayOneShot(GameManager.Player.PlayerCharacter.HitSound);
 
-                SetInvincible();
+                SetInvincible(invincibleDuration, invincibleColor);
 
                 playerController.StartRunning();
             }
@@ -172,10 +168,6 @@ public class PlayerColliderHandler : MonoBehaviour
 
                 // 플레이어가 죽으면 스테이지 종료라서 맵 매니저에서 플레이어 죽음 처리?
             }
-        }
-        else if(other.CompareTag(ITEM_TAG))
-        {
-            playerController.UseItem();
         }
     }
 }

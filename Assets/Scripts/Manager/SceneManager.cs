@@ -17,8 +17,10 @@ public class SceneManager : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         Time.timeScale = 0f;
         // 다른씬 로드 되기전에 현재씬에서 진행해야 할것들
+
         AsyncOperation oper = UnitySceneManager.LoadSceneAsync(sceneName);
         // 다른씬 로드되고 진행해야할것들
+
         Time.timeScale = 1f;
         Debug.Log($"로드 끝남");
         yield return new WaitForSeconds(0.5f);

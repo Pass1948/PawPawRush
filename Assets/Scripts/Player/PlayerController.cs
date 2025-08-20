@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     private static int slidingHash = Animator.StringToHash("Sliding");
 
     // Components
+    public PlayerColliderHandler ColliderHandler { get; private set; }
     private PlayerColliderHandler colliderHandler;
     public Animator Animator { get; private set; }
     private Animator animator;

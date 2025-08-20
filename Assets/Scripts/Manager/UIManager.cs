@@ -3,28 +3,39 @@ using System.Collections.Generic;
 using UnityEditor.PackageManager.UI;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.WSA;
 
 public class UIManager : MonoBehaviour
 {
+
     private Canvas windowCanvas;
     private Canvas popUpCanvas;
+    private Canvas toastCanvas;
+
     private Stack<PopUpUI> popUpStack;
 
     private void Awake()
     {
         InstantsWindowUI();
         InstantsPopUpUI();
+        InstantsToastUI();
         EnsureEventSystem();
-
-        popUpStack = new Stack<PopUpUI>();
     }
 
+    // Scene 변경시 UI를 재생성 메소드
     public void Recreated()
     {
         InstantsWindowUI();
         InstantsPopUpUI();
+        InstantsToastUI();
     }
-
+    public void Clear()
+    {
+        popUpStack.Clear();
+        GameManager.Resource.Destroy(windowCanvas);
+        GameManager.Resource.Destroy(popUpCanvas);
+        GameManager.Resource.Destroy(toastCanvas);
+    }
     public void InstantsWindowUI()
     {
         if (windowCanvas == null)
@@ -32,7 +43,6 @@ public class UIManager : MonoBehaviour
             windowCanvas = GameManager.Resource.Instantiate<Canvas>("Prefabs/UI/Canvas");
             windowCanvas.gameObject.name = "WindowCanvas";
             windowCanvas.sortingOrder = 10;
-            DontDestroyOnLoad(windowCanvas.gameObject);
         }
     }
     public void InstantsPopUpUI()
@@ -42,9 +52,17 @@ public class UIManager : MonoBehaviour
             popUpCanvas = GameManager.Resource.Instantiate<Canvas>("Prefabs/UI/Canvas");
             popUpCanvas.gameObject.name = "PopUpCanvas";
             popUpCanvas.sortingOrder = 100;
-            DontDestroyOnLoad(popUpCanvas.gameObject);
-
             popUpStack = new Stack<PopUpUI>();
+        }
+    }
+
+    public void InstantsToastUI()
+    {
+        if (toastCanvas == null)
+        {
+            toastCanvas = GameManager.Resource.Instantiate<Canvas>("Prefabs/UI/Canvas");
+            toastCanvas.gameObject.name = "ToastCanvas";
+            toastCanvas.sortingOrder = 200;
         }
     }
 
@@ -57,7 +75,6 @@ public class UIManager : MonoBehaviour
         GameManager.Resource.Instantiate(eventSystem);
         DontDestroyOnLoad(eventSystem.gameObject);
     }
-
 
     // --------------[WindowUI]--------------
 
@@ -88,16 +105,11 @@ public class UIManager : MonoBehaviour
     public T ShowPopUpUI<T>(T popUpUI) where T : PopUpUI
     {
         if (popUpStack.Count > 0)
-        {
-            PopUpUI prevUI = popUpStack.Peek();
-            prevUI.gameObject.SetActive(false);
-        }
+            popUpStack.Peek().gameObject.SetActive(false);
 
         T ui = GameManager.Pool.GetUI(popUpUI);
         ui.transform.SetParent(popUpCanvas.transform, false);
-
         popUpStack.Push(ui);
-
         return ui;
     }
 
@@ -114,15 +126,14 @@ public class UIManager : MonoBehaviour
 
         if (popUpStack.Count > 0)
         {
-            PopUpUI curUI = popUpStack.Peek();
-            curUI.gameObject.SetActive(true);
+            popUpStack.Peek().gameObject.SetActive(true);
         }
     }
     public void PopUpUIClear()
     {
-        popUpStack.Clear();
+        // PopUpUI 스택을 비우고 모든 PopUpUI를 반환
+        while (popUpStack.Count > 0)
+            GameManager.Pool.ReleaseUI(popUpStack.Pop().gameObject);
     }
-
-
 }
 
