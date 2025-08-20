@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ba904f9a7406bf4ab9b4b25a6c38fc4, type: 3}
   m_Name: Crown
   m_EditorClassIdentifier: 
+  ItemID: 2
   ItemName: Crown
   Type: 1
   Prefab: {fileID: 5365826501482657590, guid: 109f27be4f8c0a84ba9b2b74721c393a, type: 3}

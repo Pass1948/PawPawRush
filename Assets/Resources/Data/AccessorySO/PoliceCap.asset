@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ba904f9a7406bf4ab9b4b25a6c38fc4, type: 3}
   m_Name: PoliceCap
   m_EditorClassIdentifier: 
+  ItemID: 6
   ItemName: PoliceCap
   Type: 1
   Prefab: {fileID: 7227348465325055284, guid: 88ad5d5813d5c2240a4dece4abdd3ddb, type: 3}
