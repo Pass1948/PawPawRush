@@ -23,6 +23,11 @@ public class GameManager : MonoBehaviour
     private static PlayerManager playerManager;
     public static PlayerManager Player => playerManager;
 
+    private static EventManager eventManager;
+    public static EventManager Event => eventManager;
+
+
+
     private void Awake()
     {
         if (instance != null) { Destroy(this); return; }
@@ -58,6 +63,10 @@ public class GameManager : MonoBehaviour
         GameObject playerObj = new GameObject("PlayerManager");
         playerObj.transform.SetParent(transform, false);
         playerManager = playerObj.AddComponent<PlayerManager>();
+
+        GameObject eventObj = new GameObject("EventManager");
+        eventObj.transform.SetParent(transform, false);
+        eventManager = eventObj.AddComponent<EventManager>();
     }
 
 }

@@ -14,8 +14,27 @@ public class ToastUIBase : ToastUI
     private void Awake()
     {
         base.Awake();
-        Set(toastUIData, titleText, decText, iconImage)
     }
-    
 
+    private void OnEnable()
+    {
+        if (this.isActiveAndEnabled)
+        {
+            Set(toastUIData, titleText, decText, iconImage);
+        }
+    }
+    private void OnDisable() 
+    { 
+        Clear();  // 풀 반환 직전/후에도 안전
+    }
+
+    public void Clear()
+    {
+        toastUIData = null;
+        if (titleText) titleText.text = string.Empty;
+        if (decText) decText.text = string.Empty;
+        if (iconImage) { iconImage.sprite = null; iconImage.enabled = false; }
+    }
+
+   
 }

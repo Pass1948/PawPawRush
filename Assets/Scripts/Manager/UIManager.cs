@@ -7,12 +7,19 @@ using UnityEngine.WSA;
 
 public class UIManager : MonoBehaviour
 {
-
     private Canvas windowCanvas;
     private Canvas popUpCanvas;
     private Canvas toastCanvas;
 
     private Stack<PopUpUI> popUpStack;
+
+    [Header("Toast알림 조정")]
+    [Tooltip("알림 유지시간")]
+    [SerializeField] private float showDuration = 2f;
+    [Tooltip("등장 시간")]
+    [SerializeField] private float fadeTime = 0.25f;
+    private readonly Queue<ToastUIData> queue = new();
+
 
     private void Awake()
     {
@@ -135,5 +142,9 @@ public class UIManager : MonoBehaviour
         while (popUpStack.Count > 0)
             GameManager.Pool.ReleaseUI(popUpStack.Pop().gameObject);
     }
+
+    // --------------[ToastUI]--------------
+
+
 }
 
