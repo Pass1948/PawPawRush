@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float laneChangeSpeed = 1.0f;
     [SerializeField] private float jumpHeight = 2.0f;
     [SerializeField] private float jumpDuration = 0.5f;
+    [SerializeField] private float jumpCooldown = 0.8f;
     [SerializeField] private float slideDuration = 0.5f;
 
     // Player State
@@ -33,6 +34,7 @@ public class PlayerController : MonoBehaviour
 
     // Jumping & Sliding time
     private float jumpStartTime;
+    private float lastJumpTime = -1f;
     private float slideStartTime;
 
     private Vector3 targetPosition;
@@ -165,7 +167,7 @@ public class PlayerController : MonoBehaviour
 
     public void HandleJump()
     {
-        if (!isRunning || isJumping)
+        if (!isRunning || isJumping || Time.time < lastJumpTime + +jumpCooldown)
         {
             return;
         }
@@ -176,6 +178,7 @@ public class PlayerController : MonoBehaviour
             StopSliding();
         }
 
+        lastJumpTime = Time.time;
         isJumping = true;
         jumpStartTime = Time.time;
 
