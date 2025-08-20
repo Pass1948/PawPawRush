@@ -47,38 +47,38 @@ public class AchievenmentManager : MonoBehaviour, IEventListener
     private void OnDisable()
     {
         if (GameManager.Instance == null) return;
-        GameManager.Event.RemoveEvent(EventType.TryJump10, this);
-        GameManager.Event.RemoveEvent(EventType.FirstSubItem, this);
-        GameManager.Event.RemoveEvent(EventType.Coin50, this);
-        GameManager.Event.RemoveEvent(EventType.LRMove100, this);
+        GameManager.Event.RemoveListener(EventType.TryJump10, this);
+        GameManager.Event.RemoveListener(EventType.FirstSubItem, this);
+        GameManager.Event.RemoveListener(EventType.Coin50, this);
+        GameManager.Event.RemoveListener(EventType.LRMove100, this);
     }
 
     public void OnEvent(EventType eventType, Component Sender, object Param = null)
     {
         switch (eventType)
         {
-            case EventType.JumpAttempted:
+            case EventType.TryJump10:
                 if (++jumpTry >= jumpTryTarget)
                     TryUnlock(AchievementId.TryJump10);
                 break;
 
-            case EventType.SubItemAcquired:
+            case EventType.FirstSubItem:
                 // 첫 획득만 업적(Param: 아이템 타입 등 필요시 사용)
                 TryUnlock(AchievementId.FirstSubItem);
                 break;
 
-            case EventType.CoinPicked:
+            case EventType.Coin50:
                 // Param이 int(획득 개수)라면 누적
                 coins += Param is int add ? add : 1;
                 if (coins >= coinTarget)
                     TryUnlock(AchievementId.Coin50);
                 break;
 
-            case EventType.HorizontalMoved:
+            case EventType.LRMove100:
                 // 좌/우 입력 1회당 1증가로 가정
                 lrMoves += Param is int step ? step : 1;
                 if (lrMoves >= lrMoveTarget)
-                    TryUnlock(AchievementId.LRMove200);
+                    TryUnlock(AchievementId.LRMove100);
                 break;
         }
     }
@@ -104,9 +104,6 @@ public class AchievenmentManager : MonoBehaviour, IEventListener
         var data = list[idx];
         // 토스트 등장
         GameManager.UI.EnqueueToast(data);
-
-        // 외부에서 필요 시 구독 가능한 업적 해제 이벤트
-        GameManager.Event.PostNotification(EventType.AchievementUnlocked, this, id);
     }
 
 

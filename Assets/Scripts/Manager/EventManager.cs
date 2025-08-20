@@ -31,7 +31,7 @@ public class EventManager : MonoBehaviour
         RefreshListeners();
     }
 
-    /*    public void AddListener(EventType eventType, IEventListener listener)       // 이벤트 받는 역할
+ public void AddListener(EventType eventType, IEventListener listener)       // 이벤트 받는 역할
         {
             List<IEventListener> ListenList = null;
 
@@ -45,22 +45,7 @@ public class EventManager : MonoBehaviour
             ListenList.Add(listener);
             listeners.Add(eventType, ListenList);
 
-        }*/
-
-    // 이벤트 받는 역할 (메소드 시험중)
-    public void AddListener(EventType evt, IEventListener listener)
-    {
-        if (listener == null) return;
-
-        if (!listeners.TryGetValue(evt, out var set))
-        {
-            set = new HashSet<IEventListener>();
-            listeners.Add(evt, set);
         }
-        set.Add(listener);
-    }
-
-
 
     public void PostNotification(EventType eventType, Component Sender, object Param = null) // 이벤트 발생역할
     {
@@ -85,12 +70,27 @@ public class EventManager : MonoBehaviour
     {
         listeners.Remove(eventType);
     }
+
     public void RemoveListener(EventType evt, IEventListener listener)
     {
         if (!listeners.TryGetValue(evt, out var set)) return;
         set.Remove(listener);
         if (set.Count == 0) listeners.Remove(evt);
     }
+
+    // 리스너가 자신이 등록된 모든 이벤트에서 제거될 때 사용
+    public void RemoveTarget(IEventListener listener)
+    {
+        var keys = new List<EventType>(listeners.Keys);
+        foreach (var k in keys)
+        {
+            var set = listeners[k];
+            set.Remove(listener);
+            if (set.Count == 0) listeners.Remove(k);
+        }
+    }
+
+
     private void RefreshListeners()     // Scene전환시 모든 이벤트 초기화
     {
         //임시 Dictionary 생성
