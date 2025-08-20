@@ -13,11 +13,13 @@ public class PlayerColliderHandler : MonoBehaviour
     private BoxCollider boxCollider;
     private Animator animator;
     private AudioSource audioSource;
+
+    [Header("Player Renderers")]
     [SerializeField] private List<Renderer> playerRenderers; // 플레이어 렌더러 컴포넌트
     private Color[] originalColors; // 원래 색상 저장용
 
     [Header("Sound")]
-    public AudioClip coinSound;
+    public AudioClip SlideSound;
 
     [Header("Invincibility Settings")]
     [SerializeField]
@@ -33,9 +35,7 @@ public class PlayerColliderHandler : MonoBehaviour
     private readonly Vector3 notSlidingColliderScale = new Vector3(1.0f, 2.0f, 1.0f);
 
     // Constants
-    private const string COINS_TAG = "Coin";
     private const string OBSTACLE_TAG = "Obstacle";
-    private const string ITEM_TAG = "Item";
 
     private void Awake()
     {
@@ -50,7 +50,7 @@ public class PlayerColliderHandler : MonoBehaviour
 
         boxCollider = GetComponent<BoxCollider>();
         animator = GetComponent<Animator>();
-        audioSource = GetComponent<AudioSource>();
+        audioSource = GameManager.Player.PlayerCharacter.AudioSource;
 
         // 렌더러 원래 색상 저장
         originalColors = new Color[playerRenderers.Count];
@@ -65,10 +65,13 @@ public class PlayerColliderHandler : MonoBehaviour
 
     public void Slide(bool isSliding)
     {
+
         if (isSliding)
         {
             boxCollider.size = Vector3.Scale(boxCollider.size, slidingColliderScale);
             boxCollider.center = boxCollider.center - new Vector3(0.0f, boxCollider.size.y * 0.5f, 0.0f);
+
+            audioSource.PlayOneShot(SlideSound); // 슬라이드 사운드 재생
         }
         else
         {
@@ -152,8 +155,8 @@ public class PlayerColliderHandler : MonoBehaviour
 
             if(playerCondition.CurrentLife > 0)
             {
-                // TODO: 피격 사운드 재생
-                //audioSource.PlayOneShot(GameManager.Player.PlayerCharacter.HitSound);
+                // 피격 사운드 재생
+                audioSource.PlayOneShot(GameManager.Player.PlayerCharacter.HitSound);
 
                 SetInvincible(invincibleDuration, invincibleColor);
 
@@ -161,12 +164,15 @@ public class PlayerColliderHandler : MonoBehaviour
             }
             else // 플레이어 죽음
             {
-                // TODO: 죽음 사운드 재생
-                //audioSource.PlayOneShot(GameManager.Player.PlayerCharacter.DeathSound);
+                // 죽음 사운드 재생
+                audioSource.PlayOneShot(GameManager.Player.PlayerCharacter.DeathSound);
 
                 // 플레이어 죽고 데이터를 맵 매니저나 게임 매니저에 전달?
 
                 // 플레이어가 죽으면 스테이지 종료라서 맵 매니저에서 플레이어 죽음 처리?
+                GameManager.Map.MapMovement.movementSpeed = 0; // 맵 이동 멈춤
+
+                animator.SetBool(PlayerController.DeadHash, true);
             }
         }
     }

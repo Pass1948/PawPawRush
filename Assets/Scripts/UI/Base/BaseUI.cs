@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class BaseUI : MonoBehaviour
 {
-    protected Dictionary<string, RectTransform> rects;
+    protected Dictionary<string, RectTransform> rectTransform;
     protected Dictionary<string, Button> buttons;
     protected Dictionary<string, TMP_Text> texts;
     protected virtual void Awake()
@@ -18,36 +18,29 @@ public class BaseUI : MonoBehaviour
 
     private void BindChildren()
     {
-        rects = new Dictionary<string, RectTransform>();
+        rectTransform = new Dictionary<string, RectTransform>();
         buttons = new Dictionary<string, Button>();
         texts = new Dictionary<string, TMP_Text>();
 
-        RectTransform[] children = GetComponentsInChildren<RectTransform>(true);
-
-        foreach (var rect in children)
+        RectTransform[] children = GetComponentsInChildren<RectTransform>();
+        foreach (RectTransform child in children)
         {
-            string key = GetPath(rect);
+            string key = child.gameObject.name;
 
-            if (!rects.ContainsKey(key)) rects.Add(key, rect);
+            if (rectTransform.ContainsKey(key))
+                continue;
 
-            var btn = rect.GetComponent<Button>();
-            if (btn != null && !buttons.ContainsKey(key)) 
-                buttons.Add(key, btn);
+            rectTransform.Add(key, child);
 
-            var tmp = rect.GetComponent<TMP_Text>();
-            if (tmp != null && !texts.ContainsKey(key)) 
-                texts.Add(key, tmp);
+            Button button = child.GetComponent<Button>();
+            if (button != null)
+                buttons.Add(key, button);
+
+            TMP_Text text = child.GetComponent<TMP_Text>();
+            if (text != null)
+                texts.Add(key, text);
         }
-    }
-    private static string GetPath(Transform t)
-    {
-        var path = t.name;
-        while (t.parent != null)
-        {
-            t = t.parent;
-            path = $"{t.name}/{path}";
-        }
-        return path;
     }
 }
+
 

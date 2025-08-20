@@ -1291,21 +1291,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61a0323847664c34682958e1ab7b71bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  JumpSound: {fileID: 0}
-  HitSound: {fileID: 0}
-  DeathSound: {fileID: 0}
-  customizingHandler: {fileID: 7869872010749748551}
-  accessories:
-  - {fileID: 11400000, guid: a752a89f93a569f4eb56e5b37dd3cb80, type: 2}
-  - {fileID: 11400000, guid: d38593c90f8977a48b9ab4921fd6c6fa, type: 2}
-  - {fileID: 11400000, guid: bcb11ebe00004e84285115f23b2197ec, type: 2}
-  - {fileID: 11400000, guid: 51f6ea1ba90a702448d34b93deb05c13, type: 2}
-  - {fileID: 11400000, guid: 7e3ee963dff46b74e8c4d5b83d3c4e5c, type: 2}
-  - {fileID: 11400000, guid: 0fea6c8094434d34ebfba653c87c0443, type: 2}
-  - {fileID: 11400000, guid: f8b76206d73e5774da64208c0cafbd6d, type: 2}
-  - {fileID: 11400000, guid: f118107c1165a09468aedd0e750788df, type: 2}
-  - {fileID: 11400000, guid: 7aeb32176279f5345bba2c4515f58fd8, type: 2}
-  accessoryIndex: 0
+  JumpSound: {fileID: 8300000, guid: 098b390a2ae94d54c97fe5e0255420ed, type: 3}
+  HitSound: {fileID: 8300000, guid: b470ea5d6907fc44591c20a47a2b19a4, type: 3}
+  DeathSound: {fileID: 8300000, guid: 59bb65807db1b2149a8596a4c98b221b, type: 3}
 --- !u!114 &1722921761514397304
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1352,7 +1340,7 @@ MonoBehaviour:
   - {fileID: 8646046679711403205}
   - {fileID: 5457910802552323005}
   - {fileID: 6796409952440988655}
-  coinSound: {fileID: 0}
+  SlideSound: {fileID: 8300000, guid: 73645759797312c4bb5f840c37a7a4e2, type: 3}
   invincibleDuration: 2
   invincibleColor: {r: 1, g: 0, b: 0, a: 1}
   blinkPeriod: 0.1
