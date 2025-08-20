@@ -7326,8 +7326,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   obstaclePrefabs:
-  - {fileID: 99617278588516381, guid: c8fbbf5bc4729eb44a644fee519f05d7, type: 3}
-  - {fileID: 4002663017827213865, guid: 78d282fd21fd37e44be30cec024c9c35, type: 3}
+  - {fileID: 3149418244779308510, guid: c8fbbf5bc4729eb44a644fee519f05d7, type: 3}
   spawnPoints:
   - {fileID: 3206171835406439028}
 --- !u!65 &7606272701233916135
