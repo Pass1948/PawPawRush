@@ -6,20 +6,30 @@ public class MapManager : MonoBehaviour
 {
     public static MapManager Instance { get; private set; }
 
+    [Header("MapInfo")]
     // 발판 프리팹 목록
-    public List<GameObject> platformPrefabs;
+    [SerializeField] private List<GameObject> platformPrefabs;
 
     // 현재 활성화된 발판들을 관리하는 리스트
     private List<GameObject> activePlatforms = new List<GameObject>();
 
-    public MapMovement MapMovement;
-    public float OrigMapMovementSpeed;
+    [SerializeField] private MapMovement mapMovement;
+    [SerializeField] private float origMapMovementSpeed;
+    public float OrigMapMovementSpeed
+    {
+        get { return origMapMovementSpeed; }
+        set { origMapMovementSpeed = value; }
+    }
 
     // 스폰 지점
-    public Transform spawnPoint;
+    [SerializeField] private Transform spawnPoint;
 
     // 발판 삭제 지점
-    public Transform destroyPoint;
+    [SerializeField] private Transform destroyPoint;
+
+    [Header("Sound")]
+    [SerializeField] private AudioClip countDownSound; // 카운트다운 사운드
+    private AudioSource audioSource;
 
     // 카운트 다운 시간
     public float countdownDuration = 5.0f;
@@ -40,6 +50,8 @@ public class MapManager : MonoBehaviour
 
     private void Start()
     {
+        audioSource = GetComponent<AudioSource>();
+
         PrepareInitialMap();
 
         // Temp: 게임 시작은 UI 버튼 등 다른 곳에서 StartGame()을 호출하여 시작
@@ -50,9 +62,9 @@ public class MapManager : MonoBehaviour
     {
         if (isGameRunning && !isGamePaused) // 게임이 실행 중이고 일시 정지 상태가 아닐 때
         {
-            if (MapMovement != null)
+            if (mapMovement != null)
             {
-                MapMovement.Move();
+                mapMovement.Move();
             }
             else
             {
@@ -77,15 +89,15 @@ public class MapManager : MonoBehaviour
     private void PrepareInitialMap()
     {
         // MapMovement 컴포넌트 연결되어 있는지 확인
-        if (MapMovement == null)
+        if (mapMovement == null)
         {
             Debug.LogError("MapMovement가 MapManager에 연결되지 않았습니다!");
             return;
         }
 
         // 원래 속도를 저장 후 현재 속도 0으로 설정하여 맵을 정지시킴
-        OrigMapMovementSpeed = MapMovement.movementSpeed;
-        MapMovement.movementSpeed = 0f;
+        origMapMovementSpeed = mapMovement.movementSpeed;
+        mapMovement.movementSpeed = 0f;
 
         // 초기 발판들 생성
         for (int i = 0; i < 2; i++)
@@ -172,24 +184,47 @@ public class MapManager : MonoBehaviour
         }
 
         PlayerController playerController = GameManager.Player.PlayerCharacter.PlayerController;
+        Coroutine playerPreparationCoroutine = StartCoroutine(playerController.PrepareForGameStart(countdownDuration));
 
-        // TODO: 카운트다운 UI 표시
+        // 카운트다운 효과음 재생
+        audioSource.PlayOneShot(countDownSound);
 
-        // 플레이어 준비 동작 시작
+        float currentTime = countdownDuration;
+        while (currentTime > 0)
+        {
+            // 남은 시간을 계산
+            int displayTime = Mathf.CeilToInt(currentTime);
+            Debug.Log($"남은 시간: {displayTime}초");
+
+            // TODO: 카운트다운 UI 표시
+            // UIManager에서 계산된 시간을 텍스트로 업데이트
+            // 예) uiManager.UpdateCountdownText(displayTime.ToString());
+
+            currentTime -= Time.deltaTime;
+            yield return null; // 다음 프레임까지 대기
+        }
+
+        // TODO: "START!" UI 메시지 표시
+        // 예) uiManager.UpdateCountdownText("START!");
+
         Debug.Log("플레이어 준비 시퀀스 시작...");
-        yield return StartCoroutine(playerController.PrepareForGameStart(countdownDuration));
+        // 플레이어 준비 동작이 완전히 끝날 때까지 대기
+        yield return playerPreparationCoroutine;
         Debug.Log("플레이어 준비 완료. 달리기 시작됨.");
+
+        // 1초 후 카운트다운 UI 숨김 명령 또는 바로 사라짐?
+        yield return new WaitForSeconds(1.0f);
+        //uiManager.HideCountdownDisplay();
 
         isGameRunning = true;
         isGamePaused = false;
 
         // 이동 속도를 원래 속도로 설정
-        if (MapMovement != null)
+        if (mapMovement != null)
         {
-            MapMovement.movementSpeed = OrigMapMovementSpeed;
+            mapMovement.movementSpeed = origMapMovementSpeed;
         }
 
-        // TODO: "START!" UI 메시지 표시
         Debug.Log("맵 이동 시작. 게임 플레이 시작!");
     }
 
@@ -205,9 +240,9 @@ public class MapManager : MonoBehaviour
         isGamePaused = false;
 
         // 맵 멈춤
-        if (MapMovement != null)
+        if (mapMovement != null)
         {
-            MapMovement.movementSpeed = 0;
+            mapMovement.movementSpeed = 0;
         }
     }
     
@@ -224,18 +259,18 @@ public class MapManager : MonoBehaviour
         if (isGamePaused)
         {
             // 맵 이동 멈춤
-            if (MapMovement != null)
+            if (mapMovement != null)
             {
-                MapMovement.movementSpeed = 0;
+                mapMovement.movementSpeed = 0;
             }
         }
         else
         {
             Debug.Log("게임이 다시 시작되었습니다.");
             // 맵 이동 다시
-            if (MapMovement != null)
+            if (mapMovement != null)
             {
-                MapMovement.movementSpeed = OrigMapMovementSpeed;
+                mapMovement.movementSpeed = origMapMovementSpeed;
             }
         }
     }
