@@ -10,7 +10,7 @@ public class ToastUI : BaseUI
     {
         base.Awake();
     }
-    public void Set(ToastUIData data, TextMeshPro title, TextMeshPro desc, Image icon)
+    public void Set(ToastUIData data, TMP_Text title, TMP_Text desc, Image icon)
     {
         if (data == null)
         {

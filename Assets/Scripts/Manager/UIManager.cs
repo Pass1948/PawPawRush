@@ -15,17 +15,15 @@ public class UIManager : MonoBehaviour
 
     [Header("Toast알림 조정")]
     [Tooltip("알림 유지 시간(초)")]
-    [SerializeField] private float showDuration = 2f;
+    [SerializeField] private float showDuration = 5f;
 
-    [Tooltip("페이드 인/아웃 시간(초)")]
-    [SerializeField] private float fadeTime = 0.25f;
+    private bool useUnscaledTime = true; // 일시정지 무시 여부
+    private string toastPrefabPath = "UI/ToastUIBase"; // 프로젝트에 맞게
 
-    [Tooltip("Time.timeScale 무시(일시정지 중에도 진행)")]
-    [SerializeField] private bool useUnscaledTime = true;
-
-    private readonly Queue<ToastUIData> queue = new();
-    private bool isShowing;
+    private readonly Queue<ToastUIData> toastQueue = new();
+    private bool isToastShowing;
     private Coroutine toastRoutine;
+    private ToastUIBase toastPrefabCache;
 
     private void Awake()
     {
@@ -45,8 +43,8 @@ public class UIManager : MonoBehaviour
     public void Clear()
     {        // Toast 정리
         if (toastRoutine != null) StopCoroutine(toastRoutine);
-        queue.Clear();
-        isShowing = false;
+        toastQueue.Clear();
+        isToastShowing = false;
 
         // PopUp 정리
         popUpStack.Clear();
@@ -156,31 +154,69 @@ public class UIManager : MonoBehaviour
             GameManager.Pool.ReleaseUI(popUpStack.Pop().gameObject);
     }
 
-   /* // --------------[ToastUI]--------------
-    public T ShowToastUI<T>(T toastUI) where T : ToastUI
+    // --------------[ToastUI]--------------
+    // ===== [공개 API: 데이터로 토스트 요청] =====
+    public void EnqueueToast(ToastUIData data)
     {
-        T ui = GameManager.Pool.GetUI(toastUI);
-        ui.transform.SetParent(toastCanvas.transform, false);
-        return ui;
+        if (data == null) { Debug.LogWarning("[UIManager] EnqueueToast: data is null"); return; }
+        if (toastCanvas == null) InstantsToastUI();
+
+        toastQueue.Enqueue(data);
+        if (!isToastShowing)
+            toastRoutine = StartCoroutine(ToastRoutine());
     }
-    public T ShowToastUI<T>(string path) where T : ToastUI
+
+    // ===== [내부: 프리팹 로드 캐시] =====
+    private ToastUIBase LoadToastPrefab()
     {
-        T ui = GameManager.Resource.Load<T>(path);
-        return ShowToastUI(ui);
-    }
-    public void EnqueueToast(ToastUIData data, string prefabPath)
-    {
-        ShowToastUI<ToastUI>(prefabPath);
-        EnqueueToast(data);
-    }
-    public void SetToastPrefabPath(string path)
-    {
-        if (string.IsNullOrEmpty(path))
+        if (toastPrefabCache != null) return toastPrefabCache;
+
+        if (string.IsNullOrEmpty(toastPrefabPath))
         {
-            Debug.LogWarning("[UIManager] Toast: path is null or empty");
-            return;
+            Debug.LogError("[UIManager] toastPrefabPath is empty");
+            return null;
         }
-        toastPrefabPath = path;
-    }*/
+
+        toastPrefabCache = GameManager.Resource.Load<ToastUIBase>(toastPrefabPath);
+        if (toastPrefabCache == null)
+            Debug.LogError($"[UIManager] Cannot load ToastUIBase at \"{toastPrefabPath}\"");
+
+        return toastPrefabCache;
+    }
+
+    // ===== [내부: 큐 러너 - CanvasGroup/페이드 없음, 단순 대기만] =====
+    private IEnumerator ToastRoutine()
+    {
+        isToastShowing = true;
+
+        while (toastQueue.Count > 0)
+        {
+            var data = toastQueue.Dequeue();
+
+            var prefab = LoadToastPrefab();
+            if (prefab == null) break;
+
+            // 1) 인스턴스 생성, 부모 설정, 데이터 바인딩
+            var ui = GameManager.Pool.GetUI(prefab); // ToastUIBase
+            var go = ui.gameObject;
+            ui.transform.SetParent(toastCanvas.transform, false);
+            ui.SetData(data);
+
+            // 2) 즉시 표시 (페이드 없음)
+            go.SetActive(true);
+
+            // 3) showDuration 동안 대기 (토스트 간 간격 역할도 겸함)
+            if (useUnscaledTime) yield return new WaitForSecondsRealtime(showDuration);
+            else yield return new WaitForSeconds(showDuration);
+
+            // 4) 즉시 종료(비활성) 및 정리/반환
+            go.SetActive(false);
+            ui.Clear();                    // 텍스트/아이콘 비우기(잔상 방지)
+            GameManager.Pool.ReleaseUI(go);
+        }
+
+        isToastShowing = false;
+        toastRoutine = null;
+    }
 }
 

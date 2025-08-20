@@ -29,8 +29,11 @@ public class GameManager : MonoBehaviour
     private static EventManager eventManager;
     public static EventManager Event => eventManager;
 
+    private static ScoreManager scoreManager;
+    public static ScoreManager Score => scoreManager;
 
-
+    private static AchievenmentManager achievenmentManager;
+    public static AchievenmentManager Achievenment => achievenmentManager;
     private void Awake()
     {
         if (instance != null) { Destroy(this); return; }
@@ -74,6 +77,16 @@ public class GameManager : MonoBehaviour
         GameObject eventObj = new GameObject("EventManager");
         eventObj.transform.SetParent(transform, false);
         eventManager = eventObj.AddComponent<EventManager>();
+
+        GameObject scoreObj = new GameObject("ScoreManager");
+        scoreObj.transform.SetParent(transform, false);
+        scoreManager = scoreObj.AddComponent<ScoreManager>();
+
+        GameObject achievenmentObj = new GameObject("AchievenmentManager");
+        achievenmentObj.transform.SetParent(transform, false);
+        achievenmentManager = achievenmentObj.AddComponent<AchievenmentManager>();
+
+
     }
 
 }
