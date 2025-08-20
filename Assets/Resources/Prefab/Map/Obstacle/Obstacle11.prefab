@@ -164,7 +164,7 @@ GameObject:
   - component: {fileID: 7330657664884957331}
   m_Layer: 0
   m_Name: cake_strawberry_slice
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -266,7 +266,7 @@ GameObject:
   - component: {fileID: 8611274873924029950}
   m_Layer: 0
   m_Name: Obstacle11
-  m_TagString: Obstacle
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -310,7 +310,7 @@ GameObject:
   - component: {fileID: 6053792007214501784}
   m_Layer: 0
   m_Name: cake_chocolate_slice
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
