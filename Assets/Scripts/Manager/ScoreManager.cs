@@ -16,9 +16,9 @@ public class ScoreManager : MonoBehaviour
     {
         baseScore += Mathf.RoundToInt(amount * scoreMultiplier);
         Debug.Log("Score: " + baseScore);
-        if(baseScore >= 10)
+        if(baseScore == 50)
         {
-            GameManager.Event.PostNotification(EventType.AchievementUnlocked, this, AchievementId.Score10);
+            GameManager.Event.PostNotification(EventType.AchievementUnlocked, this, AchievementId.Coin50);
         }
     }
 

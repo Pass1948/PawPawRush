@@ -13,24 +13,38 @@ MonoBehaviour:
   m_Name: Achievement
   m_EditorClassIdentifier: 
   toastUIInfo:
-  - title: "\uB098\uB294\uC57C \uC810\uD504\uC640!"
+  - title: "\uB098\uB294\uC57C \uC810\uD504\uC655!"
     desc: "\uB2EC\uC131\uC870\uAC74 : \uC810\uD504 10\uD68C \uC2DC\uB3C4"
     icon: {fileID: 0}
     achievementId: 0
-  - title: "\uC2DC\uAC04\uC740 \uAE08\uC774\uB77C\uACE0 \uCE5C\uAD6C"
-    desc: "\uB2EC\uC131\uC870\uAC74 : \uC790\uC11D\uC544\uC774\uD15C \uCCAB \uD68D\uB4DD"
+  - title: "\uC640\uB9AC\uAC00\uB9AC"
+    desc: "\uB2EC\uC131\uC870\uAC74 : \uC88C, \uC6B0 \uC6C0\uC9C1\uC778 \uD69F\uC218
+      25\uBC88"
     icon: {fileID: 0}
     achievementId: 1
   - title: "\uB098\uB294 \uBD80\uC790\uAC00 \uB420\uAEBC\uC57C"
     desc: "\uB2EC\uC131\uC870\uAC74 : \uAE08\uD654 50\uAC1C \uD68D\uB4DD"
     icon: {fileID: 0}
     achievementId: 2
-  - title: "\uC640\uB9AC\uAC00\uB9AC"
-    desc: "\uB2EC\uC131\uC870\uAC74 : \uC88C, \uC6B0 \uC6C0\uC9C1\uC778 \uD69F\uC218
-      100\uBC88"
+  - title: "\uB514\uC800\uD2B8 \uBE64\uCE58"
+    desc: "\uB2EC\uC131\uC870\uAC74 : \uCCAB \uC7A5\uC560\uBB3C \uCDA9\uB3CC\uC2DC"
     icon: {fileID: 0}
     achievementId: 3
-  - title: "\uC810\uC21810\uC810\uB2EC\uC131"
-    desc: "\uB2EC\uC131\uC870\uAC74 : \uC2A4\uCF54\uC5B410\uB2EC\uC131"
+  - title: "\uBB3B\uACE0 \uB354\uBE14\uB85C\uAC00!"
+    desc: "\uB2EC\uC131\uC870\uAC74 : \uCCAB \uC810\uC218 \uB450\uBC30\uC544\uC774\uD15C
+      \uD68D\uB4DD\uC2DC"
     icon: {fileID: 0}
     achievementId: 4
+  - title: "\uACE0\uC591\uC774\uC57C \uBA39\uC790 \uB0E5\uB0E5\uB0E5\uB0E5"
+    desc: "\uB2EC\uC131\uC870\uAC74 : \uCCAB \uCCB4\uB825 \uC544\uC774\uD15C \uD68D\uB4DD\uC2DC"
+    icon: {fileID: 0}
+    achievementId: 5
+  - title: "\uD558\uC9C0\uB9CC \uBE68\uB790\uC8E0?"
+    desc: "\uB2EC\uC131\uC870\uAC74 : \uCCAB \uC2A4\uD53C\uB4DC \uC544\uC774\uD15C
+      \uD68D\uB4DD\uC2DC"
+    icon: {fileID: 0}
+    achievementId: 6
+  - title: Wasted
+    desc: "\uB2EC\uC131\uC870\uAC74 : \uCC98\uC74C\uC73C\uB85C \uC8FD\uC5C8\uC744\uB54C"
+    icon: {fileID: 0}
+    achievementId: 7
