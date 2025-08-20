@@ -8,10 +8,12 @@ public class PlayerCharacter : MonoBehaviour
     public PlayerController PlayerController { get; private set; }
     public PlayerCondition PlayerCondition { get; private set; }
     public PlayerCustomizingHandler CustomizingHandler { get; private set; }
+    public AudioSource AudioSource { get; private set; }
 
     private PlayerController playerController;
     private PlayerCondition playerCondition;
     private PlayerCustomizingHandler customizingHandler;
+    private AudioSource audioSource;
 
     [Header("Sound")]
     public AudioClip JumpSound;
@@ -33,6 +35,9 @@ public class PlayerCharacter : MonoBehaviour
 
         customizingHandler = GetComponent<PlayerCustomizingHandler>();
         CustomizingHandler = customizingHandler;
+
+        audioSource = GetComponent<AudioSource>();
+        AudioSource = audioSource;
     }
 
     private void Start()

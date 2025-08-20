@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
     private PlayerColliderHandler colliderHandler;
     public Animator Animator { get; private set; }
     private Animator animator;
+    private AudioSource audioSource;
 
     [Header("Movement")]
     [SerializeField] private float laneChangeSpeed = 1.0f;
@@ -50,6 +51,8 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        audioSource = GameManager.Player.PlayerCharacter.AudioSource;
+
         // temp
         StartCoroutine(WaitToStart());
     }
@@ -176,6 +179,7 @@ public class PlayerController : MonoBehaviour
         jumpStartTime = Time.time;
 
         // 애니메이션 및 사운드 재생
+        audioSource.PlayOneShot(GameManager.Player.PlayerCharacter.JumpSound); // 슬라이드 사운드 재생
         animator.SetBool(jumpingHash, true);
     }
 
