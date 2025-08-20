@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ba904f9a7406bf4ab9b4b25a6c38fc4, type: 3}
   m_Name: PillboxHat
   m_EditorClassIdentifier: 
+  ItemID: 5
   ItemName: PillboxHat
   Type: 1
   Prefab: {fileID: 7699700229003924371, guid: a3646a062ddfa884e8bc954f3ad51c3d, type: 3}
