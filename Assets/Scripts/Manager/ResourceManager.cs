@@ -14,7 +14,7 @@ using UnityEngine;
 
             T resource = Resources.Load<T>(path);
 
-            if (resource == null) Debug.LogWarning($"ResourceManager: ¸®¼Ò½º ·Îµå ½ÇÆĞ - {key}");
+            if (resource == null) Debug.LogWarning($"ResourceManager: ë¦¬ì†ŒìŠ¤ ë¡œë“œ ì‹¤íŒ¨ - {key}");
 
             else resources.Add(key, resource);
 
@@ -23,15 +23,15 @@ using UnityEngine;
 
         public T[] LoadAll<T>(string path) where T : Object
         {
-            // 1) Resources.LoadAll·Î ¿¡¼Â ¹è¿­ ·Îµå
+            // 1) Resources.LoadAllë¡œ ì—ì…‹ ë°°ì—´ ë¡œë“œ
             T[] assets = Resources.LoadAll<T>(path);
             if (assets == null || assets.Length == 0)
             {
-                Debug.LogWarning($"ResourceManager: LoadAll ½ÇÆĞ ¶Ç´Â ¿¡¼Â ¾øÀ½ - {typeof(T)} @ \"{path}\"");
+                Debug.LogWarning($"ResourceManager: LoadAll ì‹¤íŒ¨ ë˜ëŠ” ì—ì…‹ ì—†ìŒ - {typeof(T)} @ \"{path}\"");
                 return assets;
             }
 
-            // 2) (¼±ÅÃ) °³º° ¿¡¼ÂÀ» Ä³½Ã µñ¼Å³Ê¸®¿¡ µî·Ï
+            // 2) (ì„ íƒ) ê°œë³„ ì—ì…‹ì„ ìºì‹œ ë”•ì…”ë„ˆë¦¬ì— ë“±ë¡
             foreach (var asset in assets)
             {
                 string key = $"{typeof(T)}.{path}/{asset.name}";
@@ -77,7 +77,7 @@ using UnityEngine;
             return Instantiate(original, Vector3.zero, Quaternion.identity, null, pooling);
         }
 
-        // °æ·Î(path)¿¡ µû¶ó ¿ÀºêÁ§Æ®¸¦ »ı¼ºÇÏ´Â ±â´É
+        // ê²½ë¡œ(path)ì— ë”°ë¼ ì˜¤ë¸Œì íŠ¸ë¥¼ ìƒì„±í•˜ëŠ” ê¸°ëŠ¥
         public T Instantiate<T>(string path, Vector3 position, Quaternion rotation, Transform parent, bool pooling = false) where T : Object
         {
             T original = Load<T>(path);
@@ -124,5 +124,5 @@ using UnityEngine;
         public void Destroy(Component component, float delay = 0f)
         {
             Object.Destroy(component, delay);
-        }
+    }
     }

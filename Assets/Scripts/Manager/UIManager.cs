@@ -14,12 +14,18 @@ public class UIManager : MonoBehaviour
     private Stack<PopUpUI> popUpStack;
 
     [Header("Toast알림 조정")]
-    [Tooltip("알림 유지시간")]
+    [Tooltip("알림 유지 시간(초)")]
     [SerializeField] private float showDuration = 2f;
-    [Tooltip("등장 시간")]
-    [SerializeField] private float fadeTime = 0.25f;
-    private readonly Queue<ToastUIData> queue = new();
 
+    [Tooltip("페이드 인/아웃 시간(초)")]
+    [SerializeField] private float fadeTime = 0.25f;
+
+    [Tooltip("Time.timeScale 무시(일시정지 중에도 진행)")]
+    [SerializeField] private bool useUnscaledTime = true;
+
+    private readonly Queue<ToastUIData> queue = new();
+    private bool isShowing;
+    private Coroutine toastRoutine;
 
     private void Awake()
     {
@@ -37,8 +43,15 @@ public class UIManager : MonoBehaviour
         InstantsToastUI();
     }
     public void Clear()
-    {
+    {        // Toast 정리
+        if (toastRoutine != null) StopCoroutine(toastRoutine);
+        queue.Clear();
+        isShowing = false;
+
+        // PopUp 정리
         popUpStack.Clear();
+
+        // Canvas 정리
         GameManager.Resource.Destroy(windowCanvas);
         GameManager.Resource.Destroy(popUpCanvas);
         GameManager.Resource.Destroy(toastCanvas);
@@ -47,7 +60,7 @@ public class UIManager : MonoBehaviour
     {
         if (windowCanvas == null)
         {
-            windowCanvas = GameManager.Resource.Instantiate<Canvas>("Prefabs/UI/Canvas");
+            windowCanvas = GameManager.Resource.Instantiate<Canvas>("UI/Canvas");
             windowCanvas.gameObject.name = "WindowCanvas";
             windowCanvas.sortingOrder = 10;
         }
@@ -56,7 +69,7 @@ public class UIManager : MonoBehaviour
     {
         if (popUpCanvas == null)
         {
-            popUpCanvas = GameManager.Resource.Instantiate<Canvas>("Prefabs/UI/Canvas");
+            popUpCanvas = GameManager.Resource.Instantiate<Canvas>("UI/Canvas");
             popUpCanvas.gameObject.name = "PopUpCanvas";
             popUpCanvas.sortingOrder = 100;
             popUpStack = new Stack<PopUpUI>();
@@ -67,7 +80,7 @@ public class UIManager : MonoBehaviour
     {
         if (toastCanvas == null)
         {
-            toastCanvas = GameManager.Resource.Instantiate<Canvas>("Prefabs/UI/Canvas");
+            toastCanvas = GameManager.Resource.Instantiate<Canvas>("UI/Canvas");
             toastCanvas.gameObject.name = "ToastCanvas";
             toastCanvas.sortingOrder = 200;
         }
@@ -143,8 +156,31 @@ public class UIManager : MonoBehaviour
             GameManager.Pool.ReleaseUI(popUpStack.Pop().gameObject);
     }
 
-    // --------------[ToastUI]--------------
-
-
+   /* // --------------[ToastUI]--------------
+    public T ShowToastUI<T>(T toastUI) where T : ToastUI
+    {
+        T ui = GameManager.Pool.GetUI(toastUI);
+        ui.transform.SetParent(toastCanvas.transform, false);
+        return ui;
+    }
+    public T ShowToastUI<T>(string path) where T : ToastUI
+    {
+        T ui = GameManager.Resource.Load<T>(path);
+        return ShowToastUI(ui);
+    }
+    public void EnqueueToast(ToastUIData data, string prefabPath)
+    {
+        ShowToastUI<ToastUI>(prefabPath);
+        EnqueueToast(data);
+    }
+    public void SetToastPrefabPath(string path)
+    {
+        if (string.IsNullOrEmpty(path))
+        {
+            Debug.LogWarning("[UIManager] Toast: path is null or empty");
+            return;
+        }
+        toastPrefabPath = path;
+    }*/
 }
 

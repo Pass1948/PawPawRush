@@ -8,8 +8,4 @@ using UnityEngine;
         {
             base.Awake();
         }
-        protected override void OnDisable()
-        {
-            base.OnDisable();
-        }
     }

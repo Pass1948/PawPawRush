@@ -11,12 +11,20 @@ public class ToastUIBase : ToastUI
     [SerializeField] TextMeshPro decText;
     ToastUIData toastUIData;
 
+    [SerializeField] Button button1;
+
     private void Awake()
     {
         base.Awake();
+        buttons[button1.name].onClick.AddListener(() => { Back(); });
     }
 
-    private void OnEnable()
+    void Back() 
+    {
+        Debug.Log("Back button clicked");
+    }
+
+    /*private void OnEnable()
     {
         if (this.isActiveAndEnabled)
         {
@@ -34,7 +42,7 @@ public class ToastUIBase : ToastUI
         if (titleText) titleText.text = string.Empty;
         if (decText) decText.text = string.Empty;
         if (iconImage) { iconImage.sprite = null; iconImage.enabled = false; }
-    }
+    }*/
 
    
 }

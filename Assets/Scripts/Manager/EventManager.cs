@@ -4,11 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public enum EventType
 {
-    TryJump10,               // 나는야 점프왕! : 점프 10회 시도
-    FirstSubItem,           // 시간은 금이라고 친구 : 자석아이템 첫 획득
-    Coin50,                     // 나는 부자가 될꺼야 : 코인 50개 획득
-    LRMove100,            // 와리가리 : 좌/우 움직임 횟수 100번
-
+    AchievementUnlocked // 업적 달성
 }
 
 

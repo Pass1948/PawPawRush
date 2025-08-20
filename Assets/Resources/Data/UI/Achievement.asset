@@ -13,9 +13,20 @@ MonoBehaviour:
   m_Name: Achievement
   m_EditorClassIdentifier: 
   toastUIInfo:
-  - title: 
-    desc: 
+  - title: "\uB098\uB294\uC57C \uC810\uD504\uC640!"
+    desc: "\uB2EC\uC131\uC870\uAC74 : \uC810\uD504 10\uD68C \uC2DC\uB3C4"
     icon: {fileID: 0}
-  - title: 
-    desc: 
+    achievementId: 0
+  - title: "\uC2DC\uAC04\uC740 \uAE08\uC774\uB77C\uACE0 \uCE5C\uAD6C"
+    desc: "\uB2EC\uC131\uC870\uAC74 : \uC790\uC11D\uC544\uC774\uD15C \uCCAB \uD68D\uB4DD"
     icon: {fileID: 0}
+    achievementId: 1
+  - title: "\uB098\uB294 \uBD80\uC790\uAC00 \uB420\uAEBC\uC57C"
+    desc: "\uB2EC\uC131\uC870\uAC74 : \uAE08\uD654 50\uAC1C \uD68D\uB4DD"
+    icon: {fileID: 0}
+    achievementId: 2
+  - title: "\uC640\uB9AC\uAC00\uB9AC"
+    desc: "\uB2EC\uC131\uC870\uAC74 : \uC88C, \uC6B0 \uC6C0\uC9C1\uC778 \uD69F\uC218
+      100\uBC88"
+    icon: {fileID: 0}
+    achievementId: 3
