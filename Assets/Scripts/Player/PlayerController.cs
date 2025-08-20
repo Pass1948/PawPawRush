@@ -7,11 +7,11 @@ public class PlayerController : MonoBehaviour
 {
     // Animator parameter
     private static int startHash = Animator.StringToHash("Greeting");
-    private static int deadHash = Animator.StringToHash("Dead");
     private static int runStartHash = Animator.StringToHash("RunStart");
     private static int movingHash = Animator.StringToHash("Moving");
     private static int jumpingHash = Animator.StringToHash("Jumping");
     private static int slidingHash = Animator.StringToHash("Sliding");
+    public static int DeadHash = Animator.StringToHash("Dead");
 
     // Components
     public PlayerColliderHandler ColliderHandler { get; private set; }
@@ -264,10 +264,5 @@ public class PlayerController : MonoBehaviour
                 StopSliding();
             }
         }
-    }
-
-    public void UseItem()
-    {
-        Debug.Log("Use Item");
     }
 }
