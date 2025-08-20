@@ -7,24 +7,16 @@ using UnityEngine.UI;
 public class ToastUIBase : ToastUI
 {
     [SerializeField] Image iconImage;
-    [SerializeField] TextMeshPro titleText;
-    [SerializeField] TextMeshPro decText;
+    [SerializeField] TMP_Text titleText;
+    [SerializeField] TMP_Text decText;
     ToastUIData toastUIData;
-
-    [SerializeField] Button button1;
 
     private void Awake()
     {
         base.Awake();
-        buttons[button1.name].onClick.AddListener(() => { Back(); });
     }
 
-    void Back() 
-    {
-        Debug.Log("Back button clicked");
-    }
-
-    /*private void OnEnable()
+    private void OnEnable()
     {
         if (this.isActiveAndEnabled)
         {
@@ -35,6 +27,12 @@ public class ToastUIBase : ToastUI
     { 
         Clear();  // 풀 반환 직전/후에도 안전
     }
+    public void SetData(ToastUIData data)
+    {
+        toastUIData = data;
+        if (isActiveAndEnabled)
+            Set(toastUIData, titleText, decText, iconImage);
+    }
 
     public void Clear()
     {
@@ -42,7 +40,5 @@ public class ToastUIBase : ToastUI
         if (titleText) titleText.text = string.Empty;
         if (decText) decText.text = string.Empty;
         if (iconImage) { iconImage.sprite = null; iconImage.enabled = false; }
-    }*/
-
-   
+    }
 }

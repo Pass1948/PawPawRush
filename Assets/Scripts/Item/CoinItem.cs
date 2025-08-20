@@ -10,7 +10,7 @@ public class CoinItem : MonoBehaviour
     {
         if(other.CompareTag("Player"))
         {
-            ScoreManager.Instance.AddScore(scoreAmount);
+            GameManager.Score.AddScore(scoreAmount);
 
             // TODO: 오브젝트 풀링
             Destroy(gameObject); // 아이템은 사용 후 제거

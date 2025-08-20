@@ -45,6 +45,7 @@ public class EventManager : MonoBehaviour
 
     public void PostNotification(EventType eventType, Component Sender, object Param = null) // 이벤트 발생역할
     {
+        Debug.Log("이벤트발싸1!!");
         List<IEventListener> ListenList = null;
 
         //이벤트 리스너(대기자)가 없으면 그냥 리턴.
