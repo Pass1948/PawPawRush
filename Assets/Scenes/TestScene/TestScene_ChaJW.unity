@@ -133,7 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 141606546}
   - component: {fileID: 141606545}
-  - component: {fileID: 141606544}
+  - component: {fileID: 141606547}
   m_Layer: 0
   m_Name: MapManager
   m_TagString: Untagged
@@ -141,19 +141,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &141606544
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 141606543}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d9b0e7f6b59fbf4b9ddb1a2d56322f4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  movementSpeed: 20
 --- !u!114 &141606545
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -168,6 +155,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   platformPrefabs:
   - {fileID: 2418067262975552551, guid: 0af3901484b83ab4a9cf303cd51cc2bc, type: 3}
+  mapMovement: {fileID: 141606547}
   spawnPoint: {fileID: 718982342}
   destroyPoint: {fileID: 608092458}
 --- !u!4 &141606546
@@ -185,6 +173,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &141606547
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 141606543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d9b0e7f6b59fbf4b9ddb1a2d56322f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementSpeed: 10
 --- !u!1 &312319445
 GameObject:
   m_ObjectHideFlags: 0
