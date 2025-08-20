@@ -26,6 +26,11 @@ public class GameManager : MonoBehaviour
     private static MapManager mapManager;
     public static MapManager Map => mapManager;
 
+    private static EventManager eventManager;
+    public static EventManager Event => eventManager;
+
+
+
     private void Awake()
     {
         if (instance != null) { Destroy(this); return; }
@@ -65,6 +70,10 @@ public class GameManager : MonoBehaviour
         GameObject mapObj = new GameObject("MapManager");
         mapObj.transform.SetParent(transform, false);
         mapManager = mapObj.AddComponent<MapManager>();
+
+        GameObject eventObj = new GameObject("EventManager");
+        eventObj.transform.SetParent(transform, false);
+        eventManager = eventObj.AddComponent<EventManager>();
     }
 
 }
