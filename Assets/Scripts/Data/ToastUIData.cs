@@ -14,11 +14,6 @@ public enum AchievementId
     FistDeath,
 
 
-
-
-
-
-
 }
 [System.Serializable]
 public class ToastUIData
