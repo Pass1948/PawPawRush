@@ -409,6 +409,7 @@ MonoBehaviour:
   setBotton: {fileID: 1119727931023559166}
   startButton: {fileID: 3672971287513706407}
   exitButton: {fileID: 5206628103850586728}
+  startButton2: {fileID: 429453005970103664}
   titleUI: {fileID: 4195720221394705396}
   customUI: {fileID: 5643967519009705562}
 --- !u!1 &3618842259664609433
@@ -864,7 +865,7 @@ GameObject:
   - component: {fileID: 7112624781260324434}
   - component: {fileID: 429453005970103664}
   m_Layer: 5
-  m_Name: START_Botton
+  m_Name: StartBotton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1380,6 +1381,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a57846ca80799a74e82b3be9b41d98e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startButton: {fileID: 429453005970103664}
 --- !u!1 &6716605619894696674
 GameObject:
   m_ObjectHideFlags: 0

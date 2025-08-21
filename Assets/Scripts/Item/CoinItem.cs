@@ -11,7 +11,7 @@ public class CoinItem : MonoBehaviour
         if(other.CompareTag("Player"))
         {
             GameManager.Score.AddScore(scoreAmount);
-            GameManager.Sound.PlaySFX("CoinPickup"); // 코인 획득 사운드 재생
+            GameManager.Sound.PlaySFX("CoinSFX"); // 코인 획득 사운드 재생
             // TODO: 오브젝트 풀링
             Destroy(gameObject); // 아이템은 사용 후 제거
         }

@@ -8,6 +8,7 @@ public class StartSceneUI : WindowUI
     [SerializeField] Button setBotton;
     [SerializeField] Button startButton;
     [SerializeField] Button exitButton;
+    [SerializeField] Button startButton2;
 
     [SerializeField] GameObject titleUI;
     [SerializeField] GameObject customUI;
