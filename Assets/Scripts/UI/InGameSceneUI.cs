@@ -26,7 +26,7 @@ public class InGameSceneUI : WindowUI, IEventListener
     protected override void Awake()
     {
         base.Awake();
-        buttons[SetBotton.name].onClick.AddListener(() => { GameManager.UI.ShowPopUpUI<SettingUI>("UI/SetUI"); });
+        buttons[SetBotton.name].onClick.AddListener(() => { OnSet(); });
     }
     private void OnEnable()
     {
@@ -47,7 +47,11 @@ public class InGameSceneUI : WindowUI, IEventListener
         GameManager.Event.RemoveListener(EventType.OnHeal, this);
         GameManager.Event.RemoveListener(EventType.OnHit, this);
     }
-
+    void OnSet()
+    {
+        GameManager.UI.ShowPopUpUI<SettingUI>("UI/SetUI");
+        Time.timeScale = 0f;
+    }
     public void StartCountdow()
     {
         countdownStart -= Time.deltaTime;

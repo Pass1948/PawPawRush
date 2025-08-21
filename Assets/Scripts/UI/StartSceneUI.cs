@@ -15,7 +15,7 @@ public class StartSceneUI : WindowUI
     protected override void Awake()
     {
         base.Awake();
-        buttons[setBotton.name].onClick.AddListener(() => { GameManager.UI.ShowPopUpUI<SettingUI>("UI/SetUI"); });
+        buttons[setBotton.name].onClick.AddListener(() => { OnSet(); });
         buttons[startButton.name].onClick.AddListener(() => { ChangeUI(); });
         buttons[exitButton.name].onClick.AddListener(() => {LeaveGameButton();});
     }
@@ -25,6 +25,11 @@ public class StartSceneUI : WindowUI
         GameManager.Sound.PlayBGM("StartBGM");
     }
 
+    void OnSet()
+    {
+        GameManager.UI.ShowPopUpUI<SettingUI>("UI/SetUI");
+        Time.timeScale = 0f;
+    }
 
     void ChangeUI()
     {

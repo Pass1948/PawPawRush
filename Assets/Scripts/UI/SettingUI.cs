@@ -16,7 +16,7 @@ public class SettingUI : PopUpUI
         base.Awake();
         buttons[moveTitleButton.name].onClick.AddListener(() => { GameManager.Scene.LoadScene("TitleScene"); });
         buttons[leaveGameButton.name].onClick.AddListener(() => { LeaveGameButton(); });
-        buttons[closeButton.name].onClick.AddListener(() => { GameManager.UI.ClosePopUpUI(); });
+        buttons[closeButton.name].onClick.AddListener(() => { OnClose();  });
 
         volumeSlider.onValueChanged.AddListener(OnBgmSliderChanged);
         volumeSlider.value = GameManager.Sound.GetVolume(VolumeType.BGM);
@@ -24,6 +24,7 @@ public class SettingUI : PopUpUI
         volumeSlider2.onValueChanged.AddListener(OnSFXSliderChanged);
         volumeSlider2.value = GameManager.Sound.GetVolume(VolumeType.SFX);
     }
+
     private void OnBgmSliderChanged(float value)
     {
         GameManager.Sound.SetVolume(VolumeType.BGM, value);
@@ -31,6 +32,12 @@ public class SettingUI : PopUpUI
     private void OnSFXSliderChanged(float value)
     {
         GameManager.Sound.SetVolume(VolumeType.SFX, value);
+    }
+
+    void OnClose()
+    {
+        Time.timeScale = 1f;
+        GameManager.UI.ClosePopUpUI();
     }
 
     public void LeaveGameButton()

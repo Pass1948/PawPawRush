@@ -1308,11 +1308,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00a54319f7f502d41bf1170a03011930, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  laneChangeSpeed: 5
+  laneChangeSpeed: 8
   jumpHeight: 2.5
   jumpDuration: 0.5
   jumpCooldown: 0.8
-  slideDuration: 1
+  slideDuration: 0.8
+  runningSoundVolume: 0.2
 --- !u!114 &8131949605378127268
 MonoBehaviour:
   m_ObjectHideFlags: 0
