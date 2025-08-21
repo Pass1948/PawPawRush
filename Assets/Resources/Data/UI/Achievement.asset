@@ -13,38 +13,37 @@ MonoBehaviour:
   m_Name: Achievement
   m_EditorClassIdentifier: 
   toastUIInfo:
-  - title: "\uB098\uB294\uC57C \uC810\uD504\uC655!"
+  - title: "\uBC14\uC6B4\uC2A4\uB0E5"
     desc: "\uB2EC\uC131\uC870\uAC74 : \uC810\uD504 10\uD68C \uC2DC\uB3C4"
-    icon: {fileID: 0}
+    icon: {fileID: 21300000, guid: 3c0398a919a15f64dbd2e50a18c23dc7, type: 3}
     achievementId: 0
-  - title: "\uC640\uB9AC\uAC00\uB9AC"
-    desc: "\uB2EC\uC131\uC870\uAC74 : \uC88C, \uC6B0 \uC6C0\uC9C1\uC778 \uD69F\uC218
-      25\uBC88"
-    icon: {fileID: 0}
+  - title: "\uAC08\uD321\uC9C8\uD321"
+    desc: "\uB2EC\uC131\uC870\uAC74 : \uC88C, \uC6B0 \uC774\uB3D9 \uD69F\uC218 25\uBC88"
+    icon: {fileID: 21300000, guid: 9a5a29d382ed22340a0b76df2b786e2e, type: 3}
     achievementId: 1
-  - title: "\uB098\uB294 \uBD80\uC790\uAC00 \uB420\uAEBC\uC57C"
+  - title: "\uB0E5\uC218\uB974"
     desc: "\uB2EC\uC131\uC870\uAC74 : \uAE08\uD654 50\uAC1C \uD68D\uB4DD"
-    icon: {fileID: 0}
+    icon: {fileID: 21300000, guid: 32beff08d0a47294787e96b4c07b7ee1, type: 3}
     achievementId: 2
-  - title: "\uB514\uC800\uD2B8 \uBE64\uCE58"
-    desc: "\uB2EC\uC131\uC870\uAC74 : \uCCAB \uC7A5\uC560\uBB3C \uCDA9\uB3CC\uC2DC"
-    icon: {fileID: 0}
+  - title: "\uB514\uC800\uD2B8 \uC5B4\uD0DD"
+    desc: "\uB2EC\uC131\uC870\uAC74 : \uC7A5\uC560\uBB3C \uCCAB \uCDA9\uB3CC"
+    icon: {fileID: 21300000, guid: e4daf5dadd7da764899cb49461291314, type: 3}
     achievementId: 3
-  - title: "\uBB3B\uACE0 \uB354\uBE14\uB85C\uAC00!"
-    desc: "\uB2EC\uC131\uC870\uAC74 : \uCCAB \uC810\uC218 \uB450\uBC30\uC544\uC774\uD15C
-      \uD68D\uB4DD\uC2DC"
-    icon: {fileID: 0}
+  - title: "\uBB3B\uACE0 \uB354\uBE14\uB85C \uAC00!"
+    desc: "\uB2EC\uC131\uC870\uAC74 : \uC810\uC218 \uB450\uBC30 \uC544\uC774\uD15C
+      \uCCAB \uD68D\uB4DD"
+    icon: {fileID: 21300000, guid: e452951aa57750645a37857e244d4279, type: 3}
     achievementId: 4
-  - title: "\uACE0\uC591\uC774\uC57C \uBA39\uC790 \uB0E5\uB0E5\uB0E5\uB0E5"
-    desc: "\uB2EC\uC131\uC870\uAC74 : \uCCAB \uCCB4\uB825 \uC544\uC774\uD15C \uD68D\uB4DD\uC2DC"
-    icon: {fileID: 0}
+  - title: "\uACE0\uC591\uC774\uC57C \uBA39\uC790 \uB0E5\uB0E5"
+    desc: "\uB2EC\uC131\uC870\uAC74 : \uCCB4\uB825 \uC544\uC774\uD15C \uCCAB \uD68D\uB4DD"
+    icon: {fileID: 21300000, guid: 10b937e6be42cad40b3076f123af672d, type: 3}
     achievementId: 5
-  - title: "\uD558\uC9C0\uB9CC \uBE68\uB790\uC8E0?"
-    desc: "\uB2EC\uC131\uC870\uAC74 : \uCCAB \uC2A4\uD53C\uB4DC \uC544\uC774\uD15C
-      \uD68D\uB4DD\uC2DC"
-    icon: {fileID: 0}
+  - title: "\uADF8\uAC74 \uC81C \uC794\uC0C1\uC785\uB2C8\uB2E4\uB0E5"
+    desc: "\uB2EC\uC131\uC870\uAC74 : \uC2A4\uD53C\uB4DC \uC544\uC774\uD15C \uCCAB
+      \uD68D\uB4DD"
+    icon: {fileID: 21300000, guid: 0eab9f5e08fd0674b8a259e8b2ef63af, type: 3}
     achievementId: 6
-  - title: Wasted
-    desc: "\uB2EC\uC131\uC870\uAC74 : \uCC98\uC74C\uC73C\uB85C \uC8FD\uC5C8\uC744\uB54C"
-    icon: {fileID: 0}
+  - title: "\uC8FD\uC744\uB9CC\uD07C \uB9DB\uC788\uB0E5"
+    desc: "\uB2EC\uC131\uC870\uAC74 : \uCCAB \uC8FD\uC74C"
+    icon: {fileID: 21300000, guid: baad2156ece1db24b91852e6ad1c3d73, type: 3}
     achievementId: 7
