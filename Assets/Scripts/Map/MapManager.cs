@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -37,6 +38,9 @@ public class MapManager : MonoBehaviour
     // 코루틴
     private Coroutine playerPreparationCoroutine;
     private Coroutine speedBoostCoroutine;
+
+    // 이벤트
+    public static event Action OnMapMovementStarted;
 
     private void Awake()
     {
@@ -116,7 +120,7 @@ public class MapManager : MonoBehaviour
     private void SpawnNewPlatform(bool spawnObstacles)
     {
         // 발판 프리팹 목록에서 무작위로 선택
-        int randomIndex = Random.Range(0, platformPrefabs.Count);
+        int randomIndex = UnityEngine.Random.Range(0, platformPrefabs.Count);
         GameObject selectedPlatform = platformPrefabs[randomIndex];
         
         // 마지막 발판 위치 계산
@@ -225,6 +229,8 @@ public class MapManager : MonoBehaviour
         {
             mapMovement.movementSpeed = origMapMovementSpeed;
         }
+
+        OnMapMovementStarted?.Invoke(); // 맵 이동 시작 이벤트 발생
 
         Debug.Log("맵 이동 시작. 게임 플레이 시작!");
     }
