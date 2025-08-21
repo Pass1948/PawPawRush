@@ -10071,13 +10071,19 @@ MonoBehaviour:
   - {fileID: 727597705423213612, guid: a00c4981dabaa914fa2c253fecae6108, type: 3}
   - {fileID: 5325127590720003623, guid: 9267546bf82cb5241bd091fd40b6dd60, type: 3}
   - {fileID: 3495944031090317331, guid: b895c3d583824fb46ac9b587cf36d86e, type: 3}
+  - {fileID: 5375892444691852582, guid: 06a0abecc60bda040bc0e57e9e17401e, type: 3}
+  - {fileID: 9193591013424688867, guid: e314794c8b6f3aa4ea338c0e41030e01, type: 3}
+  - {fileID: 2354086780346146014, guid: ae86a01cc827aec4fb7abc82788814a0, type: 3}
+  - {fileID: 4261542993038385013, guid: c2a27bd43f776e6438d5dff3615968db, type: 3}
+  - {fileID: 7523565388453010602, guid: 2b42b3bce583b704d9235bf524d82627, type: 3}
+  - {fileID: 3978105471804501931, guid: 07d5b5d27245213429a728985fe859d9, type: 3}
   obstacleSpawnPoints:
   - {fileID: 1190333621023970096}
   itemPrefabs:
   - {fileID: 8507719585551843608, guid: 50a8310179dabf24dac025819aa8e574, type: 3}
   - {fileID: 8507719585551843608, guid: aa88dd3dbe7b5b641ae05a44a15d2e1c, type: 3}
   - {fileID: 8507719585551843608, guid: 51e54bae76801d640857864ea1358bd6, type: 3}
-  itemSpawnChance: 0.5
+  itemSpawnChance: 0.1
 --- !u!65 &7606272701233916135
 BoxCollider:
   m_ObjectHideFlags: 0
