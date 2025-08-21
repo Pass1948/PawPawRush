@@ -12,4 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a98529950ebd544cb7424deb6be2f6c, type: 3}
   m_Name: SoundData
   m_EditorClassIdentifier: 
-  soundInfo: []
+  soundInfo:
+  - soundName: StartBGM
+    soundType: 0
+    volume: 0
+    audioClips:
+    - {fileID: 8300000, guid: 3df2e083d6391ab4591f5f6f4ce7cd62, type: 3}
+  - soundName: InGameBGM
+    soundType: 0
+    volume: 0
+    audioClips:
+    - {fileID: 8300000, guid: 1dd8e35eaea39954c82396140da0911f, type: 3}
+  - soundName: CoinSFX
+    soundType: 1
+    volume: 0
+    audioClips:
+    - {fileID: 8300000, guid: f06eb88c5752b3d4ebe00ab3873d0216, type: 3}
