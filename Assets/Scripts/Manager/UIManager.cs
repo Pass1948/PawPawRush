@@ -91,7 +91,7 @@ public class UIManager : MonoBehaviour
             return;
 
         EventSystem eventSystem = GameManager.Resource.Load<EventSystem>("UI/EventSystem");
-        GameManager.Resource.Instantiate(eventSystem);
+        GameManager.Resource.Instantiate(eventSystem,transform);
         DontDestroyOnLoad(eventSystem.gameObject);
     }
 
