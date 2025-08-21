@@ -7323,8 +7323,13 @@ MonoBehaviour:
   - {fileID: 727597705423213612, guid: a00c4981dabaa914fa2c253fecae6108, type: 3}
   - {fileID: 5325127590720003623, guid: 9267546bf82cb5241bd091fd40b6dd60, type: 3}
   - {fileID: 3495944031090317331, guid: b895c3d583824fb46ac9b587cf36d86e, type: 3}
-  spawnPoints:
-  - {fileID: 3206171835406439028}
+  obstacleSpawnPoints:
+  - {fileID: 1190333621023970096}
+  itemPrefabs:
+  - {fileID: 8507719585551843608, guid: 50a8310179dabf24dac025819aa8e574, type: 3}
+  - {fileID: 8507719585551843608, guid: aa88dd3dbe7b5b641ae05a44a15d2e1c, type: 3}
+  - {fileID: 8507719585551843608, guid: 51e54bae76801d640857864ea1358bd6, type: 3}
+  itemSpawnChance: 0.5
 --- !u!65 &7606272701233916135
 BoxCollider:
   m_ObjectHideFlags: 0
