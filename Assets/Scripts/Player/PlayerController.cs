@@ -95,11 +95,11 @@ public class PlayerController : MonoBehaviour
         {
             ChangeLane(1);
         }
-        else if (Input.GetKeyDown(KeyCode.W))
+        else if (Input.GetKeyDown(KeyCode.Space))
         {
             HandleJump();
         }
-        else if (Input.GetKeyDown(KeyCode.S))
+        else if (Input.GetKeyDown(KeyCode.LeftControl))
         {
             if (!isSliding)
             {
