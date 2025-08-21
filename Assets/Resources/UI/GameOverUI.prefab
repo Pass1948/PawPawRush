@@ -339,7 +339,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 502995224420908275}
-  - component: {fileID: 4969499760411085803}
+  - component: {fileID: 5891444738344127722}
   m_Layer: 5
   m_Name: GameOverUI
   m_TagString: Untagged
@@ -370,7 +370,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &4969499760411085803
+--- !u!114 &5891444738344127722
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -379,9 +379,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1491097487764205096}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 171d688d0d6d80641a84fa6945db3f1a, type: 3}
+  m_Script: {fileID: 11500000, guid: 638873ed1d8a02d469474eb109e6f380, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RestartButton: {fileID: 6791839526916005500}
+  ExitButton: {fileID: 1194630469796019269}
 --- !u!1 &5604121148679192629
 GameObject:
   m_ObjectHideFlags: 0

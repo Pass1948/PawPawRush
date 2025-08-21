@@ -4,9 +4,9 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public enum EventType
 {
-    AchievementUnlocked // 업적 달성
-     , OnHit
-        , OnHeal
+    AchievementUnlocked, 
+    OnHit,
+    OnHeal
 }
 
 
@@ -29,37 +29,37 @@ public class EventManager : MonoBehaviour
         RefreshListeners();
     }
 
- public void AddListener(EventType eventType, IEventListener listener)       // 이벤트 받는 역할
+    public void AddListener(EventType eventType, IEventListener listener)       // 이벤트 받는 역할
+    {
+        List<IEventListener> ListenList = null;
+
+        if (listeners.TryGetValue(eventType, out ListenList))
         {
-            List<IEventListener> ListenList = null;
-
-            if (listeners.TryGetValue(eventType, out ListenList))
-            {
-                //해당 이벤트 키값이 존재한다면, 이벤트를 추가해준다.
-                ListenList.Add(listener);
-                return;
-            }
-            ListenList = new List<IEventListener>();
+            //해당 이벤트 키값이 존재한다면, 이벤트를 추가해준다.
             ListenList.Add(listener);
-            listeners.Add(eventType, ListenList);
-
+            return;
         }
+        ListenList = new List<IEventListener>();
+        ListenList.Add(listener);
+        listeners.Add(eventType, ListenList);
+
+    }
 
     public void PostNotification(EventType eventType, Component Sender, object Param = null) // 이벤트 발생역할
     {
         List<IEventListener> ListenList = null;
-
         //이벤트 리스너(대기자)가 없으면 그냥 리턴.
-
         if (!listeners.TryGetValue(eventType, out ListenList))
             return;
-
-
         //모든 이벤트 리스너(대기자)에게 이벤트 전송.
         for (int i = 0; i < ListenList.Count; i++)
         {
-            if (!ListenList[i].Equals(null)) //If object is not null, then send message via interfaces
+            if (!ListenList[i].Equals(null))
+            {
                 ListenList[i].OnEvent(eventType, Sender, Param);
+
+            }//If object is not null, then send message via interfaces
+
         }
     }
 

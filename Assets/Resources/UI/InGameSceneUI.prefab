@@ -235,12 +235,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SetBotton: {fileID: 8291435721050828352}
   timerText: {fileID: 408346955590938182}
-  heart1: {fileID: 4529432186691747791}
-  heart2: {fileID: 5689171681818070516}
-  heart3: {fileID: 8848592789228138529}
-  nullHeart1: {fileID: 540469867347865838}
-  nullHeart2: {fileID: 873026329153475993}
-  nullHeart3: {fileID: 9084653629132854022}
+  heart1: {fileID: 3125184120220403011}
+  heart2: {fileID: 5126463826653969477}
+  heart3: {fileID: 2601183655968446636}
+  nullHeart1: {fileID: 1462726183061269938}
+  nullHeart2: {fileID: 2292643507461179589}
+  nullHeart3: {fileID: 7917235349766049370}
   scoreText: {fileID: 9163594001257677109}
 --- !u!1 &3412672427864969289
 GameObject:

@@ -36,6 +36,7 @@ public class PlayerCondition : MonoBehaviour
                 {
                     isFirst = false;
                     GameManager.Event.PostNotification(EventType.AchievementUnlocked, this, AchievementId.FistDeath);
+                    GameManager.UI.ShowPopUpUI<GameOverPopUpUI>("UI/GameOverUI");
                 }
 
             }
