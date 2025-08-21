@@ -36,6 +36,7 @@ public class UIManager : MonoBehaviour
     // Scene 변경시 UI를 재생성 메소드
     public void Recreated()
     {
+        Clear();
         InstantsWindowUI();
         InstantsPopUpUI();
         InstantsToastUI();
@@ -58,7 +59,7 @@ public class UIManager : MonoBehaviour
     {
         if (windowCanvas == null)
         {
-            windowCanvas = GameManager.Resource.Instantiate<Canvas>("UI/Canvas");
+            windowCanvas = GameManager.Resource.Instantiate<Canvas>("UI/Canvas",transform,false);
             windowCanvas.gameObject.name = "WindowCanvas";
             windowCanvas.sortingOrder = 10;
         }

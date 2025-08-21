@@ -17,7 +17,7 @@ public class TitleWindowUI : WindowUI
 
     private void StartGame()
     {
-        GameManager.Scene.LoadScene("");
+        GameManager.Scene.LoadScene("InGameScene");
     }
 
     private void Back()
