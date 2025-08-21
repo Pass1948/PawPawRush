@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7187578908121939796}
   - component: {fileID: 3453297033843259417}
   - component: {fileID: 451436532509938849}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MagicianHat
   m_TagString: Untagged
   m_Icon: {fileID: 0}

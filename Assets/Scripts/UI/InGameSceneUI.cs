@@ -9,6 +9,6 @@ public class InGameSceneUI : WindowUI
     protected override void Awake()
     {
         base.Awake();
-        buttons["SetBotton"].onClick.AddListener(() => { GameManager.UI.ShowPopUpUI<SettingUI>("UI/SetUI"); });
+        buttons[SetBotton.name].onClick.AddListener(() => { GameManager.UI.ShowPopUpUI<SettingUI>("UI/SetUI"); });
     }
 }

@@ -5,19 +5,36 @@ using UnityEngine.UI;
 
 public class StartSceneUI : WindowUI
 {
-    [SerializeField] Button SetBotton;
+    [SerializeField] Button setBotton;
+    [SerializeField] Button startButton;
+    [SerializeField] Button exitButton;
+
+    [SerializeField] GameObject titleUI;
+    [SerializeField] GameObject customUI;
     protected override void Awake()
     {
         base.Awake();
-        buttons[SetBotton.name].onClick.AddListener(() => { GameManager.UI.ShowPopUpUI<SettingUI>("UI/SetUI"); });
+        buttons[setBotton.name].onClick.AddListener(() => { GameManager.UI.ShowPopUpUI<SettingUI>("UI/SetUI"); });
+        buttons[startButton.name].onClick.AddListener(() => { ChangeUI(); });
+        buttons[exitButton.name].onClick.AddListener(() => {LeaveGameButton();});
     }
     private void Start()
     {
         GameManager.Sound.PlayBGM("StartBGM");
     }
 
-    private void OnEnable()
+    void ChangeUI()
     {
-       
+        titleUI.SetActive(false);
+        customUI.SetActive(true);
+    }
+
+    private void LeaveGameButton()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
     }
 }

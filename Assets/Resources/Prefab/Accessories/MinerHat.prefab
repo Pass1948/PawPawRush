@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5600435479836597205}
   - component: {fileID: 3501305197771769239}
   - component: {fileID: 6568924508347913098}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MinerHat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
