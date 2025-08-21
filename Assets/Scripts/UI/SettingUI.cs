@@ -14,7 +14,7 @@ public class SettingUI : PopUpUI
     protected override void Awake()
     {
         base.Awake();
-        buttons[moveTitleButton.name].onClick.AddListener(() => { GameManager.Scene.LoadScene("TitleScene"); });
+        buttons[moveTitleButton.name].onClick.AddListener(() => { OnTitle(); });
         buttons[leaveGameButton.name].onClick.AddListener(() => { LeaveGameButton(); });
         buttons[closeButton.name].onClick.AddListener(() => { OnClose();  });
 
@@ -32,6 +32,13 @@ public class SettingUI : PopUpUI
     private void OnSFXSliderChanged(float value)
     {
         GameManager.Sound.SetVolume(VolumeType.SFX, value);
+    }
+
+    void OnTitle() 
+    {
+        Time.timeScale = 1f;
+        GameManager.UI.ClosePopUpUI();
+        GameManager.Scene.LoadScene("TitleScene");
     }
 
     void OnClose()
