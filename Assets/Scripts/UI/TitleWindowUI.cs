@@ -19,9 +19,4 @@ public class TitleWindowUI : WindowUI
     {
         GameManager.Scene.LoadScene("InGameScene");
     }
-
-    private void Back()
-    {
-        throw new System.NotImplementedException();
-    }
 }

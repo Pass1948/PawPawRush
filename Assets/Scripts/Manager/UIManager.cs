@@ -59,7 +59,7 @@ public class UIManager : MonoBehaviour
     {
         if (windowCanvas == null)
         {
-            windowCanvas = GameManager.Resource.Instantiate<Canvas>("UI/Canvas",transform,false);
+            windowCanvas = GameManager.Resource.Instantiate<Canvas>("UI/Canvas");
             windowCanvas.gameObject.name = "WindowCanvas";
             windowCanvas.sortingOrder = 10;
         }

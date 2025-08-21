@@ -6,6 +6,6 @@ public class StartSetting : MonoBehaviour
 {
     private void Start()
     {
-        GameManager.UI.ShowWindowUI<WindowUI>("UI/StartSceneUI");
+        GameManager.UI.ShowWindowUI<StartSceneUI>("UI/StartSceneUI");
     }
 }

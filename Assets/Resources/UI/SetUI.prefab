@@ -1040,7 +1040,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4925873698364617535}
-  - component: {fileID: 3271736416723486443}
+  - component: {fileID: -1594902881101835661}
   m_Layer: 0
   m_Name: SetUI
   m_TagString: Untagged
@@ -1069,7 +1069,7 @@ Transform:
   - {fileID: 8239275700490083190}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3271736416723486443
+--- !u!114 &-1594902881101835661
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1078,9 +1078,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 6713166459983867245}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 171d688d0d6d80641a84fa6945db3f1a, type: 3}
+  m_Script: {fileID: 11500000, guid: 155c42c4af9a6174aa78288f811c8ec1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  volumeSlider: {fileID: 260199877543073790}
+  moveTitleButton: {fileID: 8896872380561000833}
+  leaveGameButton: {fileID: 7012918534215457230}
+  closeButton: {fileID: 1307211065962265703}
 --- !u!1 &6865153773911389470
 GameObject:
   m_ObjectHideFlags: 0
