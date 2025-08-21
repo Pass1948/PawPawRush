@@ -155,10 +155,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   platformPrefabs:
   - {fileID: 2418067262975552551, guid: 0af3901484b83ab4a9cf303cd51cc2bc, type: 3}
-  MapMovement: {fileID: 141606547}
-  OrigMapMovementSpeed: 10
+  mapMovement: {fileID: 141606547}
+  origMapMovementSpeed: 0
   spawnPoint: {fileID: 718982342}
   destroyPoint: {fileID: 608092458}
+  countDownSound: {fileID: 0}
   countdownDuration: 5
 --- !u!4 &141606546
 Transform:
