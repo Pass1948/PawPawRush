@@ -18,10 +18,10 @@ public class ToastUIBase : ToastUI
 
     private void OnEnable()
     {
+        GameManager.Sound.PlaySFX("ToastSFX");
         if (this.isActiveAndEnabled)
         {
             Set(toastUIData, titleText, decText, iconImage);
-           GameManager.Sound.PlaySFX("ToastSFX");
         }
     }
     private void OnDisable() 

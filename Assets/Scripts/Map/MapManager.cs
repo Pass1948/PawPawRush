@@ -50,16 +50,16 @@ public class MapManager : MonoBehaviour
             return;
         }
         Instance = this;
-        DontDestroyOnLoad(gameObject);
     }
 
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
+    }
 
+    public void ReStart() 
+    {
         PrepareInitialMap();
-
-        // Temp: 게임 시작은 UI 버튼 등 다른 곳에서 StartGame()을 호출하여 시작
         StartGame();
     }
 

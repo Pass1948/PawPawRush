@@ -19,10 +19,12 @@ public class StartSceneUI : WindowUI
         buttons[startButton.name].onClick.AddListener(() => { ChangeUI(); });
         buttons[exitButton.name].onClick.AddListener(() => {LeaveGameButton();});
     }
+
     private void Start()
     {
         GameManager.Sound.PlayBGM("StartBGM");
     }
+
 
     void ChangeUI()
     {

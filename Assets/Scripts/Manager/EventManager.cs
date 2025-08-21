@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 public enum EventType
 {
     AchievementUnlocked // 업적 달성
+     , OnHit
+        , OnHeal
 }
 
 
