@@ -23,9 +23,6 @@ public class GameManager : MonoBehaviour
     private static PlayerManager playerManager;
     public static PlayerManager Player => playerManager;
 
-    private static MapManager mapManager;
-    public static MapManager Map => mapManager;
-
     private static EventManager eventManager;
     public static EventManager Event => eventManager;
 
@@ -34,6 +31,13 @@ public class GameManager : MonoBehaviour
 
     private static AchievenmentManager achievenmentManager;
     public static AchievenmentManager Achievenment => achievenmentManager;
+
+    private static SoundManager soundManager;
+    public static SoundManager Sound=> soundManager;
+
+
+
+
     private void Awake()
     {
         if (instance != null) { Destroy(this); return; }
@@ -82,6 +86,9 @@ public class GameManager : MonoBehaviour
         achievenmentObj.transform.SetParent(transform, false);
         achievenmentManager = achievenmentObj.AddComponent<AchievenmentManager>();
 
+        GameObject soundObj = new GameObject("SoundManager");
+        soundObj.transform.SetParent(transform, false);
+        soundManager = soundObj.AddComponent<SoundManager>();
 
     }
 
