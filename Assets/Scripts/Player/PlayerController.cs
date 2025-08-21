@@ -18,7 +18,8 @@ public class PlayerController : MonoBehaviour
     private PlayerColliderHandler colliderHandler;
     public Animator Animator { get; private set; }
     private Animator animator;
-    private AudioSource audioSource;
+    private AudioSource loopingAudioSource;
+    private AudioSource sfxAudioSource;
 
     [Header("Movement")]
     [SerializeField] private float laneChangeSpeed = 1.0f;
@@ -42,6 +43,7 @@ public class PlayerController : MonoBehaviour
 
     // Constants
     private const int STARTING_LANE = 1;
+    private const float LANE_OFFSET = 2.0f; // 레인 간격
 
     private void Awake()
     {
@@ -51,9 +53,20 @@ public class PlayerController : MonoBehaviour
         targetPosition = transform.position;
     }
 
+    private void OnEnable()
+    {
+        MapManager.OnMapMovementStarted += ManageRunningSound; // 이벤트 구독
+    }
+
+    private void OnDisable()
+    {
+        MapManager.OnMapMovementStarted -= ManageRunningSound; // 이벤트 구독 해제
+    }
+
     private void Start()
     {
-        audioSource = GameManager.Player.PlayerCharacter.AudioSource;
+        loopingAudioSource = GameManager.Player.PlayerCharacter.LoopingAudioSource;
+        sfxAudioSource = GameManager.Player.PlayerCharacter.SfxAudioSource;
 
         // temp
         //StartCoroutine(WaitToStart());
@@ -86,6 +99,29 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        // 달리기 소리가 재생 중일 때 맵 속도에 맞춰 pitch 조절
+        if (loopingAudioSource.isPlaying && loopingAudioSource.clip == GameManager.Player.PlayerCharacter.RunningSound)
+        {
+            // MapManager에서 현재 속도와 원래 속도를 가져옴
+            float currentSpeed = MapManager.Instance.MapMovement.movementSpeed;
+            float originalSpeed = MapManager.Instance.OrigMapMovementSpeed;
+
+            // originalSpeed가 0보다 클 때만 계산 (0으로 나누는 오류 방지)
+            if (originalSpeed > 0)
+            {
+                // 원래 속도 대비 현재 속도의 비율을 계산하여 pitch 값으로 사용
+                float targetPitch = currentSpeed / originalSpeed;
+
+                // pitch가 너무 낮아지는 것을 방지하기 위해 최소값 설정
+                loopingAudioSource.pitch = Mathf.Max(0.8f, targetPitch);
+            }
+            else
+            {
+                // 속도 값이 유효하지 않을 경우 기본 pitch로 설정
+                loopingAudioSource.pitch = 0f;
+            }
+        }
+
         Vector3 finalTargetPosition = targetPosition;
 
         CalculateSlide();
@@ -109,12 +145,8 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
-        // TODO: 맵에서 laneOffset 조절
-        // 임시로 설정
-        float laneOffset = 2.0f;
-
         currentLane = targetLane;
-        targetPosition = new Vector3((currentLane - 1) * laneOffset, targetPosition.y, targetPosition.z);
+        targetPosition = new Vector3((currentLane - 1) * LANE_OFFSET, targetPosition.y, targetPosition.z);
     }
 
     public IEnumerator PrepareForGameStart(float countdownDuration)
@@ -126,18 +158,6 @@ public class PlayerController : MonoBehaviour
         yield return lookAtCamera.WaitForCompletion(); // 회전이 끝날 때까지 코루틴을 잠시 대기
 
         animator.Play(startHash);
-
-        //float timeToStart;
-        //float length = 5f; // temp 5초 카운트 다운 -> 나중에 맵 매니저에서 설정 받아옴
-        //timeToStart = length;
-
-        //while (timeToStart >= 0)
-        //{
-        //    yield return null;
-        //    timeToStart -= Time.deltaTime * 1.5f;
-        //}
-
-        //timeToStart = -1;
 
         // 카운트다운 시간만큼 대기
         yield return new WaitForSeconds(countdownDuration);
@@ -156,6 +176,8 @@ public class PlayerController : MonoBehaviour
 
         animator.Play(runStartHash);
         animator.SetBool(movingHash, true);
+
+        //ManageRunningSound();
     }
 
     public void StopRunning()
@@ -163,6 +185,8 @@ public class PlayerController : MonoBehaviour
         isRunning = false;
 
         animator.SetBool(movingHash, false);
+
+        ManageRunningSound();
     }
 
     public void HandleJump()
@@ -183,8 +207,10 @@ public class PlayerController : MonoBehaviour
         jumpStartTime = Time.time;
 
         // 애니메이션 및 사운드 재생
-        audioSource.PlayOneShot(GameManager.Player.PlayerCharacter.JumpSound); // 슬라이드 사운드 재생
+        sfxAudioSource.PlayOneShot(GameManager.Player.PlayerCharacter.JumpSound); // 슬라이드 사운드 재생
         animator.SetBool(jumpingHash, true);
+
+        ManageRunningSound();
     }
 
     public void StopJumping()
@@ -192,6 +218,8 @@ public class PlayerController : MonoBehaviour
         isJumping = false;
 
         animator.SetBool(jumpingHash, false);
+
+        ManageRunningSound();
     }
 
     public float CalculateJumpY()
@@ -240,6 +268,8 @@ public class PlayerController : MonoBehaviour
         animator.SetBool(slidingHash, true);
 
         colliderHandler.Slide(isSliding);
+
+        ManageRunningSound();
     }
 
     public void StopSliding()
@@ -250,6 +280,8 @@ public class PlayerController : MonoBehaviour
             isSliding = false;
 
             colliderHandler.Slide(isSliding);
+
+            ManageRunningSound();
         }
     }
 
@@ -266,6 +298,31 @@ public class PlayerController : MonoBehaviour
             if (ratio >= 1.0f)
             {
                 StopSliding();
+            }
+        }
+    }
+
+    private void ManageRunningSound()
+    {
+        bool shouldPlayRunningSound = isRunning && !isJumping && !isSliding;
+
+        if (shouldPlayRunningSound)
+        {
+            if (!loopingAudioSource.isPlaying)
+            {
+                loopingAudioSource.clip = GameManager.Player.PlayerCharacter.RunningSound;
+                loopingAudioSource.loop = true;
+                loopingAudioSource.volume = 0.01f; // 달리기 사운드 볼륨 낮춤
+                loopingAudioSource.Play();
+            }
+        }
+        else
+        {
+            if (loopingAudioSource.clip == GameManager.Player.PlayerCharacter.RunningSound)
+            {
+                loopingAudioSource.Stop();
+                //loopingAudioSource.pitch = 1f;    // pitch를 기본값 1로 초기화
+                //loopingAudioSource.volume = 1f;   // 볼륨을 기본값 1로 초기화
             }
         }
     }

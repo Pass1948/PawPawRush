@@ -8,7 +8,8 @@ public class PlayerCharacter : MonoBehaviour
     public PlayerController PlayerController { get; private set; }
     public PlayerCondition PlayerCondition { get; private set; }
     public PlayerCustomizingHandler CustomizingHandler { get; private set; }
-    public AudioSource AudioSource { get; private set; }
+    public AudioSource LoopingAudioSource { get; private set; } // 달리기 소리 등 반복 사운드용
+    public AudioSource SfxAudioSource { get; private set; }     // 점프 등 효과음용
 
     private PlayerController playerController;
     private PlayerCondition playerCondition;
@@ -16,6 +17,7 @@ public class PlayerCharacter : MonoBehaviour
     private AudioSource audioSource;
 
     [Header("Sound")]
+    public AudioClip RunningSound;
     public AudioClip JumpSound;
     public AudioClip HitSound;
     public AudioClip DeathSound;
@@ -36,8 +38,12 @@ public class PlayerCharacter : MonoBehaviour
         customizingHandler = GetComponent<PlayerCustomizingHandler>();
         CustomizingHandler = customizingHandler;
 
-        audioSource = GetComponent<AudioSource>();
-        AudioSource = audioSource;
+        AudioSource[] audioSources = GetComponents<AudioSource>();
+        if (audioSources.Length >= 2)
+        {
+            LoopingAudioSource = audioSources[0]; // 첫 번째는 반복 사운드용으로
+            SfxAudioSource = audioSources[1];     // 두 번째는 효과음용으로 할당
+        }
     }
 
     private void Start()
