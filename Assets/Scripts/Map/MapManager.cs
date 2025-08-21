@@ -14,12 +14,9 @@ public class MapManager : MonoBehaviour
     private List<GameObject> activePlatforms = new List<GameObject>();
 
     [SerializeField] private MapMovement mapMovement;
+    public MapMovement MapMovement { get { return mapMovement; } set { mapMovement = value; } }
     [SerializeField] private float origMapMovementSpeed;
-    public float OrigMapMovementSpeed
-    {
-        get { return origMapMovementSpeed; }
-        set { origMapMovementSpeed = value; }
-    }
+    public float OrigMapMovementSpeed { get { return origMapMovementSpeed; } }
 
     // 스폰 지점
     [SerializeField] private Transform spawnPoint;
@@ -36,6 +33,10 @@ public class MapManager : MonoBehaviour
 
     private bool isGamePaused = false;
     private bool isGameRunning = false;
+
+    // 코루틴
+    private Coroutine playerPreparationCoroutine;
+    private Coroutine speedBoostCoroutine;
 
     private void Awake()
     {
@@ -184,7 +185,7 @@ public class MapManager : MonoBehaviour
         }
 
         PlayerController playerController = GameManager.Player.PlayerCharacter.PlayerController;
-        Coroutine playerPreparationCoroutine = StartCoroutine(playerController.PrepareForGameStart(countdownDuration));
+        playerPreparationCoroutine = StartCoroutine(playerController.PrepareForGameStart(countdownDuration));
 
         // 카운트다운 효과음 재생
         audioSource.PlayOneShot(countDownSound);
@@ -274,5 +275,45 @@ public class MapManager : MonoBehaviour
             }
         }
     }
-    
+
+    public void ApplySpeedBoost(float boostAmount, float duration)
+    {
+        // 게임이 실행 중이 아닐 때
+        if (!isGameRunning || isGamePaused)
+        {
+            return;
+        }
+
+        // 만약 이전에 실행되던 스피드 부스트 코루틴이 있다면 중지
+        if (speedBoostCoroutine != null)
+        {
+            StopCoroutine(speedBoostCoroutine);
+        }
+
+        // 새로운 스피드 부스트 코루틴을 시작하고 변수에 저장
+        speedBoostCoroutine = StartCoroutine(SpeedBoostCoroutine(boostAmount, duration));
+    }
+
+    private IEnumerator SpeedBoostCoroutine(float boostAmount, float duration)
+    {
+        Debug.Log($"스피드 부스트 활성화! 속도 {boostAmount}배, 지속 시간: {duration}초");
+
+        // 맵의 속도를 원래 속도에 부스트 양을 곱한 값으로 설정
+        mapMovement.movementSpeed = origMapMovementSpeed * boostAmount;
+
+        // 지정된 지속 시간만큼 대기
+        yield return new WaitForSeconds(duration);
+
+        Debug.Log("스피드 부스트 종료. 원래 속도로 복귀.");
+
+        // 맵의 속도를 원래 속도로 복원
+        // isGamePaused 상태가 아닐 때만 복원 -> 일시정지 로직과 충돌 방지
+        if (!isGamePaused)
+        {
+            mapMovement.movementSpeed = origMapMovementSpeed;
+        }
+
+        // 코루틴 끝 -> null로 초기화
+        speedBoostCoroutine = null;
+    }
 }
