@@ -4,26 +4,58 @@ using UnityEngine;
 
 public class MapManager : MonoBehaviour
 {
+    public static MapManager Instance { get; private set; }
+
+    [Header("MapInfo")]
     // 발판 프리팹 목록
-    public List<GameObject> platformPrefabs;
+    [SerializeField] private List<GameObject> platformPrefabs;
 
     // 현재 활성화된 발판들을 관리하는 리스트
     private List<GameObject> activePlatforms = new List<GameObject>();
 
-    public MapMovement MapMovement { get; set; }
-    public float OrigMapMovementSpeed { get; set; }
+    [SerializeField] private MapMovement mapMovement;
+    public MapMovement MapMovement { get { return mapMovement; } set { mapMovement = value; } }
+    [SerializeField] private float origMapMovementSpeed;
+    public float OrigMapMovementSpeed { get { return origMapMovementSpeed; } }
 
     // 스폰 지점
-    public Transform spawnPoint;
+    [SerializeField] private Transform spawnPoint;
 
     // 발판 삭제 지점
-    public Transform destroyPoint;
+    [SerializeField] private Transform destroyPoint;
+
+    [Header("Sound")]
+    [SerializeField] private AudioClip countDownSound; // 카운트다운 사운드
+    private AudioSource audioSource;
+
+    // 카운트 다운 시간
+    public float countdownDuration = 5.0f;
 
     private bool isGamePaused = false;
     private bool isGameRunning = false;
-    
+
+    // 코루틴
+    private Coroutine playerPreparationCoroutine;
+    private Coroutine speedBoostCoroutine;
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+    }
+
     private void Start()
     {
+        audioSource = GetComponent<AudioSource>();
+
+        PrepareInitialMap();
+
+        // Temp: 게임 시작은 UI 버튼 등 다른 곳에서 StartGame()을 호출하여 시작
         StartGame();
     }
 
@@ -31,9 +63,13 @@ public class MapManager : MonoBehaviour
     {
         if (isGameRunning && !isGamePaused) // 게임이 실행 중이고 일시 정지 상태가 아닐 때
         {
-            if (MapMovement != null)
+            if (mapMovement != null)
             {
-                MapMovement.Move();
+                mapMovement.Move();
+            }
+            else
+            {
+                Debug.LogWarning("MapMovement가 설정되지 않았습니다.");
             }
 
             // 새로운 발판 생성
@@ -48,6 +84,33 @@ public class MapManager : MonoBehaviour
                 DestroyOldestPlatform();
             }
         }
+    }
+
+    // 움직이지 않는 초기 맵 생성
+    private void PrepareInitialMap()
+    {
+        // MapMovement 컴포넌트 연결되어 있는지 확인
+        if (mapMovement == null)
+        {
+            Debug.LogError("MapMovement가 MapManager에 연결되지 않았습니다!");
+            return;
+        }
+
+        // 원래 속도를 저장 후 현재 속도 0으로 설정하여 맵을 정지시킴
+        origMapMovementSpeed = mapMovement.movementSpeed;
+        mapMovement.movementSpeed = 0f;
+
+        // 초기 발판들 생성
+        for (int i = 0; i < 2; i++)
+        {
+            SpawnNewPlatform(false);
+        }
+        for (int i = 0; i < 8; i++)
+        {
+            SpawnNewPlatform(true);
+        }
+
+        Debug.Log("초기 맵 생성 완료. 게임 시작 대기 중...");
     }
 
     private void SpawnNewPlatform(bool spawnObstacles)
@@ -90,6 +153,7 @@ public class MapManager : MonoBehaviour
         activePlatforms.RemoveAt(0);
         Destroy(oldestPlatform);
     }
+
     //플랫폼 길이 계산
     private float GetPlatformLength(GameObject platform) 
     {
@@ -108,30 +172,63 @@ public class MapManager : MonoBehaviour
             Debug.Log("게임이 이미 실행 중입니다.");
             return;
         }
-        
+
+        StartCoroutine(GameStartSequence());
+    }
+
+    private IEnumerator GameStartSequence()
+    {
+        // 플레이어 캐릭터가 씬에 로드될 때까지 대기
+        while (GameManager.Player.PlayerCharacter == null)
+        {
+            yield return null;
+        }
+
+        PlayerController playerController = GameManager.Player.PlayerCharacter.PlayerController;
+        playerPreparationCoroutine = StartCoroutine(playerController.PrepareForGameStart(countdownDuration));
+
+        // 카운트다운 효과음 재생
+        audioSource.PlayOneShot(countDownSound);
+
+        float currentTime = countdownDuration;
+        while (currentTime > 0)
+        {
+            // 남은 시간을 계산
+            int displayTime = Mathf.CeilToInt(currentTime);
+            Debug.Log($"남은 시간: {displayTime}초");
+
+            // TODO: 카운트다운 UI 표시
+            // UIManager에서 계산된 시간을 텍스트로 업데이트
+            // 예) uiManager.UpdateCountdownText(displayTime.ToString());
+
+            currentTime -= Time.deltaTime;
+            yield return null; // 다음 프레임까지 대기
+        }
+
+        // TODO: "START!" UI 메시지 표시
+        // 예) uiManager.UpdateCountdownText("START!");
+
+        Debug.Log("플레이어 준비 시퀀스 시작...");
+        // 플레이어 준비 동작이 완전히 끝날 때까지 대기
+        yield return playerPreparationCoroutine;
+        Debug.Log("플레이어 준비 완료. 달리기 시작됨.");
+
+        // 1초 후 카운트다운 UI 숨김 명령 또는 바로 사라짐?
+        yield return new WaitForSeconds(1.0f);
+        //uiManager.HideCountdownDisplay();
+
         isGameRunning = true;
         isGamePaused = false;
-        
-        // 초기 맵 생성
-        // 처음 2개의 발판은 장애물 없이 생성
-        for (int i = 0; i < 2; i++)
+
+        // 이동 속도를 원래 속도로 설정
+        if (mapMovement != null)
         {
-            SpawnNewPlatform(false);
+            mapMovement.movementSpeed = origMapMovementSpeed;
         }
 
-        // 나머지 발판은 장애물을 포함하여 생성
-        for (int i = 0; i < 8; i++)
-        {
-            SpawnNewPlatform(true);
-        }
-
-        // 이동 속도를 원래 속도로
-        if (MapMovement != null)
-        {
-            MapMovement.movementSpeed = OrigMapMovementSpeed;
-        }
+        Debug.Log("맵 이동 시작. 게임 플레이 시작!");
     }
-    
+
     public void EndGame()
     {
         if (!isGameRunning)
@@ -144,9 +241,9 @@ public class MapManager : MonoBehaviour
         isGamePaused = false;
 
         // 맵 멈춤
-        if (MapMovement != null)
+        if (mapMovement != null)
         {
-            MapMovement.movementSpeed = 0;
+            mapMovement.movementSpeed = 0;
         }
     }
     
@@ -163,20 +260,60 @@ public class MapManager : MonoBehaviour
         if (isGamePaused)
         {
             // 맵 이동 멈춤
-            if (MapMovement != null)
+            if (mapMovement != null)
             {
-                MapMovement.movementSpeed = 0;
+                mapMovement.movementSpeed = 0;
             }
         }
         else
         {
             Debug.Log("게임이 다시 시작되었습니다.");
             // 맵 이동 다시
-            if (MapMovement != null)
+            if (mapMovement != null)
             {
-                MapMovement.movementSpeed = OrigMapMovementSpeed;
+                mapMovement.movementSpeed = origMapMovementSpeed;
             }
         }
     }
-    
+
+    public void ApplySpeedBoost(float boostAmount, float duration)
+    {
+        // 게임이 실행 중이 아닐 때
+        if (!isGameRunning || isGamePaused)
+        {
+            return;
+        }
+
+        // 만약 이전에 실행되던 스피드 부스트 코루틴이 있다면 중지
+        if (speedBoostCoroutine != null)
+        {
+            StopCoroutine(speedBoostCoroutine);
+        }
+
+        // 새로운 스피드 부스트 코루틴을 시작하고 변수에 저장
+        speedBoostCoroutine = StartCoroutine(SpeedBoostCoroutine(boostAmount, duration));
+    }
+
+    private IEnumerator SpeedBoostCoroutine(float boostAmount, float duration)
+    {
+        Debug.Log($"스피드 부스트 활성화! 속도 {boostAmount}배, 지속 시간: {duration}초");
+
+        // 맵의 속도를 원래 속도에 부스트 양을 곱한 값으로 설정
+        mapMovement.movementSpeed = origMapMovementSpeed * boostAmount;
+
+        // 지정된 지속 시간만큼 대기
+        yield return new WaitForSeconds(duration);
+
+        Debug.Log("스피드 부스트 종료. 원래 속도로 복귀.");
+
+        // 맵의 속도를 원래 속도로 복원
+        // isGamePaused 상태가 아닐 때만 복원 -> 일시정지 로직과 충돌 방지
+        if (!isGamePaused)
+        {
+            mapMovement.movementSpeed = origMapMovementSpeed;
+        }
+
+        // 코루틴 끝 -> null로 초기화
+        speedBoostCoroutine = null;
+    }
 }

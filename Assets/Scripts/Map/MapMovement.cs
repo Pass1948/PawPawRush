@@ -8,7 +8,7 @@ public class MapMovement : MonoBehaviour
 
     private void Awake()
     {
-        GameManager.Map.MapMovement = this; // MapMovement를 MapManager에 등록
+        //GameManager.Map.MapMovement = this; // MapMovement를 MapManager에 등록
     }
 
     public void Move()// 오브젝트 이동

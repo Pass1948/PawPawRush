@@ -9,9 +9,10 @@ public class ToastUIBase : ToastUI
     [SerializeField] Image iconImage;
     [SerializeField] TMP_Text titleText;
     [SerializeField] TMP_Text decText;
+    [SerializeField] AudioClip soundClip;
     ToastUIData toastUIData;
 
-    private void Awake()
+    protected override void Awake()
     {
         base.Awake();
     }
@@ -21,6 +22,7 @@ public class ToastUIBase : ToastUI
         if (this.isActiveAndEnabled)
         {
             Set(toastUIData, titleText, decText, iconImage);
+            AudioSource.PlayClipAtPoint(soundClip, transform.position);
         }
     }
     private void OnDisable() 

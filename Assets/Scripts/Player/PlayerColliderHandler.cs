@@ -37,11 +37,6 @@ public class PlayerColliderHandler : MonoBehaviour
     // Constants
     private const string OBSTACLE_TAG = "Obstacle";
 
-    private void Awake()
-    {
-        
-    }
-
     private void Start()
     {
         // 컴포넌트 캐싱
@@ -140,6 +135,7 @@ public class PlayerColliderHandler : MonoBehaviour
     {
         if(other.CompareTag(OBSTACLE_TAG)) // 장애물 충돌 처리(맵 구현하면서 적용)
         {
+            GameManager.Event.PostNotification(EventType.AchievementUnlocked, this, AchievementId.FistHit);
             if(isInvincible)
             {
                 return;
@@ -167,10 +163,7 @@ public class PlayerColliderHandler : MonoBehaviour
                 // 죽음 사운드 재생
                 audioSource.PlayOneShot(GameManager.Player.PlayerCharacter.DeathSound);
 
-                // 플레이어 죽고 데이터를 맵 매니저나 게임 매니저에 전달?
-
-                // 플레이어가 죽으면 스테이지 종료라서 맵 매니저에서 플레이어 죽음 처리?
-                GameManager.Map.MapMovement.movementSpeed = 0; // 맵 이동 멈춤
+                MapManager.Instance.EndGame(); // 맵 이동 멈춤
 
                 animator.SetBool(PlayerController.DeadHash, true);
             }

@@ -7,6 +7,7 @@ public class PlayerCondition : MonoBehaviour
     public int MaxLife { get; private set; } = 3;
     public int CurrentLife { get; set; }
 
+    bool isFirst = true; // 첫 활성화 여부
     // 일단 임시로 여기서 목숨 초기화
     private void Start()
     {
@@ -30,7 +31,12 @@ public class PlayerCondition : MonoBehaviour
             {
                 // 플레이어가 죽었을 때 처리
                 Debug.Log("Player is dead.");
-                GameManager.Event.PostNotification(EventType.AchievementUnlocked, this, AchievementId.Coin50);
+                if(isFirst)
+                {
+                    isFirst = false;
+                    GameManager.Event.PostNotification(EventType.AchievementUnlocked, this, AchievementId.FistDeath);
+                }
+
             }
         }
     }

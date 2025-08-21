@@ -14,8 +14,6 @@ public class BaseUI : MonoBehaviour
         BindChildren();
     }
 
-    protected virtual void OnDisable() { }
-
     private void BindChildren()
     {
         rectTransform = new Dictionary<string, RectTransform>();
