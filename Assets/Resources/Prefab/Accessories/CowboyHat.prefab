@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5371864997701682574}
   - component: {fileID: 7615616903718057083}
   - component: {fileID: 3181375815396263181}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CowboyHat
   m_TagString: Untagged
   m_Icon: {fileID: 0}

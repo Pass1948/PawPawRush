@@ -3,30 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 
-public enum VolumeType
-{
-    Master,
-    BGM,
-    SFX
-}
-
 public class SoundManager : MonoBehaviour
 {
-    [Header("Mixer")]
-    [SerializeField] private AudioMixer mixer;
+     private AudioMixer mixer;
     private readonly string masterVolumeParam = "Master";
     private readonly string bgmVolumeParam = "BGM";
     private readonly string sfxVolumeParam = "SFX";
-
-    [Header("Audio Sources")]
-    [SerializeField] private AudioSource bgmSource;
-    [SerializeField] private AudioSource sfxSource;
-
+    private AudioSource bgmSource;
+    private AudioSource sfxSource;
     private SoundDataSO currentBGM;
     private Coroutine fadeCoroutine;
-
-    [Header("Sound Database (SO)")]
-    [SerializeField] private SoundData soundDB; 
+    private SoundData soundDB; 
 
     // 이름 → 데이터 매핑
     private readonly Dictionary<string, SoundDataSO> soundDict = new();
@@ -189,11 +176,9 @@ public class SoundManager : MonoBehaviour
 
     public void SetVolume(VolumeType type, float volume)
     {
-        string param = type == VolumeType.Master ? masterVolumeParam :
-                       type == VolumeType.BGM ? bgmVolumeParam : sfxVolumeParam;
-
+        string param = type == VolumeType.Master ? masterVolumeParam : type == VolumeType.BGM ? bgmVolumeParam : sfxVolumeParam;
         float volumeDB = (volume <= 0.0001f) ? -80f : Mathf.Log10(Mathf.Clamp01(volume)) * 20f;
-        if (mixer != null) mixer.SetFloat(param, volumeDB);
+        mixer.SetFloat(param, volumeDB);
     }
 
     public float GetVolume(VolumeType type)

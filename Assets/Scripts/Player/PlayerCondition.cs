@@ -26,6 +26,7 @@ public class PlayerCondition : MonoBehaviour
         if (CurrentLife > 0)
         {
             CurrentLife--;
+            GameManager.Event.PostNotification(EventType.OnHit,this);
             Debug.Log($"Player Life Decreased: {CurrentLife}");
             if (CurrentLife <= 0)
             {
@@ -35,6 +36,7 @@ public class PlayerCondition : MonoBehaviour
                 {
                     isFirst = false;
                     GameManager.Event.PostNotification(EventType.AchievementUnlocked, this, AchievementId.FistDeath);
+                    GameManager.UI.ShowPopUpUI<GameOverPopUpUI>("UI/GameOverUI");
                 }
 
             }
@@ -47,6 +49,7 @@ public class PlayerCondition : MonoBehaviour
         if (CurrentLife < MaxLife)
         {
             CurrentLife++;
+            GameManager.Event.PostNotification(EventType.OnHeal, this);
         }
         
         Debug.Log($"{CurrentLife}");

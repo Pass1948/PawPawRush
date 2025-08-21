@@ -36,6 +36,7 @@ public class UIManager : MonoBehaviour
     // Scene 변경시 UI를 재생성 메소드
     public void Recreated()
     {
+        Clear();
         InstantsWindowUI();
         InstantsPopUpUI();
         InstantsToastUI();
@@ -90,7 +91,7 @@ public class UIManager : MonoBehaviour
             return;
 
         EventSystem eventSystem = GameManager.Resource.Load<EventSystem>("UI/EventSystem");
-        GameManager.Resource.Instantiate(eventSystem);
+        GameManager.Resource.Instantiate(eventSystem,transform);
         DontDestroyOnLoad(eventSystem.gameObject);
     }
 

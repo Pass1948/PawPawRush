@@ -45,6 +45,10 @@ public class PlayerController : MonoBehaviour
     private Vector3 targetPosition;
     private int currentLane = STARTING_LANE;
 
+    // 업적 관련
+    int jumpCount = 0; // 점프 횟수 (업적용)
+    int adMoveCount = 0; // 이동 횟수 (업적용)
+
     // Constants
     private const int STARTING_LANE = 1;
     private const float LANE_OFFSET = 2.0f; // 레인 간격
@@ -148,6 +152,11 @@ public class PlayerController : MonoBehaviour
             // 레인 밖으로 못 나가게 무시
             return;
         }
+        adMoveCount++;
+        if (adMoveCount>=25)
+        {
+            GameManager.Event.PostNotification(EventType.AchievementUnlocked, this, AchievementId.LRMove25);
+        }
 
         currentLane = targetLane;
         targetPosition = new Vector3((currentLane - 1) * LANE_OFFSET, targetPosition.y, targetPosition.z);
@@ -197,7 +206,11 @@ public class PlayerController : MonoBehaviour
         {
             return;
         }
-
+        jumpCount++;
+        if (jumpCount >= 10)
+        {
+            GameManager.Event.PostNotification(EventType.AchievementUnlocked, this, AchievementId.TryJump10);
+        }
 
         if (isSliding)
         {

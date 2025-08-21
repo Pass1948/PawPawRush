@@ -1,18 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class customWindowUI : MonoBehaviour
+public class customWindowUI : WindowUI
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] Button startButton;
+    protected override void Awake()
     {
-        
+        base.Awake();
+    }
+    private void OnEnable()
+    {
+        buttons[startButton.name].onClick.AddListener(() => { GameManager.Scene.LoadScene("InGameScene"); });
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
 }

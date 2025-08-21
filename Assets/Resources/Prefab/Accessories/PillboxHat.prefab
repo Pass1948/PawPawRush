@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5027941084518901080}
   - component: {fileID: 5374291160793631452}
   - component: {fileID: 6141717108851671409}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PillboxHat
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -7,6 +7,7 @@ public class ScoreManager : MonoBehaviour
 {
     // 현재 누적된 점수
     private int baseScore = 0;
+    public int BaseScore {  get { return baseScore; }set { baseScore = value; }}
 
     // 점수 배율 (기본: 1배, 아이템 획득 시 2배 등)
     private float scoreMultiplier = 1f;

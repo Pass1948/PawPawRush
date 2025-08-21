@@ -50,7 +50,7 @@ Light:
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
+    m_Type: 0
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -144,7 +144,7 @@ Light:
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
+    m_Type: 0
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -235,7 +235,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   time: 0
-  fullDayLength: 30
+  fullDayLength: 100
   startTime: 0.4
   noon: {x: 90, y: 0, z: 0}
   sun: {fileID: 5007892030723436614}
@@ -273,8 +273,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0.25
-      value: 0
+      time: 0.24940872
+      value: 0.10256958
       inSlope: 0
       outSlope: 0
       tangentMode: 136
@@ -292,7 +292,7 @@ MonoBehaviour:
       outWeight: 0.33333334
     - serializedVersion: 3
       time: 0.75
-      value: 0
+      value: 0.104888916
       inSlope: 0
       outSlope: 0
       tangentMode: 136
@@ -305,10 +305,10 @@ MonoBehaviour:
   moon: {fileID: 6387573591455882292}
   moonColor:
     serializedVersion: 2
-    key0: {r: 0.047058824, g: 0, b: 1, a: 1}
+    key0: {r: 0.66287464, g: 0.6462264, b: 1, a: 1}
     key1: {r: 0.53815037, g: 0.48113197, b: 1, a: 1}
     key2: {r: 0.5210211, g: 0.45597476, b: 1, a: 0}
-    key3: {r: 0.047058824, g: 0, b: 1, a: 0}
+    key3: {r: 0.76176476, g: 0.75, b: 1, a: 0}
     key4: {r: 0, g: 0, b: 0, a: 0}
     key5: {r: 0, g: 0, b: 0, a: 0}
     key6: {r: 0, g: 0, b: 0, a: 0}
@@ -346,8 +346,8 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.5
-      value: 0.15
+      time: 0.5011902
+      value: 0.24906006
       inSlope: 0
       outSlope: 0
       tangentMode: 136
@@ -370,8 +370,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0
-      value: 0
+      time: -0.0011863708
+      value: 0.104888916
       inSlope: 0
       outSlope: 0
       tangentMode: 136
@@ -397,8 +397,8 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 1
-      value: 0
+      time: 0.99884033
+      value: 0.104888916
       inSlope: 0
       outSlope: 0
       tangentMode: 136
@@ -412,8 +412,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0
-      value: 0
+      time: -0.0059318542
+      value: 0.104888916
       inSlope: 0
       outSlope: 0
       tangentMode: 136
@@ -439,8 +439,8 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 1
-      value: 0
+      time: 0.9976196
+      value: 0.10021973
       inSlope: 0
       outSlope: 0
       tangentMode: 136
