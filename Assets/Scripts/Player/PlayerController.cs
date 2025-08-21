@@ -28,6 +28,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float jumpCooldown = 0.8f;
     [SerializeField] private float slideDuration = 0.5f;
 
+    [Header("Audio")]
+    [SerializeField, Range(0f, 1f)]
+    private float runningSoundVolume = 0.03f;
+
     // Player State
     private bool isRunning;
     private bool isJumping;
@@ -176,8 +180,6 @@ public class PlayerController : MonoBehaviour
 
         animator.Play(runStartHash);
         animator.SetBool(movingHash, true);
-
-        //ManageRunningSound();
     }
 
     public void StopRunning()
@@ -312,7 +314,7 @@ public class PlayerController : MonoBehaviour
             {
                 loopingAudioSource.clip = GameManager.Player.PlayerCharacter.RunningSound;
                 loopingAudioSource.loop = true;
-                loopingAudioSource.volume = 0.01f; // 달리기 사운드 볼륨 낮춤
+                loopingAudioSource.volume = runningSoundVolume;
                 loopingAudioSource.Play();
             }
         }
