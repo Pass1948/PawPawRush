@@ -9,7 +9,6 @@ public class ToastUIBase : ToastUI
     [SerializeField] Image iconImage;
     [SerializeField] TMP_Text titleText;
     [SerializeField] TMP_Text decText;
-    [SerializeField] AudioClip soundClip;
     ToastUIData toastUIData;
 
     protected override void Awake()
@@ -19,10 +18,10 @@ public class ToastUIBase : ToastUI
 
     private void OnEnable()
     {
+        GameManager.Sound.PlaySFX("ToastSFX");
         if (this.isActiveAndEnabled)
         {
             Set(toastUIData, titleText, decText, iconImage);
-            AudioSource.PlayClipAtPoint(soundClip, transform.position);
         }
     }
     private void OnDisable() 
