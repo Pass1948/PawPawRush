@@ -338,10 +338,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1722921761514397304, guid: 8c022fe41d34a0b4493ca775ab598571, type: 3}
-      propertyPath: laneChangeSpeed
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 8868124184818071609, guid: 8c022fe41d34a0b4493ca775ab598571, type: 3}
       propertyPath: m_Name
       value: Player_Cat

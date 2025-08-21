@@ -45,7 +45,7 @@ public class PlayerColliderHandler : MonoBehaviour
 
         boxCollider = GetComponent<BoxCollider>();
         animator = GetComponent<Animator>();
-        audioSource = GameManager.Player.PlayerCharacter.AudioSource;
+        audioSource = GameManager.Player.PlayerCharacter.SfxAudioSource;
 
         // 렌더러 원래 색상 저장
         originalColors = new Color[playerRenderers.Count];
