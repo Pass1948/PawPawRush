@@ -25,6 +25,11 @@
 
 ---
 
+
+## 🎀 와이어 프레임
+
+<img width="922" height="918" alt="image" src="https://github.com/user-attachments/assets/805b9f68-bbde-4095-8397-c39c20560146" />
+
 ## 🧩 게임 주요 기능
 - <img width="767" height="433" alt="image" src="https://github.com/user-attachments/assets/11478e44-c9fb-4a1b-8c20-5b88d7e53c38" />
 
