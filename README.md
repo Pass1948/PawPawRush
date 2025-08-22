@@ -1,6 +1,6 @@
 - # 🕹️ PawPawRush(포포러쉬) — 나만알조 팀
 
-프로젝트 소개 > 유니티 3D 달리기게임 입니다. 간결한 조작과 명확한 피드백(스코어·업적)을 통해 러닝커브를 낮추고, 라운드 클리어 중심의 리플레이성을 설계한 팀 프로젝트입니다.
+프로젝트 소개 > 유니티 3D 달리기 게임 입니다. 간결한 조작과 명확한 피드백(스코어·업적)을 통해 러닝 커브를 낮추고, 라운드 클리어 중심의 리플레이성을 설계한 팀 프로젝트입니다.
 ---
 ## 📅 개발 기간
 - 시작: 2025.08.14  
@@ -17,11 +17,11 @@
 ## 👥 멤버 구성
 | 역할 | 이름/깃허브 | 담당 |
 |---|---|---|
-| 팀리더 · 아이템,스코어(데이터) | 이현수 | 팀전반 일정, 요구사항 관리, 아이템기능과 스코어 연산 |
+| 팀리더 · 아이템, 스코어(데이터) | 이현수 | 팀전반 일정, 요구사항 관리, 아이템기능과 스코어 연산 |
 | 맵담당 | 정희찬 | MapManager담당,무한랜덤 맵생성, 장애물과 아이템 랜덤위치 생성 로직 |
-| 전반적인 UI/UX, PPT, 영상, 기획 | 주슬기 | 게임 기획 전반담당(게임워크플로우&게임컨셉, UI와이어프레임 제작, 아이템효과, 케릭터조작법), UI 디자인 및 상호작용 연동 |
-| 플레이어, 플레이어커스터마이징 | 차주원 | PlayerManager 담당, 플레이어 조작(점프, 슬라이드, 좌우 3레일움직임), 플레이어와 장애물&아이템 상호작용(효과발동, 피격등)|
-| 게임매니저, 업적시스템 | 이영신 | 게임에 필요한 매니저들 제작&관리&연동 담당(UI, Sound, Resource, Pool, Evenet, Achievenment 등), 업적시스템 제작(업적데이터와 UI상호작용 연동)|
+| 전반적인 UI/UX, PPT, 영상, 기획 | 주슬기 | 게임 기획 전반담당(게임 워크플로우& 게임컨셉, UI와이어프레임 제작, 아이템효과, 케릭터조작법), UI 디자인 및 상호작용 연동 |
+| 플레이어, 플레이어 커스터마이징 | 차주원 | PlayerManager 담당, 플레이어 조작(점프, 슬라이드, 좌우 3레일 움직임), 플레이어와 장애물& 아이템 상호작용(효과발동, 피격등)|
+| 게임매니저, 업적시스템 | 이영신 | 게임에 필요한 매니저들 제작& 관리& 연동 담당(UI, Sound, Resource, Pool, Evenet, Achievenment 등), 업적시스템 제작(업적데이터와 UI 상호작용 연동)|
 
 ---
 
@@ -52,14 +52,14 @@
 - **점수 보너스 크림케이크**: 먹으면 3~5초 동안 점수 2배
 - **회복/HP 증가 딸기 타르트**: HP 한칸 회복
 
-### 6) 케릭터 커스터마이징
+### 6) 캐릭터 커스터마이징
 - <img width="300" height="250" alt="image" src="https://github.com/user-attachments/assets/72ae7241-0b4c-418e-99ad-e7303cbad14c" />
 - 오른쪽 모자들을 누르면 해당 모자에 맞는 에셋이 왼쪽 케릭터 프리팹에 부착되어 보여짐
   
 ---
 
 ## 📦 활용 에셋 목록 (Assets Used)
-- **케릭터** : https://assetstore.unity.com/packages/3d/characters/animals/little-friends-cartoon-animals-lite-262505#content
+- **캐릭터** : https://assetstore.unity.com/packages/3d/characters/animals/little-friends-cartoon-animals-lite-262505#content
 - **맵&장애물&아이템** : https://kxrejii.itch.io/bakery-asset-pack , https://fertile-soil-productions.itch.io/modular-platformer , https://thecloudy.itch.io/cute-low-poly-caf-assets, https://tinytreats.itch.io/baked-goods
 
 ---
