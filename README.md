@@ -55,12 +55,26 @@
 ### 6) 케릭터 커스터마이징
 - <img width="300" height="250" alt="image" src="https://github.com/user-attachments/assets/72ae7241-0b4c-418e-99ad-e7303cbad14c" />
 - 오른쪽 모자들을 누르면 해당 모자에 맞는 에셋이 왼쪽 케릭터 프리팹에 부착되어 보여짐
+  
 ---
+
 ## 📦 활용 에셋 목록 (Assets Used)
 - **케릭터** : https://assetstore.unity.com/packages/3d/characters/animals/little-friends-cartoon-animals-lite-262505#content
 - **맵&장애물&아이템** : https://kxrejii.itch.io/bakery-asset-pack , https://fertile-soil-productions.itch.io/modular-platformer , https://thecloudy.itch.io/cute-low-poly-caf-assets, https://tinytreats.itch.io/baked-goods
 
 ---
+
+## ⬇️ 다운로드 (Builds)
+
+### 최신 버전
+- https://drive.google.com/file/d/1UaQHjm9vFGYvXRNMmh5_TUUKApIVou4P/view?usp=sharing
+
+### 설치/실행 안내
+1. ZIP을 다운로드 후 **압축 해제**  
+2. (Windows) `PawPawRush.exe` 실행  
+4. 방화벽/SmartScreen 경고가 뜨면 **실행 허용** 후 진행
+
+
 ## 🚀 실행 & 빌드
 ```bash
 # 의존성 없음 (Unity 에디터에서 바로 실행)
