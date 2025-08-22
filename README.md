@@ -25,7 +25,6 @@
 
 ---
 
-
 ## 🎀 와이어 프레임
 
 <img width="922" height="918" alt="image" src="https://github.com/user-attachments/assets/805b9f68-bbde-4095-8397-c39c20560146" />
@@ -69,7 +68,7 @@
 
 ---
 
-## ⬇️ 다운로드 (Builds)
+## ⬇️ 다운로드 및 실행법 (Builds)
 
 ### 최신 버전
 - https://drive.google.com/file/d/1UaQHjm9vFGYvXRNMmh5_TUUKApIVou4P/view?usp=sharing
@@ -78,6 +77,7 @@
 1. ZIP을 다운로드 후 **압축 해제**  
 2. (Windows) `PawPawRush.exe` 실행  
 4. 방화벽/SmartScreen 경고가 뜨면 **실행 허용** 후 진행
+5. 프로젝트상에서 실행하실 분들은 'TitleScene'에서 실행해보실길 바랍니다
 
 
 ## 🚀 실행 & 빌드
