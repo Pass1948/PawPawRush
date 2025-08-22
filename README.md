@@ -26,6 +26,7 @@
 ---
 
 ## 🧩 게임 주요 기능
+- <img width="767" height="433" alt="image" src="https://github.com/user-attachments/assets/11478e44-c9fb-4a1b-8c20-5b88d7e53c38" />
 
 ### 1) 코어 루프 (무한 달리기)
 - **코인 = 점수**: 코인 획득 시 즉시 점수 누적, UI에 상시 노출
@@ -38,7 +39,7 @@
 - **Left Ctrl**: 슬라이드
 
 ### 3) UI/UX
-- **커스터마이징 UI**: 스킨/옵션 등 외형·설정 변경(확장 가능)
+- **커스터마이징 UI**: 외형 변경 상호작용 연동
 - **토스트 알림**: 업적 조건 충족 시 **오른쪽 하단** 토스트 노출
 - **볼륨 조절**: 설정 UI에서 전체 볼륨 슬라이더 제공
 
@@ -51,7 +52,9 @@
 - **점수 보너스 크림케이크**: 먹으면 3~5초 동안 점수 2배
 - **회복/HP 증가 딸기 타르트**: HP 한칸 회복
 
-
+### 6) 케릭터 커스터마이징
+- <img width="300" height="250" alt="image" src="https://github.com/user-attachments/assets/72ae7241-0b4c-418e-99ad-e7303cbad14c" />
+- 오른쪽 모자들을 누르면 해당 모자에 맞는 에셋이 왼쪽 케릭터 프리팹에 부착되어 보여짐
 ---
 ## 📦 활용 에셋 목록 (Assets Used)
 - **케릭터** : https://assetstore.unity.com/packages/3d/characters/animals/little-friends-cartoon-animals-lite-262505#content
