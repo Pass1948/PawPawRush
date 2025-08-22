@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
-using UnityEngine.WSA;
 public enum AchievementId
 {
     TryJump10,        // 나는야 점프왕! : 점프 10회 시도

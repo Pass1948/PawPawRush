@@ -88,7 +88,6 @@ public class EventManager : MonoBehaviour
         }
     }
 
-
     private void RefreshListeners()     // Scene전환시 모든 이벤트 초기화
     {
         //임시 Dictionary 생성

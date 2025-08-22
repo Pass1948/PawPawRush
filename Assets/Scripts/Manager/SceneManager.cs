@@ -59,6 +59,7 @@ public class SceneManager : MonoBehaviour // 씬 전환을 관리하는 매니�
         }
         else if (sceneName == "InGameScene")
         {
+
             GameManager.UI.ShowWindowUI<InGameSceneUI>("UI/InGameSceneUI");
             GameManager.Sound.PlayBGM("InGameBGM");
             MapManager.Instance.ReStart();
