@@ -54,8 +54,8 @@
 
 ---
 ## 📦 활용 에셋 목록 (Assets Used)
--- **케릭터** : https://assetstore.unity.com/packages/3d/characters/animals/little-friends-cartoon-animals-lite-262505#content
--- **맵&장애물&아이템** : https://kxrejii.itch.io/bakery-asset-pack , https://fertile-soil-productions.itch.io/modular-platformer , https://thecloudy.itch.io/cute-low-poly-caf-assets, https://tinytreats.itch.io/baked-goods
+- **케릭터** : https://assetstore.unity.com/packages/3d/characters/animals/little-friends-cartoon-animals-lite-262505#content
+- **맵&장애물&아이템** : https://kxrejii.itch.io/bakery-asset-pack , https://fertile-soil-productions.itch.io/modular-platformer , https://thecloudy.itch.io/cute-low-poly-caf-assets, https://tinytreats.itch.io/baked-goods
 
 ---
 ## 🚀 실행 & 빌드
