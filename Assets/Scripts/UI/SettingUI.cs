@@ -13,9 +13,10 @@ public class SettingUI : PopUpUI
     protected override void Awake()
     {
         base.Awake();
+        // 람다와 아닌것의 기준은??
         buttons[moveTitleButton.name].onClick.AddListener(() => { OnTitle(); });
-        buttons[leaveGameButton.name].onClick.AddListener(() => { LeaveGameButton(); });
-        buttons[closeButton.name].onClick.AddListener(() => { OnClose();  });
+        buttons[leaveGameButton.name].onClick.AddListener(LeaveGameButton);
+        buttons[closeButton.name].onClick.AddListener(OnClose);
 
         volumeSlider.onValueChanged.AddListener(OnBgmSliderChanged);
         volumeSlider.value = GameManager.Sound.GetVolume(VolumeType.BGM);

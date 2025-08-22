@@ -54,6 +54,7 @@ public class GameManager : MonoBehaviour
 
     private void InitManagers()
     {
+        // 자동화 코드 만들어두면 편할듯
         GameObject resourceObj = new GameObject("ResourceManager");
         resourceObj.transform.SetParent(transform, false);
         resourceManager = resourceObj.AddComponent<ResourceManager>();

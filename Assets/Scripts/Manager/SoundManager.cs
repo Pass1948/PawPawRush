@@ -19,6 +19,7 @@ public class SoundManager : MonoBehaviour
     private readonly Dictionary<string, SoundDataSO> soundDict = new();
 
     // (옵션) 씬별 BGM 매핑: 씬이름 → soundName
+    // string 으로 string 을 매핑해서 의미가 크게 없을듯?
     private Dictionary<string, string> sceneBGMMapping = new()
     {
         { "StartScene", "StartBGM" },
@@ -38,6 +39,8 @@ public class SoundManager : MonoBehaviour
         mixer = GameManager.Resource.Load<AudioMixer>("Prefab/Sound/AudioMixer");
         bgmSource = GameManager.Resource.Instantiate<AudioSource>("Prefab/Sound/BGM",this.transform);
         sfxSource = GameManager.Resource.Instantiate<AudioSource>("Prefab/Sound/SFX", this.transform);
+        
+        // db 를 들고있을때 실제 오브젝트 참조하고 있다면 메모리 점유가 커짐 -> 이후 어드레서블 이용하면 개선 가능
         soundDB = GameManager.Resource.Load<SoundData>("Data/Sound/SoundData");
 
         soundDict.Clear();

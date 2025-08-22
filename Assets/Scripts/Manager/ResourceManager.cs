@@ -21,6 +21,8 @@ using UnityEngine;
             return resource;
         }
 
+        // 게임 규모가 커지면 주의하자
+        // 특정 패스 기준으로 리소스를 다불러오는건 위험하다. -> 메모리가 부족할 수 있음
         public T[] LoadAll<T>(string path) where T : Object
         {
             // 1) Resources.LoadAll로 에셋 배열 로드

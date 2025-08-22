@@ -12,6 +12,7 @@ using UnityEngine.Pool;
 
         private void Awake()
         {
+            // Recreated 호출
             poolDic = new Dictionary<string, ObjectPool<GameObject>>();
             poolContainer = new Dictionary<string, Transform>();
             poolRoot = new GameObject("PoolRoot").transform;
@@ -30,6 +31,7 @@ using UnityEngine.Pool;
             // GameManager.Resource.Destroy(canvasRoot);
         }
 
+        // 제네릭 활용 좋음
         public T Get<T>(T original, Vector3 position, Quaternion rotation, Transform parent) where T : Object
         {
             if (original is GameObject)

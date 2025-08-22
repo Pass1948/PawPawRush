@@ -105,6 +105,8 @@ public class MapManager : MonoBehaviour
         mapMovement.movementSpeed = 0f;
 
         // 초기 발판들 생성
+        // 초기 설정 수를 변수로 뺴두면 좋음
+        // 로직에 들어가는 수 등의 데이터는 변수로
         for (int i = 0; i < 2; i++)
         {
             SpawnNewPlatform(false);
@@ -117,6 +119,7 @@ public class MapManager : MonoBehaviour
         Debug.Log("초기 맵 생성 완료. 게임 시작 대기 중...");
     }
 
+    // 폴 매니저를 같이 쓰면 좋을듯
     private void SpawnNewPlatform(bool spawnObstacles)
     {
         // 발판 프리팹 목록에서 무작위로 선택
@@ -180,6 +183,11 @@ public class MapManager : MonoBehaviour
         StartCoroutine(GameStartSequence());
     }
 
+    // 시퀸스 개념 자체는 좋다.
+    // 모듈화 하면 좋음.
+    // 특히 지금처럼 씬 시작전체 필요한 일을 순서대로 처리할 수 있음 -> API 통신있을때 유용
+    
+    // 맵 매니저라지만 - 해당 씬을 총괄하는 초기화로 보임
     private IEnumerator GameStartSequence()
     {
         // 플레이어 캐릭터가 씬에 로드될 때까지 대기
@@ -230,6 +238,9 @@ public class MapManager : MonoBehaviour
             mapMovement.movementSpeed = origMapMovementSpeed;
         }
 
+        // 좋은 이벤트 개념
+        // 해당 구조에 좋은 개념이 많이 들어가 있긴한데 짬뽕...
+        // 일관성은 좀 부족한다
         OnMapMovementStarted?.Invoke(); // 맵 이동 시작 이벤트 발생
 
         Debug.Log("맵 이동 시작. 게임 플레이 시작!");

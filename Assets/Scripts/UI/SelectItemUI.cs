@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class SelectItemUI : WindowUI
 {
+    // 배열 권장
     [SerializeField] Button button1;
     [SerializeField] Button button2;
     [SerializeField] Button button3;
@@ -15,8 +16,19 @@ public class SelectItemUI : WindowUI
     [SerializeField] Button button8;
     [SerializeField] Button button9;
 
+    // private Button[] buttons = new Button[9];
+    
+    
     protected override void Awake()
     {
+        //
+        // for (int i = 1; i <= buttons.Length; i++)
+        // {
+        //     int idx = i;
+        //     buttons[i].onClick.AddListener(() => { GameManager.Player.ChangeAndSaveEquippedAccessory(idx); });
+        // }
+        
+        
         base.Awake();
         buttons[button1.name].onClick.AddListener(() => {GameManager.Player.ChangeAndSaveEquippedAccessory(1);  });
         buttons[button2.name].onClick.AddListener(() => {GameManager.Player.ChangeAndSaveEquippedAccessory(2);  });

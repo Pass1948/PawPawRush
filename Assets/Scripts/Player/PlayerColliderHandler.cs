@@ -39,6 +39,7 @@ public class PlayerColliderHandler : MonoBehaviour
 
     private void Start()
     {
+        // Player 접근을 좀 돌아가고 있다
         // 컴포넌트 캐싱
         playerController = GameManager.Player.PlayerCharacter.PlayerController;
         playerCondition = GameManager.Player.PlayerCharacter.PlayerCondition;
@@ -80,6 +81,7 @@ public class PlayerColliderHandler : MonoBehaviour
         StartCoroutine(InvincibleTimer(duration, color));
     }
 
+    // 잘 만듬 - 이후 DoTween 써보면 딸깍으로 구현가능
     private IEnumerator InvincibleTimer(float duration, Color color)
     {
         Debug.Log("Invincible Timer Started");

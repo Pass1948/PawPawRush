@@ -5,6 +5,7 @@ using UnityEngine.TextCore.Text;
 
 public class PlayerController : MonoBehaviour
 {
+    private PlayerCharacter player;
     // Animator parameter
     private static int startHash = Animator.StringToHash("Greeting");
     private static int runStartHash = Animator.StringToHash("RunStart");
@@ -59,6 +60,11 @@ public class PlayerController : MonoBehaviour
         colliderHandler = GetComponent<PlayerColliderHandler>();
 
         targetPosition = transform.position;
+    }
+
+    public void SetPlayer(PlayerCharacter player)
+    {
+        this.player = player;
     }
 
     private void OnEnable()

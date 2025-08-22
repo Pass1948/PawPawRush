@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
+// 기늘이 충실함 - Good
 public class AchievenmentManager : MonoBehaviour, IEventListener
 {
     [SerializeField] private AchievementsData achievements; // List<ToastUIData> (각 항목에 achievementId 포함)
@@ -18,6 +19,7 @@ public class AchievenmentManager : MonoBehaviour, IEventListener
         Initialize();
     }
 
+    // 데이터 세팅을 통한 갱신 대비 좋음
     // 외부에서 나중에 주입해도 되도록
     public void SetAchievements(AchievementsData data)
     {
@@ -57,6 +59,7 @@ public class AchievenmentManager : MonoBehaviour, IEventListener
         LogMissingIds();
     }
 
+    // 누수방지
     private void OnEnable()
     {
         GameManager.Event.AddListener(EventType.AchievementUnlocked, this);

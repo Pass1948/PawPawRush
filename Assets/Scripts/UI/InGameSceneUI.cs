@@ -12,6 +12,7 @@ public class InGameSceneUI : WindowUI, IEventListener
     [SerializeField] TMP_Text timerText;
 
     //Hp 이미지
+    // 배열 권장
     [SerializeField] Image heart1;
     [SerializeField] Image heart2;
     [SerializeField] Image heart3;

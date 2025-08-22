@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 
 public class UIManager : MonoBehaviour
 {
+    // 레이어에 따른 기준 캔버스 좋음
     private Canvas windowCanvas;
     private Canvas popUpCanvas;
     private Canvas toastCanvas;
@@ -17,8 +18,11 @@ public class UIManager : MonoBehaviour
     [SerializeField] private float showDuration = 5f;
 
     private bool useUnscaledTime = true; // 일시정지 무시 여부
+    // 개별 오브젝트의 위치를 데이터로??
     private string toastPrefabPath = "UI/ToastUIBase"; // 프로젝트에 맞게
 
+    // 기능자체는 좋은나 매니저가 커질 것 같다
+    // 분리모듈을 준비하는것도 방법
     private readonly Queue<ToastUIData> toastQueue = new();
     private bool isToastShowing;
     private Coroutine toastRoutine;
@@ -54,10 +58,13 @@ public class UIManager : MonoBehaviour
         GameManager.Resource.Destroy(popUpCanvas);
         GameManager.Resource.Destroy(toastCanvas);
     }
+    
+    // window, popUp, toast 기능 동일 - 재사용 가능하게구성 
     public void InstantsWindowUI()
     {
         if (windowCanvas == null)
         {
+            // 메인 경로는 상수로
             windowCanvas = GameManager.Resource.Instantiate<Canvas>("UI/Canvas");
             windowCanvas.gameObject.name = "WindowCanvas";
             windowCanvas.sortingOrder = 10;
@@ -84,6 +91,7 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    // 체크 좋음
     public void EnsureEventSystem()
     {
         if (EventSystem.current != null)
@@ -103,6 +111,8 @@ public class UIManager : MonoBehaviour
         return ui;
     }
 
+    // 사용하는데서 패스를 넘기면 활용이 힘듬
+    // 특히 경로는 매니저에서 관리, key 값만 전달하자
     public T ShowWindowUI<T>(string path) where T : WindowUI
     {
         T ui = GameManager.Resource.Load<T>(path);
@@ -127,6 +137,8 @@ public class UIManager : MonoBehaviour
 
         T ui = GameManager.Pool.GetUI(popUpUI);
         ui.transform.SetParent(popUpCanvas.transform, false);
+        
+        // 스택형 팝업에 대한 이해 좋음
         popUpStack.Push(ui);
         return ui;
     }
@@ -147,6 +159,9 @@ public class UIManager : MonoBehaviour
             popUpStack.Peek().gameObject.SetActive(true);
         }
     }
+    
+    // 팝업 클리어가 필요한 경우가 종종 있음 - Good
+    // 모두 팝업말고 특정 팝업이 나올때까지 Pop 하는 기능도 있으면 좋음
     public void PopUpUIClear()
     {
         // PopUpUI 스택을 비우고 모든 PopUpUI를 반환
@@ -161,7 +176,11 @@ public class UIManager : MonoBehaviour
         if (data == null) { Debug.LogWarning("[UIManager] EnqueueToast: data is null"); return; }
         if (toastCanvas == null) InstantsToastUI();
 
+        // 큐에 대한 이해
         toastQueue.Enqueue(data);
+        
+        // 중복 토스트 실행 체크 좋음
+        // 코루틴 관리를 위해 toastRoutine 에 저장하는 것 좋음
         if (!isToastShowing)
             toastRoutine = StartCoroutine(ToastRoutine());
     }

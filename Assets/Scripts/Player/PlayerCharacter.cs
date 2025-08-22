@@ -31,6 +31,7 @@ public class PlayerCharacter : MonoBehaviour
 
         playerController = GetComponent<PlayerController>();
         PlayerController = playerController;
+        playerController.SetPlayer(this);
 
         playerCondition = GetComponent<PlayerCondition>();
         PlayerCondition = playerCondition;

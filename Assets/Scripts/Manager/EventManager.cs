@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+
+// 필요한 이벤트만 구성 - Good
 public enum EventType
 {
     AchievementUnlocked, 
@@ -45,6 +47,7 @@ public class EventManager : MonoBehaviour
 
     }
 
+    // object Param 을 구체화 하는 것을 권장
     public void PostNotification(EventType eventType, Component Sender, object Param = null) // 이벤트 발생역할
     {
         List<IEventListener> ListenList = null;
@@ -54,6 +57,11 @@ public class EventManager : MonoBehaviour
         //모든 이벤트 리스너(대기자)에게 이벤트 전송.
         for (int i = 0; i < ListenList.Count; i++)
         {
+            // Unity 오브젝트 null 판정은 == null 로 체크
+            // 오브젝트 Destroy 해도 참조가 남아 있을 수 있음, 프레임 끝에 참조 제거됨
+            // 이 경우
+            // == null 은 true
+            // Equals 은 false
             if (!ListenList[i].Equals(null))
             {
                 ListenList[i].OnEvent(eventType, Sender, Param);

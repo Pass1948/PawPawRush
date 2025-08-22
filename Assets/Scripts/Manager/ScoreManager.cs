@@ -17,6 +17,7 @@ public class ScoreManager : MonoBehaviour
     {
         baseScore += Mathf.RoundToInt(amount * scoreMultiplier);
         Debug.Log("Score: " + baseScore);
+        // == 으로 스킵되는 경우는??
         if(baseScore == 50)
         {
             GameManager.Event.PostNotification(EventType.AchievementUnlocked, this, AchievementId.Coin50);
